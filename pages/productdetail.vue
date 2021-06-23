@@ -4,16 +4,16 @@
     <nav-mobile />
 
     <div class="md:px-20 px-2">
-      <div class="flex justify-start my-5">
+      <div class="flex justify-start md:my-5 my-2">
         <div class="mr-3 text-lg text-gray-500">Home</div>
         <div class="text-lg text-gray-500 mr-3">></div>
         <div class="text-lg text-gray-500 mr-3">Produk</div>
         <div class="text-lg text-gray-500 mr-3">></div>
-        <div class="text-lg text-blue-500 mr-3">Detail Filter Air Botolan</div>
+        <div class="text-lg text-blue-500 mr-3">Filter Air Botolan</div>
       </div>
 
       <div class="grid grid-cols-12 grid-flow-row gap-2 md:gap-4">
-        <div class="md:col-span-7">
+        <div class="md:col-span-7 col-span-12">
           <transition name="slide-fade" mode="out-in">
             <img
               :key="photos[activePhoto].id"
@@ -26,7 +26,7 @@
           </transition>
           <div class="grid grid-cols-5 grid-flow-row gap-2 md:gap-4 mt-4">
             <div
-              class="md:col-span-1 hover:border"
+              class="col-span-1 hover:border"
               v-for="(photo, index) in photos"
               :key="index"
             >
@@ -42,35 +42,41 @@
                 />
               </div>
             </div>
-
-            <div class="md:col-span-5 flex cursor-pointer">
+            <div class="block md:hidden col-span-12 my-3 ">
+                <div class=" justify-between">
+                    <div class="text-gray-700 text-xl font-semibold">Filter Air Botolan</div>
+                    <div class="text-base text-blue-600 font-semibold">Rp.700.0000</div>
+                    
+                </div>
+            </div>
+            <div class="md:col-span-5 col-span-12 flex cursor-pointer">
               <div
                 class="
                   font-semibold
-                  text-2xl text-blue-700
+                  md:text-2xl text-blue-700
                   mr-16
                   hover:text-blue-400
                 "
               >
                 <div v-on:click="produk">Info Produk</div>
                 <div
-                  class="rounded-full bg-blue-700 h-1 mt-1"
+                  class="rounded-full bg-blue-700 border md:h-1 mt-1"
                   v-show="isInfoProduk"
                 ></div>
               </div>
               <div
-                class="font-semibold text-2xl text-blue-700 hover:text-blue-400"
+                class="font-semibold md:text-2xl text-blue-700 hover:text-blue-400"
               >
                 <div @click="ulasan">Ulasan</div>
                 <div
-                  class="rounded-full bg-blue-700 h-1 mt-1"
+                  class="rounded-full bg-blue-700 border md:h-1 mt-1"
                   v-show="!isInfoProduk"
                 ></div>
               </div>
             </div>
 
-            <div class="md:col-span-5">
-              <div class="text-gray-700 text-lg cekinfop" v-if="isInfoProduk">
+            <div class="md:col-span-5 col-span-12">
+              <div class="md:text-gray-700 text-gray-600 text-sm md:text-lg" v-if="isInfoProduk">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
                 dicta, tempore doloribus consequatur, ad nisi totam qui, et rem
                 aut debitis consectetur. Ipsum doloremque, quisquam id aliquam
@@ -95,7 +101,7 @@
             </div>
           </div>
         </div>
-        <div class="md:col-span-5">
+        <div class="md:col-span-5 hidden md:block">
           <div class="border p-4 rounded-lg sticky top-4">
             <div class="text-xl text-gray-700 font-medium">
               Filter Air Botoloan
