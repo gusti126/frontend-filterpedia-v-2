@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-white rounded-xl p-2 md:p-3 border shadow-lg">
+  <div class="bg-white rounded-lg md:rounded-xl p-2 md:p-3 border shadow-lg">
     <div>
       <img
         :src="require(`~/assets/product/${nameImage}`)"
         :alt="nameImage"
-        class="rounded-xl"
+        class="rounded-lg md:rounded-xl"
       />
     </div>
     <div class="font-normal text-sm md:text-xl text-gray-800 mt-2">{{ title }}</div>

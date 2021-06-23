@@ -19,6 +19,7 @@
               font-medium
               text-gray-600
             "
+            placeholder="Cari Produk ..."
             id="cari-nav"
           />
           <label for="cari-nav" class="my-auto">
