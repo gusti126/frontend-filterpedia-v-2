@@ -1,8 +1,8 @@
 <template>
   <div class="bg-blue-600">
-    <div class="container md:px-10 py-2">
+    <div class="container px-2 md:px-10 py-2">
       <nav class="flex">
-        <nuxt-link to="/" class="my-auto mr-4">
+        <nuxt-link to="/" class="my-auto mr-4 md:flex hidden">
           <div class="text-white font-medium text-lg">LOGO NAV</div>
         </nuxt-link>
         <!-- input search -->
@@ -11,7 +11,8 @@
             type="text"
             class="
               h-8
-              w-96
+              md:w-96
+              w-60
               px-4
               rounded-full
               focus:outline-none
@@ -61,6 +62,7 @@
             hover:bg-white
             hover:text-blue-500
             text-white
+            md:flex hidden
           "
         >
           <div class="font-medium text-lg">Masuk</div>
@@ -76,6 +78,7 @@
             hover:text-white
             text-blue-500
             ml-4
+            md:flex hidden
           "
         >
           <div class="font-medium text-lg">Daftar</div>
