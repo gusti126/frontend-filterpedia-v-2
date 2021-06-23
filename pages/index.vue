@@ -7,12 +7,14 @@
       <img src="~/assets/banner/header-banner.png" alt="" />
     </div>
     <!--end banner header -->
-    <div class="md:px-10 px-2">
+    <div class="md:px-20 px-2">
       <div class="font-semibold text-base md:text-2xl mt-4 text-gray-800">
         Kategori
       </div>
+
       <kategori />
 
+    <!-- Product populer -->
       <div
         class="
           mt-10
@@ -70,9 +72,11 @@
           </nuxt-link>
         </div>
       </div>
+      <!-- endProduct populer -->
+
     </div>
     <!-- banner info -->
-    <div class="md:px-10 px-2 my-5">
+    <div class="md:px-20 px-2 my-5">
       <img
         src="~/assets/banner/bannerinfo.png"
         alt=""
@@ -80,13 +84,15 @@
       />
     </div>
     <!-- endbanner info -->
+
     <!-- produk spesial diskon -->
-    <div class="md:px-10 px-2">
+    <div class="md:px-20 px-2">
       <div
         class="font-semibold text-base md:text-2xl text-gray-800 mb-4 md:mb-5"
       >
         Spesial Diskon
       </div>
+
       <div
         class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-2 md:gap-4"
       >
@@ -133,7 +139,10 @@
       </div>
     </div>
     <!-- endproduk spesial diskon -->
+
+   
     <div>
+      <div></div>
       <botfooter nameImage="logo.png" />
     </div>
   </div>
