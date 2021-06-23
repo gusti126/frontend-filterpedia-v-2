@@ -14,7 +14,7 @@
 
       <kategori />
 
-    <!-- Product populer -->
+      <!-- Product populer -->
       <div
         class="
           mt-10
@@ -35,8 +35,8 @@
           <nuxt-link to="/productdetail">
             <card-produk
               nameImage="Rectangle 20-1.jpg"
-              diskon="80000"
-              price="70000"
+              v-bind:diskon="80000"
+              v-bind:price="70000"
               title="Nama Produk"
             />
           </nuxt-link>
@@ -45,8 +45,8 @@
           <nuxt-link to="/productdetail">
             <card-produk
               nameImage="Rectangle 20.jpg"
-              diskon="80000"
-              price="70000"
+              v-bind:diskon="80000"
+              v-bind:price="70000"
               title="Nama Produk"
             />
           </nuxt-link>
@@ -55,8 +55,8 @@
           <nuxt-link to="/productdetail">
             <card-produk
               nameImage="Rectangle 20-3.jpg"
-              diskon="80000"
-              price="70000"
+              v-bind:diskon="80000"
+              v-bind:price="70000"
               title="Nama Produk"
             />
           </nuxt-link>
@@ -65,15 +65,14 @@
           <nuxt-link to="/productdetail">
             <card-produk
               nameImage="Rectangle 20-2.jpg"
-              diskon="80000"
-              price="70000"
+              v-bind:diskon="80000"
+              v-bind:price="70000"
               title="Nama Produk"
             />
           </nuxt-link>
         </div>
       </div>
       <!-- endProduct populer -->
-
     </div>
     <!-- banner info -->
     <div class="md:px-20 px-2 my-5">
@@ -100,8 +99,8 @@
           <nuxt-link to="/productdetail">
             <card-produk
               nameImage="Rectangle 20-1.jpg"
-              diskon="80000"
-              price="70000"
+              v-bind:diskon="80000"
+              v-bind:price="70000"
               title="Nama Produk"
             />
           </nuxt-link>
@@ -110,8 +109,8 @@
           <nuxt-link to="/productdetail">
             <card-produk
               nameImage="Rectangle 20.jpg"
-              diskon="80000"
-              price="70000"
+              v-bind:diskon="80000"
+              v-bind:price="70000"
               title="Nama Produk"
             />
           </nuxt-link>
@@ -120,8 +119,8 @@
           <nuxt-link to="/productdetail">
             <card-produk
               nameImage="Rectangle 20-3.jpg"
-              diskon="80000"
-              price="70000"
+              v-bind:diskon="80000"
+              v-bind:price="70000"
               title="Nama Produk"
             />
           </nuxt-link>
@@ -130,8 +129,8 @@
           <nuxt-link to="/productdetail">
             <card-produk
               nameImage="Rectangle 20-2.jpg"
-              diskon="80000"
-              price="70000"
+              v-bind:diskon="80000"
+              v-bind:price="70000"
               title="Nama Produk"
             />
           </nuxt-link>
@@ -140,9 +139,7 @@
     </div>
     <!-- endproduk spesial diskon -->
 
-   
     <div>
-      <div></div>
       <botfooter nameImage="logo.png" />
     </div>
   </div>
