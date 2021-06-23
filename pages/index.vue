@@ -83,61 +83,59 @@
     <!-- produk spesial diskon -->
     <div class="md:px-10 px-2">
       <div
-      class="
-        font-semibold
-        text-base
-        md:text-2xl
-        text-gray-800
-        mb-4
-        md:mb-5
-      "
-    >
-      Spesial Diskon 
-    </div>
-    <div class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-2 md:gap-4">
-      <div class="md:col-span-3 col-span-1">
-        <nuxt-link to="/productdetail">
-          <card-produk
-            nameImage="Rectangle 20-1.jpg"
-            diskon="80000"
-            price="70000"
-            title="Nama Produk"
-          />
-        </nuxt-link>
+        class="font-semibold text-base md:text-2xl text-gray-800 mb-4 md:mb-5"
+      >
+        Spesial Diskon
       </div>
-      <div class="md:col-span-3 col-span-1">
-        <nuxt-link to="/productdetail">
-          <card-produk
-            nameImage="Rectangle 20.jpg"
-            diskon="80000"
-            price="70000"
-            title="Nama Produk"
-          />
-        </nuxt-link>
+      <div
+        class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-2 md:gap-4"
+      >
+        <div class="md:col-span-3 col-span-1">
+          <nuxt-link to="/productdetail">
+            <card-produk
+              nameImage="Rectangle 20-1.jpg"
+              diskon="80000"
+              price="70000"
+              title="Nama Produk"
+            />
+          </nuxt-link>
+        </div>
+        <div class="md:col-span-3 col-span-1">
+          <nuxt-link to="/productdetail">
+            <card-produk
+              nameImage="Rectangle 20.jpg"
+              diskon="80000"
+              price="70000"
+              title="Nama Produk"
+            />
+          </nuxt-link>
+        </div>
+        <div class="md:col-span-3 col-span-1">
+          <nuxt-link to="/productdetail">
+            <card-produk
+              nameImage="Rectangle 20-3.jpg"
+              diskon="80000"
+              price="70000"
+              title="Nama Produk"
+            />
+          </nuxt-link>
+        </div>
+        <div class="md:col-span-3 col-span-1">
+          <nuxt-link to="/productdetail">
+            <card-produk
+              nameImage="Rectangle 20-2.jpg"
+              diskon="80000"
+              price="70000"
+              title="Nama Produk"
+            />
+          </nuxt-link>
+        </div>
       </div>
-      <div class="md:col-span-3 col-span-1">
-        <nuxt-link to="/productdetail">
-          <card-produk
-            nameImage="Rectangle 20-3.jpg"
-            diskon="80000"
-            price="70000"
-            title="Nama Produk"
-          />
-        </nuxt-link>
-      </div>
-      <div class="md:col-span-3 col-span-1">
-        <nuxt-link to="/productdetail">
-          <card-produk
-            nameImage="Rectangle 20-2.jpg"
-            diskon="80000"
-            price="70000"
-            title="Nama Produk"
-          />
-        </nuxt-link>
-      </div>
-    </div>
     </div>
     <!-- endproduk spesial diskon -->
+    <div>
+      <botfooter nameImage="logo.png" />
+    </div>
   </div>
 </template>
 
