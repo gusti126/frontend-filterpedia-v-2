@@ -1,8 +1,7 @@
 <template>
   <div>
     <navbar />
-    <nav-mobile />
-
+    <mobile-addcart />
     <div class="md:px-20 px-2">
       <div class="flex justify-start md:my-5 my-2">
         <div class="mr-3 text-lg text-gray-500">Home</div>
@@ -157,7 +156,7 @@
               <div class="text-gray-600">Garansi Resmi Satu Tahun</div>
             </div>
             <div class="my-7 flex justify-between">
-              <div>
+              
                 <nuxt-link
                   to="/belilangsung"
                   class="
@@ -168,13 +167,11 @@
                     rounded-lg
                     border-2 border-blue-700
                   "
+                  
                 >
                   Beli Langsung
                 </nuxt-link>
-              </div>
-              <div class="">
-                <nuxt-link
-                  to="/belilangsung"
+                <div
                   class="
                     border-2 border-blue-700
                     text-blue-700
@@ -184,11 +181,13 @@
                     hover:border-0
                     hover:bg-blue-600
                     hover:text-white
+                    cursor-pointer
                   "
+                  @click="showAlert"
                 >
+                
                   +Keranjang
-                </nuxt-link>
-              </div>
+                </div>
             </div>
             <div class="flex justify-between">
               <nuxt-link to="/chat" class="text-gray-400 hover:text-blue-500">
@@ -356,6 +355,17 @@ export default {
     },
     changeActive: function (id) {
       this.activePhoto = id
+    },
+    showAlert() {
+      // Use sweetalert2
+      this.$swal({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Berhasil masukan Keranjang',
+        showConfirmButton: false,
+        timer: 1700
+      });
     },
   },
 }
