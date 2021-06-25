@@ -4,6 +4,7 @@
       bg-gradient-to-l
       from-blue-700
       to-blue-400
+      hidden md:block
       w-full
       px-10
       py-4
