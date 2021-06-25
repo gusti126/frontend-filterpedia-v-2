@@ -41,18 +41,22 @@
                 />
               </div>
             </div>
-            <div class="block md:hidden col-span-12 my-3 ">
-                <div class=" justify-between">
-                    <div class="text-gray-700 text-xl font-semibold">Filter Air Botolan</div>
-                    <div class="text-base text-blue-600 font-semibold">Rp.700.0000</div>
-                    
+            <div class="block md:hidden col-span-12 my-3">
+              <div class="justify-between">
+                <div class="text-gray-700 text-xl font-semibold">
+                  Filter Air Botolan
                 </div>
+                <div class="text-base text-blue-600 font-semibold">
+                  Rp.700.0000
+                </div>
+              </div>
             </div>
             <div class="md:col-span-5 col-span-12 flex cursor-pointer">
               <div
                 class="
                   font-semibold
-                  md:text-2xl text-blue-700
+                  md:text-2xl
+                  text-blue-700
                   mr-16
                   hover:text-blue-400
                 "
@@ -64,7 +68,12 @@
                 ></div>
               </div>
               <div
-                class="font-semibold md:text-2xl text-blue-700 hover:text-blue-400"
+                class="
+                  font-semibold
+                  md:text-2xl
+                  text-blue-700
+                  hover:text-blue-400
+                "
               >
                 <div @click="ulasan">Ulasan</div>
                 <div
@@ -75,27 +84,12 @@
             </div>
 
             <div class="md:col-span-5 col-span-12">
-              <div class="md:text-gray-700 text-gray-600 text-sm md:text-lg" v-if="isInfoProduk">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
-                dicta, tempore doloribus consequatur, ad nisi totam qui, et rem
-                aut debitis consectetur. Ipsum doloremque, quisquam id aliquam
-                maiores ea nesciunt sed quae, doloribus nihil saepe odit officia
-                blanditiis. Necessitatibus ex natus asperiores in ipsum
-                voluptatum veritatis, placeat similique aliquam illum cumque
-                maxime voluptas totam cupiditate officia reprehenderit, dolorem,
-                eos tempore. Expedita qui recusandae asperiores tempora natus
-                nemo error iusto doloremque saepe? Nisi repudiandae reiciendis,
-                odio a magni temporibus exercitationem tempora consectetur
-                deleniti molestiae rerum, eaque quidem architecto obcaecati
-                inventore! Explicabo inventore qui delectus eius expedita
-                obcaecati totam accusantium reprehenderit ullam. Lorem ipsum,
-                dolor sit amet consectetur adipisicing elit. Perspiciatis culpa
-                exercitationem aliquid ut consequatur distinctio quasi
-                blanditiis facere aspernatur quidem eligendi quam velit officia
-                eos voluptatibus vero eveniet incidunt totam tempore
-                necessitatibus, labore provident quae nihil. Consequatur, a id
-                neque commodi aspernatur error reprehenderit enim, omnis,
-                assumenda tenetur voluptatum repudiandae.
+              <div
+                class="md:text-gray-700 text-gray-600 text-sm md:text-lg"
+                v-if="isInfoProduk"
+              >
+                {{ subdeks }} <div class="text-blue-800 cursor-pointer" v-if="readmore" @click="readMore"><div>Lihat Selengkapnya</div></div>
+              
               </div>
             </div>
           </div>
@@ -156,38 +150,35 @@
               <div class="text-gray-600">Garansi Resmi Satu Tahun</div>
             </div>
             <div class="my-7 flex justify-between">
-              
-                <nuxt-link
-                  to="/belilangsung"
-                  class="
-                    bg-blue-700
-                    text-white
-                    px-9
-                    py-2
-                    rounded-lg
-                    border-2 border-blue-700
-                  "
-                  
-                >
-                  Beli Langsung
-                </nuxt-link>
-                <div
-                  class="
-                    border-2 border-blue-700
-                    text-blue-700
-                    px-9
-                    py-2
-                    rounded-lg
-                    hover:border-0
-                    hover:bg-blue-600
-                    hover:text-white
-                    cursor-pointer
-                  "
-                  @click="showAlert"
-                >
-                
-                  +Keranjang
-                </div>
+              <nuxt-link
+                to="/belilangsung"
+                class="
+                  bg-blue-700
+                  text-white
+                  px-9
+                  py-2
+                  rounded-lg
+                  border-2 border-blue-700
+                "
+              >
+                Beli Langsung
+              </nuxt-link>
+              <div
+                class="
+                  border-2 border-blue-700
+                  text-blue-700
+                  px-9
+                  py-2
+                  rounded-lg
+                  hover:border-0
+                  hover:bg-blue-600
+                  hover:text-white
+                  cursor-pointer
+                "
+                @click="showAlert"
+              >
+                +Keranjang
+              </div>
             </div>
             <div class="flex justify-between">
               <nuxt-link to="/chat" class="text-gray-400 hover:text-blue-500">
@@ -341,17 +332,24 @@ export default {
           url: '20-1.jpg',
         },
       ],
+      deskripsi:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias dicta, tempore doloribus consequatur, ad nisi totam qui, et rem aut debitis consectetur. Ipsum doloremque, quisquam id aliquam maiores ea nesciunt sed quae, doloribus nihil saepe odit officia blanditiis. Necessitatibus ex natus asperiores in ipsum voluptatum veritatis, placeat similique aliquam illum cumque maxime voluptas totam cupiditate officia reprehenderit, dolorem, eos tempore. Expedita qui recusandae asperiores tempora natus nemo error iusto doloremque saepe? Nisi repudiandae reiciendis, odio a magni temporibus exercitationem tempora consectetur deleniti molestiae rerum, eaque quidem architecto obcaecati inventore! Explicabo inventore qui delectus eius expedita obcaecati totam accusantium reprehenderit ullam. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis culpa exercitationem aliquid ut consequatur distinctio quasi blanditiis facere aspernatur quidem eligendi quam velit officia eos voluptatibus vero eveniet incidunt totam tempore necessitatibus, labore provident quae nihil. Consequatur, a id neque commodi aspernatur error reprehenderit enim, omnis, assumenda tenetur voluptatum repudiandae.',
+      subdeks: '',
+      readmore: true,
     }
   },
-
+  mounted() {
+    this.subdeks = this.deskripsi.substring(0, 200);
+    // console.log(this.subdeks);
+  },
   methods: {
     ulasan: function () {
       this.isInfoProduk = false
-      console.log(this.isInfoProduk)
+      console.log(this.deskripsi.length)
     },
     produk: function () {
       this.isInfoProduk = true
-      console.log(this.isInfoProduk)
+      console.log(this.subdeks)
     },
     changeActive: function (id) {
       this.activePhoto = id
@@ -364,8 +362,13 @@ export default {
         icon: 'success',
         title: 'Berhasil masukan Keranjang',
         showConfirmButton: false,
-        timer: 1700
-      });
+        timer: 1700,
+      })
+    },
+    readMore: function(){
+      this.readmore = false;
+      this.subdeks = this.deskripsi;
+      console.log(this.readmore);
     },
   },
 }

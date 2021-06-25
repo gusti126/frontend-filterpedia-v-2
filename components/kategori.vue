@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="font-semibold text-base md:text-2xl mt-4 text-gray-800">
+        Kategori
+    </div>
     <div class="hidden md:flex justify-between">
       <div>
         <div class="bg-gray-400 rounded-full h-20 w-20 mt-5 mx-auto"></div>
@@ -30,7 +33,7 @@
         <div class="text-center mt-2">Kategori tujuh</div>
       </div>
     </div>
-    <div class="md:hidden justify-between flex">
+    <div class="md:hidden justify-between flex ">
       <div>
         <div class="bg-gray-400 rounded-full h-11 w-11 mt-2 mx-auto"></div>
         <div class="text-center font-normal text-xs">Kategori satu</div>

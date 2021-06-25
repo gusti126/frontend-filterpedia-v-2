@@ -12,7 +12,8 @@
             class="
               h-8
               md:w-96
-              w-60
+              w-full
+            
               px-4
               rounded-full
               focus:outline-none
@@ -40,7 +41,7 @@
         <!-- end input search -->
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="my-auto ml-4 h-8 w-8 text-white"
+          class="my-auto ml-4 h-8 w-8 text-white md:flex hidden"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

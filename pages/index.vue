@@ -8,9 +8,6 @@
     </div>
     <!--end banner header -->
     <div class="md:px-20 px-2">
-      <div class="font-semibold text-base md:text-2xl mt-4 text-gray-800">
-        Kategori
-      </div>
 
       <kategori />
 

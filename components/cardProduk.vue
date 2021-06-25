@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-lg md:rounded-xl p-2 md:p-3 border shadow-lg">
+  <div class="bg-white rounded-lg md:rounded-xl p-2 md:p-3 border shadow">
     <div>
       <img
         :src="require(`~/assets/product/${nameImage}`)"
