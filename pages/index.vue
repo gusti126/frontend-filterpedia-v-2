@@ -8,7 +8,6 @@
     </div>
     <!--end banner header -->
     <div class="md:px-20 px-2">
-
       <kategori />
 
       <!-- Product populer -->
@@ -34,7 +33,7 @@
               nameImage="Rectangle 20-1.jpg"
               v-bind:diskon="80000"
               v-bind:price="70000"
-              title="Nama Produk"
+              title="Nama Produk 1"
             />
           </nuxt-link>
         </div>
@@ -145,4 +144,3 @@
 <script>
 export default {}
 </script>
-
