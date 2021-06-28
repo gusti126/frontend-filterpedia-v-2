@@ -1,5 +1,6 @@
 <template>
-<div><!-- content -->
+<div>
+  <!-- content -->
     <div class="bg-white w-full min-h-full p-6 rounded-xl">
       <div>
         <img
