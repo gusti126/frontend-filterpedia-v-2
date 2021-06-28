@@ -19,4 +19,14 @@ $ npm run generate
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
-## Page Directory
+### Layout
+1. default
+    secara default layout menggunakan bawaan nuxtjs
+
+2. dashboard
+    layout dashboard untuk page
+    - profile
+    - pesanan saya
+    - riwayat pembelian
+    - pengaturan
+    - logout
