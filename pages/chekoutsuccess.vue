@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="flex justify-center">
-            <nuxt-link to="pesanan" class="text-white mb-10 text-center text-sm border-2 border-blue-600  bg-blue-600 px-3 md:px-6 py-2 rounded-md">Lihat pesanan</nuxt-link>
+            <nuxt-link to="/dashboard/pesanan" class="text-white mb-10 text-center text-sm border-2 border-blue-600  bg-blue-600 px-3 md:px-6 py-2 rounded-md">Lihat pesanan</nuxt-link>
             <nuxt-link to="/" class="text-blue-600 mb-10 text-center border-2 border-blue-600 px-3 md:px-6 py-2 rounded-md ml-5 text-sm md:ml-10">Lanjut belanja</nuxt-link>
         </div>
       </div>

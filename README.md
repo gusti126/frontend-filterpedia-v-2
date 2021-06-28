@@ -1,4 +1,4 @@
-# nuxt-from-npx
+# filterpedia
 
 ## Build Setup
 

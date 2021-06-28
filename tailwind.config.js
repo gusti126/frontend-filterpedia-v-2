@@ -5,11 +5,17 @@ module.exports =
             fontFamily: {
                     poppins: ["Poppins"],
                 },
+            extend: {
+              colors: {
+                pesanan: '#EBFDFE',
+              },
         },
         fontFamily: {
             poppins: ["Poppins"],
         },
         variants: {},
+       
+        },
         plugins: [],
         purge: {
           content: [
