@@ -1,14 +1,17 @@
 <template>
   <div class="bg-white rounded-lg md:rounded-xl p-2 md:p-3 border shadow">
     <div>
+      <Skeleton height="150px" v-show="load" />
       <img
         :src="require(`~/assets/product/${nameImage}`)"
         :alt="nameImage"
-        class="rounded-lg md:rounded-xl"
+        class="rounded-lg md:rounded-xl" v-show="!load"
       />
     </div>
     <div class="font-normal text-sm md:text-xl text-gray-800 mt-2">
-      {{ title }}
+      <Skeleton height="50px">
+        {{ title }}
+      </Skeleton>
     </div>
     <div class="font-semibold text-sm md:text-xl text-blue-800">
       Rp.{{ price }}
@@ -57,12 +60,39 @@
 </template>
 
 <script>
+import { Skeleton } from 'vue-loading-skeleton'
 export default {
   props: {
     title: String,
     price: Number,
     nameImage: String,
     diskon: Number,
+  },
+  components: { Skeleton },
+  data() {
+    return {
+      load: false,
+    }
+  },
+  mounted() {
+    // this.hiddenLoad();
+    
+  },
+
+  methods: {
+    hiddenLoad() {
+      setTimeout(() => {
+        this.load = false
+      }, 3000)
+    },
+
+    start() {
+        this.load = true
+        console.log('start loading')
+      },
+      finish() {
+        this.load = false
+      },
   },
 }
 </script>

@@ -88,7 +88,8 @@
                 class="md:text-gray-700 text-gray-600 text-sm md:text-lg"
                 v-if="isInfoProduk"
               >
-                {{ subdeks }} <div class="text-blue-800 cursor-pointer" v-if="readmore" @click="readMore"><div>Lihat Selengkapnya</div></div>
+                {{ subdeks }} 
+                <div class="text-blue-800 cursor-pointer" v-if="readmore" @click="readMore"><div>Lihat Selengkapnya</div></div>
               
               </div>
             </div>

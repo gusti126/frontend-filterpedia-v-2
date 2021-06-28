@@ -14,7 +14,10 @@
     <!-- endheader sidebar -->
     <!-- menu sidebar -->
     <nuxt-link to="profile">
-      <div class="mt-8 flex font-semibold text-gray-500">
+      <div
+        class="mt-8 flex font-semibold text-gray-500 hover:text-blue-500"
+        :class="{ 'text-blue-500': isProfile }"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 mr-3"
@@ -32,7 +35,11 @@
         <div class="my-auto">Profile</div>
       </div>
     </nuxt-link>
-    <nuxt-link to="pesanan" class="text-blue-500 hover:text-blue-500">
+    <nuxt-link
+      to="pesanan"
+      class="text-gray-500 hover:text-blue-500"
+      :class="{ 'text-blue-500': isPesanan }"
+    >
       <div class="mt-6 flex font-semibold mr-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +59,10 @@
       </div>
     </nuxt-link>
     <nuxt-link to="riwayat-pembelian">
-      <div class="mt-6 flex font-semibold text-gray-500 hover:text-blue-500">
+      <div
+        class="mt-6 flex font-semibold text-gray-500 hover:text-blue-500"
+        :class="{ 'text-blue-500': isRiwayat }"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 mr-3"
@@ -71,7 +81,10 @@
       </div>
     </nuxt-link>
     <nuxt-link to="setting">
-      <div class="mt-6 flex font-semibold text-gray-500 hover:text-blue-500">
+      <div
+        class="mt-6 flex font-semibold text-gray-500 hover:text-blue-500"
+        :class="{ 'text-blue-500': isPengaturan }"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 mr-3"
@@ -117,3 +130,17 @@
     <!-- endmenu sidebar -->
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    isProfile: false,
+    isPesanan: false,
+    isRiwayat: false,
+    isPengaturan: false,
+  },
+  data() {
+    return {}
+  },
+}
+</script>

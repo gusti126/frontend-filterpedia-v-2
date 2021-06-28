@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-blue-600">
+  <div class=" h-28 bg-gradient-to-r from-purple-400 to-blue-600 md:from-transparent md:bg-blue-600 md:h-full">
     <div class=" px-2 md:px-20 py-2">
       <nav class="flex">
         <nuxt-link to="/" class="my-auto mr-4 md:flex hidden">
