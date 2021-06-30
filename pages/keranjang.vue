@@ -64,79 +64,81 @@
         <div>Action</div>
       </div>
       <div
-        class="grid grid-cols-4 mt-5"
-        v-for="(b, index) in barang"
+        class="grid grid-cols-4 mt-8"
+        v-for="(b, index) in keranjang"
         :key="index"
       >
         <div>
-          <input type="checkbox" @click="hendleCheked(index)" :id="index" />
+          
           <img
             :src="require(`~/assets/product/${b.image}`)"
             alt=""
-            class="rounded-lg w-32"
+            class="rounded w-32"
           />
         </div>
-        <div class="text-lg mt-4">
+        <div class="text-lg mt-2">
           <nuxt-link to="productdetail" class="hover:text-blue-500">{{
             b.nama
           }}</nuxt-link>
-        </div>
-        <div class="text-green-600 font-medium mt-4">
-          Rp.{{ b.harga }}
           <div class="text-xs mt-1 text-blue-400">
             70% <span class="line-through text-gray-400 ml-2">Rp.1000000</span>
           </div>
         </div>
-        <div class="flex mt-4">
-          <div class="" @click="plusHendle(index)">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-8 w-8 text-blue-600 cursor-pointer"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+        <div class=" mt-4">
+          <div class="text-green-600 font-medium">Rp.{{ b.harga }}</div>
+          <div class="flex mt-4">
+            <div class="" @click="plusHendle(index)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-blue-600 cursor-pointer"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <div class="mx-4 font-medium text-gray-700 ">
+              {{ b.counter }}
+            </div>
+            <div @click="minHendle(index)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 cursor-pointer"
+                :class="{
+                  'text-gray-400': b.counter < 2,
+                  'text-blue-600': b.counter > 1,
+                }"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
           </div>
-          <div class="mx-4 font-bold text-gray-700 text-xl mt-1">
-            {{ b.counter }}
-          </div>
-          <div @click="minHendle(index)">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-8 w-8 cursor-pointer"
-              :class="{
-                'text-gray-400': b.counter < 2,
-                'text-blue-600': b.counter > 1,
-              }"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
+        </div>
+        <div class="text-red-400 my-auto">
+          Hapus
         </div>
       </div>
       <div class="mt-10">
         <div class="text-lg font-semibold text-gray-800">
           Subtotal Belanjaan
         </div>
-        <div class="text-blue-600 font-medium mb-4">Rp.{{ subtotal }}</div>
-        <nuxt-link
-          to="belilangsung"
-          class="py-2 px-6 rounded bg-blue-600 text-white hover:bg-purple-700"
+        <div class="text-blue-600 font-medium mb-4">Rp.{{ this.$store.state.subtotal }}</div>
+        <nuxt-link to="belilangsung"
+          class="py-2 px-6 rounded bg-blue-600 text-white hover:bg-purple-700" 
           >Beli Sekarang</nuxt-link
         >
       </div>
@@ -156,12 +158,12 @@
         </div>
         <div class="w-full ml-4 mt-4">
           <div class="text-sm">{{ b.nama }}</div>
+          <div class="text-xs mt-1 text-blue-400">
+            80%
+            <span class="line-through text-gray-400 ml-2">Rp.1000000</span>
+          </div>
           <div class="flex">
             <div class="text-sm font-medium mr-4">Rp.{{ b.harga }}</div>
-            <div class="text-xs mt-1 text-blue-400">
-              70%
-              <span class="line-through text-gray-400 ml-2">Rp.1000000</span>
-            </div>
           </div>
           <div class="flex justify-end">
             <div class="" @click="plusHendle(index)">
@@ -180,7 +182,7 @@
                 />
               </svg>
             </div>
-            <div class="mx-4 font-bold text-gray-700">
+            <div class="mx-4 font-medium text-gray-700">
               {{ b.counter }}
             </div>
             <div @click="minHendle(index)">
@@ -214,9 +216,10 @@
 <script>
 import NavMobile from '~/components/nav-mobile.vue'
 import navbar from '~/components/navbar.vue'
+import { mapMutations } from 'vuex'
 export default {
   components: { navbar, NavMobile },
-
+// @click="$store.commit('increment')"
   head() {
     return {
       title: 'Keranjang Pesanan Lisa Blackpink',
@@ -227,7 +230,8 @@ export default {
     return {
       cheked: [1, 3],
       counter1: 1,
-      subtotal: 0,
+      subtotal: '',
+      keranjang: this.$store.state.keranjang,
       barang: [
         {
           id: 1,
@@ -259,40 +263,44 @@ export default {
       ],
     }
   },
-  mounted() {},
+  mounted() {
+    // for(var i = 0; i < this.barang.length; i++)
+    // {
+    //   var harga2 = this.barang[i].harga * this.barang[i].counter;
+    //   this.subtotal += harga2
+      
+    // }
+    // console.log(this.keranjang.length)
+      
+  },
   methods: {
+    
     plusHendle(id) {
-      this.barang[id].counter += 1
+      this.keranjang[id].counter += 1
+      this.subtotal += this.keranjang[id].harga
 
-      if (this.barang[id].ischeked == true) {
-        this.subtotal += this.barang[id].harga
-        console.log('ok 1')
-      }
-
-      console.log(document.getElementById(id).checked)
     },
     minHendle(id) {
-      if (this.barang[id].counter < 2) {
+      if (this.keranjang[id].counter < 2) {
         return event.preventDefault()
       }
 
-      this.barang[id].counter -= 1
-      if (document.getElementById(id).checked == true) {
-        this.subtotal -= this.barang[id].harga
-      }
+      this.keranjang[id].counter -= 1
+      this.subtotal -= this.keranjang[id].harga
+      
     },
     hendleCheked(id) {
-      if (this.barang[id].ischeked == false) {
+      if (this.keranjang[id].ischeked == false) {
         document.getElementById(id).checked = true
-        this.barang[id].ischeked = true
-        this.subtotal += this.barang[id].harga * this.barang[id].counter
-        console.log(this.barang[id].ischeked)
+        this.keranjang[id].ischeked = true
+        this.subtotal += this.keranjang[id].harga * this.keranjang[id].counter
+        console.log(this.keranjang[id].ischeked)
       } else {
         document.getElementById(id).checked = false
-        this.barang[id].ischeked = false
-        this.subtotal -= this.barang[id].harga * this.barang[id].counter
-        console.log(this.barang[id])
-        console.log(this.barang[id].ischeked)
+        this.keranjang[id].ischeked = false
+        this.subtotal -= this.keranjang[id].harga * this.keranjang[id].counter
+        console.log(this.keranjang[id])
+        console.log(this.keranjang[id].ischeked)
       }
 
       if (this.subtotal < 1) {

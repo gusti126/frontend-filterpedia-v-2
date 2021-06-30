@@ -13,6 +13,7 @@
         border
         w-full
         rounded-t-xl
+        z-50
       "
     >
       <div>

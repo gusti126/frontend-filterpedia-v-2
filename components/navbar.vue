@@ -16,7 +16,7 @@
           <div class="text-white font-medium text-lg">LOGO NAV</div>
         </nuxt-link>
         <!-- input search -->
-        <div class="my-auto flex bg-white rounded-full pr-4">
+        <div class="my-auto flex bg-white rounded-full md:w-96 w-full pr-4">
           <input
             type="text"
             class="
@@ -48,10 +48,19 @@
           </label>
         </div>
         <!-- end input search -->
-        <nuxt-link to="/keranjang">
+        <nuxt-link to="/keranjang" class="relative flex">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="my-auto ml-4 h-8 w-8 text-white md:flex hidden hover:text-purple-200"
+            class="
+              my-auto
+              ml-4
+              h-8
+              w-8
+              text-white
+              md:flex
+              hidden
+              hover:text-purple-200
+            "
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -63,6 +72,21 @@
               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
             />
           </svg>
+          <span
+            class="
+              absolute
+              -right-2
+              top-0
+              rounded-full
+              bg-green-600
+              px-1
+              text-white
+              text-sm
+              leading-tight
+              text-center
+            "
+            >5
+          </span>
         </nuxt-link>
         <nuxt-link
           to="/login"

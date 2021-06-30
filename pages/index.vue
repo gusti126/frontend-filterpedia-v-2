@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="pb-20 md:pb-0">
     <nav-mobile />
     <navbar />
     <!-- banner header -->
-    <div class="px-2">
+    <div class="px-2 ">
       <img
         src="~/assets/banner/header-banner.png"
         alt=""
@@ -45,7 +45,7 @@
           md:mb-5
         "
       >
-        Product Populer
+        Product Populer Satu
       </div>
       <div
         class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-2 md:gap-4"
