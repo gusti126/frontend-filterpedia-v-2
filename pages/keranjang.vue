@@ -14,7 +14,7 @@
         rounded-t-xl
       "
     >
-      <div class=" text-gray-800">
+      <div class="text-gray-800">
         Subtotal Belanjaan
         <div class="text-blue-600 font-medium">Rp.{{ subtotal }}</div>
       </div>
@@ -146,7 +146,6 @@
     <!-- mobile view -->
     <div class="" v-for="(b, index) in barang" :key="index">
       <div class="px-3 md:hidden flex mt-9">
-          
         <div>
           <input type="checkbox" @click="hendleCheked(index)" :id="index" />
           <img
@@ -156,9 +155,9 @@
           />
         </div>
         <div class="w-full ml-4 mt-4">
-          <div class="text-sm">{{b.nama}}</div>
+          <div class="text-sm">{{ b.nama }}</div>
           <div class="flex">
-            <div class="text-sm font-medium mr-4">Rp.{{b.harga}}</div>
+            <div class="text-sm font-medium mr-4">Rp.{{ b.harga }}</div>
             <div class="text-xs mt-1 text-blue-400">
               70%
               <span class="line-through text-gray-400 ml-2">Rp.1000000</span>
@@ -264,13 +263,13 @@ export default {
   methods: {
     plusHendle(id) {
       this.barang[id].counter += 1
-      
+
       if (this.barang[id].ischeked == true) {
-        this.subtotal += this.barang[id].harga;
+        this.subtotal += this.barang[id].harga
         console.log('ok 1')
       }
-      
-      console.log(document.getElementById(id).checked )
+
+      console.log(document.getElementById(id).checked)
     },
     minHendle(id) {
       if (this.barang[id].counter < 2) {
@@ -281,7 +280,6 @@ export default {
       if (document.getElementById(id).checked == true) {
         this.subtotal -= this.barang[id].harga
       }
-
     },
     hendleCheked(id) {
       if (this.barang[id].ischeked == false) {
