@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div class="pb-40 md:pb-0">
     <div
       class="
         md:hidden
         flex
         justify-between
         fixed
-        bottom-14
+        bottom-12
+        pb-4
         bg-white
         px-2
         pt-1
@@ -15,8 +16,10 @@
       "
     >
       <div class="text-gray-800">
-        Subtotal Belanjaan
-        <div class="text-blue-600 font-medium">Rp.{{ subtotal }}</div>
+        Total Belanjaan
+        <div class="text-blue-600 font-medium">
+          Rp.{{ this.$store.state.subtotal }}
+        </div>
       </div>
 
       <nuxt-link
@@ -29,8 +32,24 @@
           bg-blue-600
           text-white
           hover:bg-purple-700
+          flex
         "
-        >Beli Sekarang</nuxt-link
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 mr-2 my-auto"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+          />
+        </svg>
+        Beli </nuxt-link
       >
     </div>
     <nav-mobile />
@@ -69,7 +88,6 @@
         :key="index"
       >
         <div>
-          
           <img
             :src="require(`~/assets/product/${b.image}`)"
             alt=""
@@ -84,7 +102,7 @@
             70% <span class="line-through text-gray-400 ml-2">Rp.1000000</span>
           </div>
         </div>
-        <div class=" mt-4">
+        <div class="mt-4">
           <div class="text-green-600 font-medium">Rp.{{ b.harga }}</div>
           <div class="flex mt-4">
             <div class="" @click="plusHendle(index)">
@@ -103,7 +121,7 @@
                 />
               </svg>
             </div>
-            <div class="mx-4 font-medium text-gray-700 ">
+            <div class="mx-4 font-medium text-gray-700">
               {{ b.counter }}
             </div>
             <div @click="minHendle(index)">
@@ -128,17 +146,18 @@
             </div>
           </div>
         </div>
-        <div class="text-red-400 my-auto">
-          Hapus
-        </div>
+        <div class="text-red-400 my-auto">Hapus</div>
       </div>
       <div class="mt-10">
         <div class="text-lg font-semibold text-gray-800">
           Subtotal Belanjaan
         </div>
-        <div class="text-blue-600 font-medium mb-4">Rp.{{ this.$store.state.subtotal }}</div>
-        <nuxt-link to="belilangsung"
-          class="py-2 px-6 rounded bg-blue-600 text-white hover:bg-purple-700" 
+        <div class="text-blue-600 font-medium mb-4">
+          Rp.{{ this.$store.state.subtotal }}
+        </div>
+        <nuxt-link
+          to="belilangsung"
+          class="py-2 px-6 rounded bg-blue-600 text-white hover:bg-purple-700"
           >Beli Sekarang</nuxt-link
         >
       </div>
@@ -146,17 +165,16 @@
     <!-- end desktop view -->
 
     <!-- mobile view -->
-    <div class="" v-for="(b, index) in barang" :key="index">
+    <div class="" v-for="(b, index) in keranjang" :key="index">
       <div class="px-3 md:hidden flex mt-9">
         <div>
-          <input type="checkbox" @click="hendleCheked(index)" :id="index" />
           <img
             :src="require(`~/assets/product/${b.image}`)"
             alt=""
             class="h-16 rounded"
           />
         </div>
-        <div class="w-full ml-4 mt-4">
+        <div class="w-full ml-4 md:mt-4">
           <div class="text-sm">{{ b.nama }}</div>
           <div class="text-xs mt-1 text-blue-400">
             80%
@@ -219,7 +237,7 @@ import navbar from '~/components/navbar.vue'
 import { mapMutations } from 'vuex'
 export default {
   components: { navbar, NavMobile },
-// @click="$store.commit('increment')"
+  // @click="$store.commit('increment')"
   head() {
     return {
       title: 'Keranjang Pesanan Lisa Blackpink',
@@ -263,22 +281,11 @@ export default {
       ],
     }
   },
-  mounted() {
-    // for(var i = 0; i < this.barang.length; i++)
-    // {
-    //   var harga2 = this.barang[i].harga * this.barang[i].counter;
-    //   this.subtotal += harga2
-      
-    // }
-    // console.log(this.keranjang.length)
-      
-  },
+  mounted() {},
   methods: {
-    
     plusHendle(id) {
       this.keranjang[id].counter += 1
       this.subtotal += this.keranjang[id].harga
-
     },
     minHendle(id) {
       if (this.keranjang[id].counter < 2) {
@@ -287,7 +294,6 @@ export default {
 
       this.keranjang[id].counter -= 1
       this.subtotal -= this.keranjang[id].harga
-      
     },
     hendleCheked(id) {
       if (this.keranjang[id].ischeked == false) {

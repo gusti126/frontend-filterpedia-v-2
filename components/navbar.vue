@@ -1,13 +1,10 @@
 <template>
   <div
     class="
-      h-28
       bg-gradient-to-r
-      from-purple-400
-      to-blue-600
+      
       md:from-transparent
-      md:bg-blue-600
-      md:h-full
+      bg-blue-700
     "
   >
     <div class="px-2 md:px-20 py-2">
@@ -46,8 +43,10 @@
               />
             </svg>
           </label>
+          
         </div>
         <!-- end input search -->
+        
         <nuxt-link to="/keranjang" class="relative flex">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -77,17 +76,36 @@
               absolute
               -right-2
               top-0
+              hidden
+              md:block
               rounded-full
               bg-green-600
               px-1
-              text-white
-              text-sm
+              text-white text-sm
               leading-tight
               text-center
             "
-            >5
+            >{{ keranjang.length }}
           </span>
         </nuxt-link>
+        <div class="ml-2 md:ml-6 my-auto">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8 text-white "
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              />
+            </svg>
+          </div>
+        </div>
         <nuxt-link
           to="/login"
           class="
@@ -109,7 +127,7 @@
           to="/register"
           class="
             bg-white
-            rounded-lg
+            rounded
             px-4
             py-1
             hover:bg-blue-200
@@ -126,3 +144,13 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      keranjang: this.$store.state.keranjang,
+    }
+  },
+}
+</script>

@@ -3,7 +3,7 @@
     <nav-mobile />
     <navbar />
     <!-- banner header -->
-    <div class="px-2 ">
+    <div class="md:px-0">
       <img
         src="~/assets/banner/header-banner.png"
         alt=""
@@ -11,18 +11,16 @@
       />
 
       <!-- Make a div wrapped slider,set height and width -->
-      <div class="-mt-12 md:hidden">
+      <div class=" md:hidden">
         <!-- Using the slider component -->
         <slider ref="slider" :options="options">
           <!-- slideritem wrapped package with the components you need -->
           <slideritem>
-            <img src="~/assets/banner/mobile1.jpg" alt="" class="rounded-lg" />
+            <img src="~/assets/banner/mobile1.jpg" alt="" class="" />
           </slideritem>
+         
           <slideritem>
-            <img src="~/assets/banner/mobile2.jpg" alt="" class="rounded-lg" />
-          </slideritem>
-          <slideritem>
-            <img src="~/assets/banner/mobile3.png" alt="" class="rounded-lg" />
+            <img src="~/assets/banner/mobile3.png" alt="" class="" />
           </slideritem>
           <!-- Customizable loading -->
           <div slot="loading">loading...</div>
@@ -106,13 +104,10 @@
         <slider ref="slider" :options="options">
           <!-- slideritem wrapped package with the components you need -->
           <slideritem>
-            <img src="~/assets/banner/mobile1.jpg" alt="" class="rounded-lg" />
+            <img src="~/assets/banner/mobile1.jpg" alt="" class="" />
           </slideritem>
           <slideritem>
-            <img src="~/assets/banner/mobile2.jpg" alt="" class="rounded-lg" />
-          </slideritem>
-          <slideritem>
-            <img src="~/assets/banner/mobile3.png" alt="" class="rounded-lg" />
+            <img src="~/assets/banner/mobile3.png" alt="" class="" />
           </slideritem>
           <!-- Customizable loading -->
           <div slot="loading">loading...</div>
@@ -199,7 +194,6 @@ export default {
         autoplay: 3000,
         loop: true,
         itemAnimation: true,
-        centeredSlides: true,
       },
     }
   },

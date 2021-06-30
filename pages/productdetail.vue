@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div class="md:mb-0 mb-20">
     <navbar />
     <mobile-addcart />
     <div class="md:px-20 px-2">
-      <div class="flex justify-start md:my-5 my-2">
-        <div class="mr-3 text-lg text-gray-500">Home</div>
-        <div class="text-lg text-gray-500 mr-3">></div>
-        <div class="text-lg text-gray-500 mr-3">Produk</div>
-        <div class="text-lg text-gray-500 mr-3">></div>
-        <div class="text-lg text-blue-500 mr-3">Filter Air Botolan</div>
+      <div class="flex justify-start md:my-5 my-1">
+        <div class="mr-3 md:text-lg text-gray-500">Home</div>
+        <div class="md:text-lg text-gray-500 mr-3">></div>
+        <div class="md:text-lg text-gray-500 mr-3">Produk</div>
+        <div class="md:text-lg text-gray-500 mr-3">></div>
+        <div class="md:text-lg text-blue-500 mr-3">Filter Air Botolan</div>
       </div>
 
-      <div class="grid grid-cols-12 grid-flow-row gap-2 md:gap-4">
+      <div class="grid grid-cols-12 grid-flow-row gap-4 md:gap-4">
         <div class="md:col-span-7 col-span-12">
           <transition name="slide-fade" mode="out-in">
             <img
@@ -19,7 +19,7 @@
               :src="
                 require(`~/assets/product/Rectangle ${photos[activePhoto].url}`)
               "
-              class="rounded-lg"
+              class="rounded"
               alt=""
             />
           </transition>
@@ -51,27 +51,27 @@
                 </div>
               </div>
             </div>
-            <div class="md:col-span-5 col-span-12 flex cursor-pointer">
+            <div class="md:col-span-5 col-span-12 flex cursor-pointer md:mt-4">
               <div
                 class="
-                  font-semibold
-                  md:text-2xl
-                  text-blue-700
+                  
+                  md:text-xl
+                  font-medium text-gray-800
                   mr-16
                   hover:text-blue-400
                 "
               >
-                <div v-on:click="produk">Info Produk</div>
+                <div v-on:click="produk" class="">Info Produk</div>
                 <div
-                  class="rounded-full bg-blue-700 border md:h-1 mt-1"
+                  class="rounded-full bg-gray-800 border md:h-1 mt-1"
                   v-show="isInfoProduk"
                 ></div>
               </div>
               <div
                 class="
-                  font-semibold
-                  md:text-2xl
-                  text-blue-700
+                  
+                  md:text-xl
+                  font-medium text-gray-800
                   hover:text-blue-400
                 "
               >
@@ -83,13 +83,13 @@
               </div>
             </div>
 
-            <div class="md:col-span-5 col-span-12">
+            <div class="md:col-span-5 col-span-12 ">
               <div
-                class="md:text-gray-700 text-gray-600 text-sm md:text-lg"
+                class="md:text-gray-700 text-gray-600 text-sm md:text-base leading-6 "
                 v-if="isInfoProduk"
               >
-                {{ subdeks }} 
-                <div class="text-blue-800 cursor-pointer" v-if="readmore" @click="readMore"><div>Lihat Selengkapnya</div></div>
+                {{ subdeks }} ...
+                <span class="text-blue-800 font-medium cursor-pointer" v-if="readmore" @click="readMore">Lihat Selengkapnya</span>
               
               </div>
             </div>
@@ -341,7 +341,6 @@ export default {
   },
   mounted() {
     this.subdeks = this.deskripsi.substring(0, 200);
-    // console.log(this.subdeks);
   },
   methods: {
     ulasan: function () {
