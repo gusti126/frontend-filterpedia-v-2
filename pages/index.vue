@@ -51,16 +51,14 @@
         class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-2 md:gap-4"
       >
         <div class="md:col-span-3 col-span-1">
-          <Skeleton>
-            <nuxt-link to="/productdetail">
-              <card-produk
-                nameImage="Rectangle 20-1.jpg"
-                v-bind:diskon="80000"
-                v-bind:price="70000"
-                title="Nama Produk 1"
-              />
-            </nuxt-link>
-          </Skeleton>
+          <nuxt-link to="/productdetail">
+            <card-produk
+              nameImage="Rectangle 20-1.jpg"
+              v-bind:diskon="80000"
+              v-bind:price="70000"
+              title="Nama Produk 1"
+            />
+          </nuxt-link>
         </div>
         <div class="md:col-span-3 col-span-1">
           <nuxt-link to="/productdetail">
