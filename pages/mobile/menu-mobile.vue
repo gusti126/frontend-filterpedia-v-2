@@ -35,8 +35,8 @@
     <div class="px-2 pt-3">
       <div class="bg-white shadow border p-2 rounded-lg">
         <div class="font-medium">Daftar transaksi</div>
-        <div class="flex mt-6 justify-around">
-          <div class="text-center">
+        <div class="flex mt-6 justify-around ">
+          <div class="text-center relative">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-10 w-10 text-blue-700 mx-auto"
@@ -49,12 +49,26 @@
                 clip-rule="evenodd"
               />
             </svg>
+            <span
+              class="
+                absolute
+                left-12
+                top-0
+                rounded-full
+                bg-green-600
+                px-1
+                text-white text-md
+                leading-tight
+                text-center
+              "
+              >{{ keranjang.length }}
+            </span>
             <nuxt-link class="text-sm" to="/dashboard/pesanan"
               >Menunggu pembayaran</nuxt-link
             >
           </div>
 
-          <div class="text-center">
+          <div class="text-center relative">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-10 w-10 text-blue-700 mx-auto"
@@ -68,11 +82,25 @@
                 d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"
               />
             </svg>
+            <span
+              class="
+                absolute
+                left-5
+                top-0
+                rounded-full
+                bg-green-600
+                px-1
+                text-white text-md
+                leading-tight
+                text-center
+              "
+              >{{ keranjang.length }}
+            </span>
             <nuxt-link class="text-sm" to="chekoutsuccess"
               >Sedang dikirim</nuxt-link
             >
           </div>
-          <div class="text-center">
+          <div class="text-center relative">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-10 w-10 text-blue-700 mx-auto"
@@ -87,6 +115,20 @@
                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
               />
             </svg>
+            <span
+              class="
+                absolute
+                left-5
+                top-0
+                rounded-full
+                bg-green-600
+                px-1
+                text-white text-md
+                leading-tight
+                text-center
+              "
+              >20
+            </span>
             <nuxt-link class="text-sm " to="chekoutsuccess"
               >Transaksi berhasil</nuxt-link
             >
@@ -179,3 +221,13 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      keranjang: this.$store.state.keranjang,
+    }
+  },
+}
+</script>
