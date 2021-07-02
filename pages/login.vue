@@ -1,7 +1,7 @@
 <template>
   <div class="md:px-20 px-2 h-screen">
     <div class="grid grid-cols-12 grid-flow-row gap-4 md:gap-10 h-full py-10 md:py-32">
-      <div class="md:col-span-3 md:col-start-3 col-span-6 col-start-3
+      <div class="md:col-span-3 md:col-start-3 md:block hidden col-span-6 col-start-3
       ">
         <img src="~assets/login-hero.png" alt="" class="my-auto" />
       </div>

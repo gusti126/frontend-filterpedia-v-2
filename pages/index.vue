@@ -4,23 +4,26 @@
     <navbar />
     <!-- banner header -->
     <div class="md:px-0">
-      <img
-        src="~/assets/banner/header-banner.png"
+      <!-- <img
+        src="~/assets/banner/Frame 4.jpg"
         alt=""
         class="md:block hidden"
-      />
+      /> -->
 
       <!-- Make a div wrapped slider,set height and width -->
-      <div class=" md:hidden">
+      <div class="">
         <!-- Using the slider component -->
         <slider ref="slider" :options="options">
           <!-- slideritem wrapped package with the components you need -->
+
           <slideritem>
-            <img src="~/assets/banner/mobile1.jpg" alt="" class="" />
+            <img src="~/assets/banner/Frame 1.jpg" alt="" class="" />
           </slideritem>
-         
           <slideritem>
-            <img src="~/assets/banner/mobile3.png" alt="" class="" />
+            <img src="~/assets/banner/Frame 4.jpg" alt="" class="" />
+          </slideritem>
+          <slideritem>
+            <img src="~/assets/banner/Frame 8.jpg" alt="" class="" />
           </slideritem>
           <!-- Customizable loading -->
           <div slot="loading">loading...</div>
@@ -104,10 +107,13 @@
         <slider ref="slider" :options="options">
           <!-- slideritem wrapped package with the components you need -->
           <slideritem>
-            <img src="~/assets/banner/mobile1.jpg" alt="" class="" />
+            <img src="~/assets/banner/Frame 8.jpg" alt="" class="" />
           </slideritem>
           <slideritem>
-            <img src="~/assets/banner/mobile3.png" alt="" class="" />
+            <img src="~/assets/banner/Frame 1.jpg" alt="" class="" />
+          </slideritem>
+          <slideritem>
+            <img src="~/assets/banner/Frame 4.jpg" alt="" class="" />
           </slideritem>
           <!-- Customizable loading -->
           <div slot="loading">loading...</div>
@@ -191,7 +197,7 @@ export default {
 
       options: {
         currentPage: 0,
-        autoplay: 3000,
+        autoplay: 2000,
         loop: true,
         itemAnimation: true,
       },
