@@ -58,7 +58,9 @@ export default {
 5. login
 6. register
 7. poructdetail
+
    > pada page terdapat dua folder dashboard dan mobile. folder mobile dimana tampilan yang memangkhusus mobile view
+
 8. dashboard
    - pesanan
    - profile
