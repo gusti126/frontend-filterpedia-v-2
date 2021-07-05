@@ -69,6 +69,8 @@ export default {
 
 ## Components
 
+Ada beberapa komponen yang di buat dan bisa digunakan kembali
+
 1. bannerHeader untuk banner header bisa di manfaatkan untuk promosi atau pemasangan info pamflet
 2. botfooter digunakan untuk menampilkan footer di bawah website
 3. cardPesanan untuk menampilkan produk produk yang di pesan oleh user di gunakan di page _/pesanan_
