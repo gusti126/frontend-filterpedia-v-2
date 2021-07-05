@@ -17,7 +17,7 @@
     >
       <div class="text-gray-800">
         Total Belanjaan
-        <div class="text-blue-600 font-medium">Rp.1000.000</div>
+        <div class="text-blue-600 font-medium">Rp.{{ 1000000 | currency }}</div>
       </div>
 
       <nuxt-link
