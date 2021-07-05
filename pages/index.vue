@@ -1,34 +1,10 @@
 <template>
   <div class="pb-20 md:pb-0">
-    <nav-mobile />
+    <nav-mobile :isHome="true" />
     <navbar />
     <!-- banner header -->
     <div class="md:px-0">
-      <!-- <img
-        src="~/assets/banner/Frame 4.jpg"
-        alt=""
-        class="md:block hidden"
-      /> -->
-
-      <!-- Make a div wrapped slider,set height and width -->
-      <div class="">
-        <!-- Using the slider component -->
-        <slider ref="slider" :options="options">
-          <!-- slideritem wrapped package with the components you need -->
-
-          <slideritem>
-            <img src="~/assets/banner/Frame 1.jpg" alt="" class="" />
-          </slideritem>
-          <slideritem>
-            <img src="~/assets/banner/Frame 4.jpg" alt="" class="" />
-          </slideritem>
-          <slideritem>
-            <img src="~/assets/banner/Frame 8.jpg" alt="" class="" />
-          </slideritem>
-          <!-- Customizable loading -->
-          <div slot="loading">loading...</div>
-        </slider>
-      </div>
+      <banner-header />
     </div>
     <!--end banner header -->
     <div class="md:px-20 px-2">
@@ -186,10 +162,12 @@
 <script>
 // import slider components
 import { slider, slideritem } from 'vue-concise-slider'
+import BannerHeader from '~/components/bannerHeader.vue'
 export default {
   components: {
     slider,
     slideritem,
+    BannerHeader,
   },
   data() {
     return {

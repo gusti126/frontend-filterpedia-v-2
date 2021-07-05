@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-mobile />
+    <nav-mobile :isProfile="true" />
     <div
       class="
         bg-gradient-to-r
@@ -32,13 +32,17 @@
       </div>
     </div>
 
-    <div class="px-2 pt-3">
-      <div class="bg-white shadow border p-2 rounded-lg">
+    <div class="px-2 pt-5">
+      <div class="bg-white shadow border p-4 rounded-lg">
         <div class="font-medium">Daftar transaksi</div>
         <div class="flex mt-6 justify-around">
           <div class="text-center relative">
             <nuxt-link class="text-sm" to="/dashboard/pesanan">
-              <img src="~/assets/icon/003-timer.svg" alt="" class="h-12 mx-auto">
+              <img
+                src="~/assets/icon/003-timer.svg"
+                alt=""
+                class="h-12 mx-auto"
+              />
               <span
                 class="
                   absolute
@@ -59,7 +63,11 @@
 
           <div class="text-center relative">
             <nuxt-link class="text-sm" to="/dashboard/pesanan">
-              <img src="~/assets/icon/018-delivery truck 1 (1).svg" alt="" class="h-12 mx-auto">
+              <img
+                src="~/assets/icon/018-delivery truck 1 (1).svg"
+                alt=""
+                class="h-12 mx-auto"
+              />
               <span
                 class="
                   absolute
@@ -79,7 +87,11 @@
           </div>
           <div class="text-center relative">
             <nuxt-link class="text-sm" to="/dashboard/pesanan">
-              <img src="~/assets/icon/043-window 1.svg" alt="" class="h-12 mx-auto">
+              <img
+                src="~/assets/icon/043-window 1.svg"
+                alt=""
+                class="h-12 mx-auto"
+              />
               <span
                 class="
                   absolute

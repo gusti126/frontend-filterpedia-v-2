@@ -7,7 +7,7 @@
         justify-between
         fixed
         bottom-12
-        pb-4
+        pb-7
         bg-white
         px-2
         pt-1
@@ -17,9 +17,7 @@
     >
       <div class="text-gray-800">
         Total Belanjaan
-        <div class="text-blue-600 font-medium">
-          Rp.{{ this.$store.state.subtotal }}
-        </div>
+        <div class="text-blue-600 font-medium">Rp.1000.000</div>
       </div>
 
       <nuxt-link
@@ -49,26 +47,12 @@
             d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
           />
         </svg>
-        Beli </nuxt-link
-      >
+        Beli
+      </nuxt-link>
     </div>
-    <nav-mobile />
+    <nav-mobile :isKeranjang="true" />
     <navbar class="hidden md:block" />
-    <div class="md:hidden py-2 px-3 shadow flex">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6 text-gray-500 mr-3"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
-          clip-rule="evenodd"
-        />
-      </svg>
-      <div class="text-sm text-gray-500 my-auto">Kembali</div>
-    </div>
+
     <div class="flex md:px-20 pt-3 text-sm md:text-base md:pt-6 px-3">
       <nuxt-link to="/" class="mr-6 text-gray-400">Home</nuxt-link>
       <div class="mr-6 text-gray-600">/</div>

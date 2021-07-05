@@ -2,7 +2,7 @@
   <div class="md:mb-0 mb-20">
     <navbar />
     <mobile-addcart />
-    <div class="md:px-20 px-2">
+    <div class="md:px-20 px-4">
       <div class="flex justify-start md:my-5 my-1">
         <div class="mr-3 md:text-lg text-gray-500">Home</div>
         <div class="md:text-lg text-gray-500 mr-3">></div>
@@ -54,9 +54,9 @@
             <div class="md:col-span-5 col-span-12 flex cursor-pointer md:mt-4">
               <div
                 class="
-                  
                   md:text-xl
-                  font-medium text-gray-800
+                  font-medium
+                  text-gray-800
                   mr-16
                   hover:text-blue-400
                 "
@@ -68,29 +68,107 @@
                 ></div>
               </div>
               <div
-                class="
-                  
-                  md:text-xl
-                  font-medium text-gray-800
-                  hover:text-blue-400
-                "
+                class="md:text-xl font-medium text-gray-800 hover:text-blue-400"
               >
                 <div @click="ulasan">Ulasan</div>
                 <div
-                  class="rounded-full bg-blue-700 border md:h-1 mt-1"
+                  class="rounded-full bg-gray-800 border md:h-1 mt-1"
                   v-show="!isInfoProduk"
                 ></div>
               </div>
             </div>
 
-            <div class="md:col-span-5 col-span-12 ">
+            <div class="md:col-span-5 col-span-12">
+              <!-- ulasan -->
+              <div v-show="!isInfoProduk">
+                <div class="flex">
+                  <div class="w-32">
+                    <img
+                      src="~assets/profile.jpg"
+                      alt=""
+                      class="rounded-full w-12 h-12 object-cover"
+                    />
+                  </div>
+                  <div class="ml-2 md:ml-6">
+                    <div class="font-semibold text-gray-700">
+                      Lisa Blackpink
+                    </div>
+                    <div class="flex mt-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 text-yellow-500 mr-2"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        />
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 text-yellow-500 mr-2"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        />
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 text-yellow-500 mr-2"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        />
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 text-yellow-500 mr-2"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        />
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 text-yellow-500 mr-2"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        />
+                      </svg>
+                    </div>
+                    <div class="mt-2 font-light text-sm">
+                      Pelayanan yang baik dan produk juga bagus, pengirimannya
+                      juga cepat
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- endulasan -->
               <div
-                class="md:text-gray-700 text-gray-600 text-sm md:text-base leading-6 "
+                class="
+                  md:text-gray-700
+                  text-gray-600 text-sm
+                  md:text-base
+                  leading-6
+                "
                 v-if="isInfoProduk"
               >
                 {{ subdeks }} ...
-                <span class="text-blue-800 font-medium cursor-pointer" v-if="readmore" @click="readMore">Lihat Selengkapnya</span>
-              
+                <span
+                  class="text-blue-800 font-medium cursor-pointer"
+                  v-if="readmore"
+                  @click="readMore"
+                  >Lihat Selengkapnya</span
+                >
               </div>
             </div>
           </div>
@@ -171,9 +249,7 @@
                   px-9
                   py-2
                   rounded-lg
-                  hover:border-0
-                  hover:bg-blue-600
-                  hover:text-white
+                  hover:border-0 hover:bg-blue-600 hover:text-white
                   cursor-pointer
                 "
                 @click="showAlert"
@@ -309,7 +385,7 @@ export default {
   components: { botfooter },
   data() {
     return {
-      isInfoProduk: true,
+      isInfoProduk: false,
       activePhoto: 0,
       photos: [
         {
@@ -340,7 +416,7 @@ export default {
     }
   },
   mounted() {
-    this.subdeks = this.deskripsi.substring(0, 200);
+    this.subdeks = this.deskripsi.substring(0, 200)
   },
   methods: {
     ulasan: function () {
@@ -365,10 +441,10 @@ export default {
         timer: 1700,
       })
     },
-    readMore: function(){
-      this.readmore = false;
-      this.subdeks = this.deskripsi;
-      console.log(this.readmore);
+    readMore: function () {
+      this.readmore = false
+      this.subdeks = this.deskripsi
+      console.log(this.readmore)
     },
   },
 }

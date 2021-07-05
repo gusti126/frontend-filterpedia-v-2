@@ -21,8 +21,7 @@
               py-2
               mt-3
               border-2
-              focus:border-blue-500
-              focus:text-blue-800
+              focus:border-blue-500 focus:text-blue-800
               px-2
               w-full
               bg-gray-100
@@ -44,8 +43,7 @@
               py-2
               mt-3
               border-2
-              focus:border-blue-500
-              focus:text-blue-800
+              focus:border-blue-500 focus:text-blue-800
               px-2
               w-full
               bg-gray-100
@@ -67,8 +65,7 @@
               py-2
               mt-3
               border-2
-              focus:border-blue-500
-              focus:text-blue-800
+              focus:border-blue-500 focus:text-blue-800
               px-2
               w-full
               bg-gray-100
@@ -90,8 +87,7 @@
               py-2
               mt-3
               border-2
-              focus:border-blue-500
-              focus:text-blue-800
+              focus:border-blue-500 focus:text-blue-800
               px-2
               w-full
               bg-gray-100
