@@ -47,7 +47,7 @@
                   Filter Air Botolan
                 </div>
                 <div class="text-base text-blue-600 font-semibold">
-                  Rp.700.0000
+                  Rp.{{ 7000000 | currency }}
                 </div>
               </div>
             </div>

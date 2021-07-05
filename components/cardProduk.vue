@@ -5,7 +5,8 @@
       <img
         :src="require(`~/assets/product/${nameImage}`)"
         :alt="nameImage"
-        class="rounded-lg md:rounded-xl" v-show="!load"
+        class="rounded-lg md:rounded-xl"
+        v-show="!load"
       />
     </div>
     <div class="font-normal text-sm md:text-xl text-gray-800 mt-2">
@@ -14,7 +15,7 @@
       </Skeleton>
     </div>
     <div class="font-semibold text-sm md:text-xl text-blue-800">
-      Rp.{{ price }}
+      Rp.{{ price | currency }}
     </div>
     <div class="flex mt-2">
       <div
@@ -61,6 +62,8 @@
 
 <script>
 import { Skeleton } from 'vue-loading-skeleton'
+import VueCurrencyFilter from 'vue-currency-filter'
+
 export default {
   props: {
     title: String,
@@ -76,7 +79,6 @@ export default {
   },
   mounted() {
     // this.hiddenLoad();
-    
   },
 
   methods: {
@@ -87,12 +89,12 @@ export default {
     },
 
     start() {
-        this.load = true
-        console.log('start loading')
-      },
-      finish() {
-        this.load = false
-      },
+      this.load = true
+      console.log('start loading')
+    },
+    finish() {
+      this.load = false
+    },
   },
 }
 </script>

@@ -47,9 +47,51 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     'vue-sweetalert2/nuxt',
+    'vue-currency-filter/nuxt',
+
+    // Or if you have custom options...
+    [
+      'vue-currency-filter/nuxt',
+      {
+        symbol: '$',
+        thousandsSeparator: ',',
+        fractionCount: 2,
+        fractionSeparator: '.',
+        symbolPosition: 'front',
+        symbolSpacing: true,
+        avoidEmptyDecimals: undefined,
+      },
+    ],
+
+    // for multiple instance
+    [
+      'vue-currency-filter/nuxt',
+      [
+        {
+          // default name 'currency'
+          symbol: '$',
+          thousandsSeparator: ',',
+          fractionCount: 2,
+          fractionSeparator: '.',
+          symbolPosition: 'front',
+          symbolSpacing: true,
+          avoidEmptyDecimals: '##',
+        },
+        {
+          // default name 'currency_2'
+          name: 'currency_2',
+          symbol: 'usd',
+          thousandsSeparator: ' ',
+          fractionCount: 2,
+          fractionSeparator: '.',
+          symbolPosition: 'front',
+          symbolSpacing: false,
+          avoidEmptyDecimals: '',
+        },
+      ],
+    ],
   ],
 
- 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
