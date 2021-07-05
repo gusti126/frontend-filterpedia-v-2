@@ -80,3 +80,4 @@ Ada beberapa komponen yang di buat dan bisa digunakan kembali
 5. mobile-addcart untuk bottom addcart pada tampilan mobile dan tombol sudah di pasang sweetalert
 6. nav-mobile untuk navbar bottom pada tampilan mobile
 7. navbar untuk navigasi bar
+   > Pada component navbar terdapat satu props tipe data number di gunakan untuk menampilkan navbar scroll
