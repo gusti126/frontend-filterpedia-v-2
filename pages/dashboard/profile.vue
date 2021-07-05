@@ -2,7 +2,7 @@
   <div>
     <!-- content -->
     <div class="bg-white w-full min-h-full p-6 rounded-xl">
-      <div>
+      <div class="relative">
         <img
           src="~/assets/profile.jpg"
           alt=""
@@ -15,6 +15,70 @@
             border-2 border-blue-500
             p-2
           "
+          v-if="!imgUrl"
+        />
+        <img
+          :src="imgUrl"
+          alt=""
+          class="
+            rounded-full
+            h-36
+            w-36
+            object-cover
+            mx-auto
+            border-2 border-blue-500
+            p-2
+          "
+          v-if="imgUrl"
+        />
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="
+            h-10
+            w-10
+            block
+            absolute
+            bottom-2
+            right-20
+            md:right-80
+            border
+            bg-white
+            rounded-full
+            p-2
+          "
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+        </svg>
+        <input
+          type="file"
+          class="
+            absolute
+            bg-gray-700
+            h-full
+            rounded-full
+            md:left-80
+            opacity-0
+            w-40
+            top-0
+            left-16
+            cursor-pointer
+          "
+          @change="onFileChange"
         />
       </div>
       <div class="grid grid-cols-12 grid-flow-row gap-4 mt-6">
@@ -33,8 +97,7 @@
               py-1
               w-full
               md:text-sm
-              focus:border-blue-500
-              focus:text-blue-500
+              focus:border-blue-500 focus:text-blue-500
             "
             value="Lisa Blackpink"
           />
@@ -54,8 +117,7 @@
               py-1
               w-full
               md:text-sm
-              focus:border-blue-500
-              focus:text-blue-500
+              focus:border-blue-500 focus:text-blue-500
             "
             value="lisa@ciptaanekaair.co.id"
           />
@@ -75,8 +137,7 @@
               py-1
               w-full
               md:text-sm
-              focus:border-blue-500
-              focus:text-blue-500
+              focus:border-blue-500 focus:text-blue-500
             "
             value="08991169449"
           />
@@ -96,8 +157,7 @@
               py-1
               w-full
               md:text-sm
-              focus:border-blue-500
-              focus:text-blue-500
+              focus:border-blue-500 focus:text-blue-500
             "
             value="Pagedangan Kabupaten Tangerang"
           />
@@ -117,8 +177,7 @@
               py-1
               w-full
               md:text-sm
-              focus:border-blue-500
-              focus:text-blue-500
+              focus:border-blue-500 focus:text-blue-500
             "
           >
             <option value="banten">Banten</option>
@@ -141,8 +200,7 @@
               py-1
               md:w-full
               text-sm
-              focus:border-blue-500
-              focus:text-blue-500
+              focus:border-blue-500 focus:text-blue-500
             "
           >
             <option value="banten">Tangerang</option>
@@ -178,6 +236,17 @@ export default {
     return {
       title: 'Profile Lisa Blackpink',
     }
+  },
+  data() {
+    return {
+      imgUrl: null,
+    }
+  },
+  methods: {
+    onFileChange(e) {
+      const file = e.target.files[0]
+      this.imgUrl = URL.createObjectURL(file)
+    },
   },
 }
 </script>
