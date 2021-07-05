@@ -1,7 +1,7 @@
 <template>
   <div class="pb-20 md:pb-0">
     <nav-mobile :isHome="true" />
-    <navbar />
+    <navbar :navScroll="170" />
     <!-- banner header -->
     <div class="md:px-0">
       <banner-header />

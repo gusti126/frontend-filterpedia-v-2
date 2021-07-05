@@ -1,7 +1,7 @@
 <template>
   <div class="font-poppins bg-blue-100 min-h-screen">
-    <div class="bg-blue-100  pb-44 md:pb-0">
-      <navbar />
+    <div class="bg-blue-100 pb-44 md:pb-0">
+      <navbar :navScroll="140" />
       <nav-mobile />
       <div class="md:px-20 px-2">
         <div class="grid grid-cols-12 grid-flow-row mt-6 gap-4">
@@ -18,9 +18,8 @@
         </div>
       </div>
     </div>
-    <div class="md:mt-60 ">
+    <div class="md:mt-60">
       <botfooter nameImage="logo.png" />
     </div>
   </div>
 </template>
-  

@@ -2,12 +2,14 @@
   <div>
     <div
       class="bg-gradient-to-r md:from-transparent bg-blue-700"
-      v-if="scrollPosition < 200"
+      v-if="scrollPosition < navHindden"
     >
       <div class="px-2 md:px-20 py-2">
         <nav class="flex">
           <nuxt-link to="/" class="my-auto mr-4 md:flex hidden">
-            <div class="text-white font-medium text-lg">LOGO NAV</div>
+            <div class="text-white font-medium text-lg">
+              <img src="~assets/footer/logo.png" alt="" class="w-10" />
+            </div>
           </nuxt-link>
           <!-- input search -->
           <div class="my-auto flex bg-white rounded-full md:w-96 w-full pr-4">
@@ -132,23 +134,25 @@
               hidden
             "
           >
-            <div class="font-medium text-lg">Daftar</div>
+            <div class="font-medium text-lg my-auto">Daftar</div>
           </nuxt-link>
         </nav>
       </div>
     </div>
     <div
       class="bg-gradient-to-r md:from-transparent bg-white"
-      v-if="scrollPosition > 200"
+      v-if="scrollPosition > navScroll"
       :class="{
         'fixed bg-white top-0 border-b shadow w-full z-10':
-          scrollPosition > 230,
+          scrollPosition > navScroll,
       }"
     >
       <div class="px-2 md:px-20 py-2">
         <nav class="flex">
           <nuxt-link to="/" class="my-auto mr-4 md:flex hidden">
-            <div class="text-blue-500 font-medium text-lg">LOGO NAV</div>
+            <div class="text-blue-500 font-medium text-lg">
+              <img src="~assets/footer/logo.png" alt="" class="w-10" />
+            </div>
           </nuxt-link>
           <!-- input search -->
           <div
@@ -305,7 +309,7 @@
               hidden
             "
           >
-            <div class="font-medium text-lg">Masuk</div>
+            <div class="font-medium text-lg my-auto">Masuk</div>
           </nuxt-link>
           <nuxt-link
             to="/register"
@@ -321,7 +325,7 @@
               hidden
             "
           >
-            <div class="font-medium text-lg">Daftar</div>
+            <div class="font-medium text-lg my-auto">Daftar</div>
           </nuxt-link>
         </nav>
       </div>
@@ -331,13 +335,16 @@
 
 <script>
 export default {
+  props: {
+    navScroll: Number,
+  },
   data() {
     return {
       keranjang: this.$store.state.keranjang,
       scrollPosition: null,
+      navHindden: this.navScroll + 100,
     }
   },
-
   mounted() {
     window.addEventListener('scroll', this.updateScroll)
   },

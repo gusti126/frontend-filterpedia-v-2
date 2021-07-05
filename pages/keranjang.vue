@@ -51,7 +51,7 @@
       </nuxt-link>
     </div>
     <nav-mobile :isKeranjang="true" />
-    <navbar class="hidden md:block" />
+    <navbar :navScroll="100" />
 
     <div class="flex md:px-20 pt-3 text-sm md:text-base md:pt-6 px-3">
       <nuxt-link to="/" class="mr-6 text-gray-400">Home</nuxt-link>

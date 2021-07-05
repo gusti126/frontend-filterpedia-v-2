@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar />
+    <navbar :navScroll="100" />
 
     <div class="md:px-20 px-2">
       <div class="mt-2 md:mt-4 md:p-4 flex">
@@ -104,7 +104,8 @@
                   text-gray-600
                   rounded-full
                   focus:outline-none
-                  focus:border-blue-800 focus:border-2
+                  focus:border-blue-800
+                  focus:border-2
                   focus:text-blue-800
                   px-3
                   py-2
@@ -127,7 +128,8 @@
                   text-gray-600
                   rounded-full
                   focus:outline-none
-                  focus:border-blue-800 focus:border-2
+                  focus:border-blue-800
+                  focus:border-2
                   focus:text-blue-800
                   px-3
                   py-2
@@ -152,7 +154,8 @@
                   text-gray-600
                   rounded-full
                   focus:outline-none
-                  focus:border-blue-800 focus:border-2
+                  focus:border-blue-800
+                  focus:border-2
                   focus:text-blue-800
                   px-3
                   py-2
@@ -176,7 +179,8 @@
                   text-gray-600
                   rounded-full
                   focus:outline-none
-                  focus:border-blue-800 focus:border-2
+                  focus:border-blue-800
+                  focus:border-2
                   focus:text-blue-800
                   px-3
                   py-2
@@ -199,7 +203,8 @@
                   text-gray-600
                   rounded-full
                   focus:outline-none
-                  focus:border-blue-800 focus:border-2
+                  focus:border-blue-800
+                  focus:border-2
                   focus:text-blue-800
                   px-3
                   py-2
@@ -230,13 +235,21 @@
                 <div class="text-gray-500 text-sm">Total Pembayaran</div>
               </div>
               <div class="col-span-12 mt-4 md:mt-0 md:col-span-3 mb-10">
-               <div class="w-full">
-                    <nuxt-link
-                  to="chekoutsuccess"
-                  class="bg-blue-600 text-center w-full block py-2 text-white rounded-lg"
-                  >Lanjut Pembayaran</nuxt-link
-                >
-               </div>
+                <div class="w-full">
+                  <nuxt-link
+                    to="chekoutsuccess"
+                    class="
+                      bg-blue-600
+                      text-center
+                      w-full
+                      block
+                      py-2
+                      text-white
+                      rounded-lg
+                    "
+                    >Lanjut Pembayaran</nuxt-link
+                  >
+                </div>
               </div>
             </div>
           </div>

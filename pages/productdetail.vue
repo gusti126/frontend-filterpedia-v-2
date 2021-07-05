@@ -1,6 +1,6 @@
 <template>
   <div class="md:mb-0 mb-20">
-    <navbar />
+    <navbar :navScroll="100" />
     <mobile-addcart />
     <div class="md:px-20 px-4">
       <div class="flex justify-start md:my-5 my-1">
@@ -162,19 +162,19 @@
                 "
                 v-if="isInfoProduk"
               >
-                {{ subdeks }} ...
+                {{ subdeks }}
                 <span
                   class="text-blue-800 font-medium cursor-pointer"
                   v-if="readmore"
                   @click="readMore"
-                  >Lihat Selengkapnya</span
+                  >... Lihat Selengkapnya</span
                 >
               </div>
             </div>
           </div>
         </div>
         <div class="md:col-span-5 hidden md:block">
-          <div class="border p-4 rounded-lg sticky top-4">
+          <div class="border p-4 rounded-lg sticky top-16">
             <div class="text-xl text-gray-700 font-medium">
               Filter Air Botoloan
             </div>
@@ -385,7 +385,7 @@ export default {
   components: { botfooter },
   data() {
     return {
-      isInfoProduk: false,
+      isInfoProduk: true,
       activePhoto: 0,
       photos: [
         {
@@ -416,7 +416,7 @@ export default {
     }
   },
   mounted() {
-    this.subdeks = this.deskripsi.substring(0, 200)
+    this.subdeks = this.deskripsi.substring(0, 260)
   },
   methods: {
     ulasan: function () {
