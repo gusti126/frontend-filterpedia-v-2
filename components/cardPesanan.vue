@@ -18,17 +18,17 @@
           class="rounded w-36 md:w-24"
         />
       </div>
-      <div class="w-full ml-4 md:flex" >
+      <div class="w-full ml-4 md:flex">
         <div class="">
           <div class="font-medium text-gray-700">{{ title }}</div>
-          <div class="text-sm text-blue-500 my-1">Rp.{{ harga }}</div>
+          <div class="text-sm text-blue-500 my-1">
+            Rp.{{ harga | currency }}
+          </div>
         </div>
         <div class="mx-auto" v-if="dikirim">
-          <div class="font-medium text-gray-700 ">
-            Sedang dikirim
-          </div>
-          <div class="text-sm  my-1" >
-            {{namaPengirim}}
+          <div class="font-medium text-gray-700">Sedang dikirim</div>
+          <div class="text-sm my-1">
+            {{ namaPengirim }}
           </div>
         </div>
         <div class="mx-auto" v-else>
@@ -80,7 +80,8 @@
           ml-3
           md:ml-3
           rounded
-        " v-if="batalkan"
+        "
+        v-if="batalkan"
         >Batalkan</nuxt-link
       >
     </div>
@@ -98,21 +99,21 @@ export default {
     batalkan: Boolean,
     dikirim: Boolean,
     namaPengirim: String,
-    hiddenCaraBayar: Boolean
+    hiddenCaraBayar: Boolean,
   },
   data() {
     return {
-        loading: false,
+      loading: false,
     }
   },
-  
+
   methods: {
-      start() {
-        this.loading = true
-      },
-      finish() {
-        this.loading = false
-      }
-    }
+    start() {
+      this.loading = true
+    },
+    finish() {
+      this.loading = false
+    },
+  },
 }
 </script>
