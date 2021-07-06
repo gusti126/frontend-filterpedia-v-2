@@ -105,7 +105,7 @@
               </svg>
             </div>
           </div>
-
+          <!--jika user belum login -->
           <nuxt-link
             to="/login"
             class="
@@ -119,9 +119,16 @@
               md:flex
               hidden
             "
+            v-if="!this.$store.state.auth.loggedIn"
           >
             <div class="font-medium text-lg">Masuk</div>
           </nuxt-link>
+          <!-- jika user sudah login -->
+          <div class="text-white ml-auto my-auto" v-else>
+            <nuxt-link to="/dashboard/profile">{{
+              this.$store.state.auth.user.name
+            }}</nuxt-link>
+          </div>
           <nuxt-link
             to="/register"
             class="
@@ -135,9 +142,23 @@
               md:flex
               hidden
             "
+            v-if="!this.$store.state.auth.loggedIn"
           >
             <div class="font-medium text-lg my-auto">Daftar</div>
           </nuxt-link>
+          <!-- jika user sudah login -->
+          <div class="" v-else>
+            <nuxt-link to="/dashboard/profile"
+              ><img
+                v-if="this.$store.state.auth.user.image_url"
+                :src="
+                  $axios.defaults.baseURL +
+                  '/' +
+                  this.$store.state.auth.user.image_url
+                "
+                class="rounded-full w-10 h-10 object-cover ml-4"
+            /></nuxt-link>
+          </div>
         </nav>
       </div>
     </div>
@@ -310,9 +331,13 @@
               md:flex
               hidden
             "
+            v-if="!this.$store.state.auth.loggedIn"
           >
             <div class="font-medium text-lg my-auto">Masuk</div>
           </nuxt-link>
+          <div class="ml-auto text-gray-800 font-medium my-auto" v-else>
+            {{ this.$store.state.auth.user.name }}
+          </div>
           <nuxt-link
             to="/register"
             class="
@@ -326,9 +351,23 @@
               md:flex
               hidden
             "
+            v-if="!this.$store.state.auth.loggedIn"
           >
             <div class="font-medium text-lg my-auto">Daftar</div>
           </nuxt-link>
+          <!-- jika user sudah login -->
+          <div class="" v-else>
+            <nuxt-link to="/dashboard/profile"
+              ><img
+                v-if="this.$store.state.auth.user.image_url"
+                :src="
+                  $axios.defaults.baseURL +
+                  '/' +
+                  this.$store.state.auth.user.image_url
+                "
+                class="rounded-full w-10 h-10 object-cover ml-4"
+            /></nuxt-link>
+          </div>
         </nav>
       </div>
     </div>
