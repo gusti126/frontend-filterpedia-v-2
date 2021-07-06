@@ -114,7 +114,24 @@ export default {
       },
     }
   },
-
+  beforeMount() {
+    console.log(this.$auth.loggedIn)
+    if (this.$auth.loggedIn == true) {
+      this.$router.push({ path: '/' })
+    }
+  },
+  beforeCreate() {
+    console.log(this.$auth.loggedIn)
+    if (this.$auth.loggedIn == true) {
+      this.$router.push({ path: '/' })
+    }
+  },
+  mounted() {
+    console.log(this.$auth.loggedIn)
+    if (this.$auth.loggedIn == true) {
+      this.$router.push({ path: '/' })
+    }
+  },
   methods: {
     async userLogin() {
       try {
