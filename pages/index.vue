@@ -197,6 +197,7 @@ export default {
   },
   mounted() {
     console.log('mounted')
+    // console.log(this.$auth.strategy.token.get())
   },
 }
 </script>
