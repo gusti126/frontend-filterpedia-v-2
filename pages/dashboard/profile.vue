@@ -239,7 +239,15 @@ export default {
   },
   data() {
     return {
-      imgUrl: null,
+      imgUrl:
+        this.$axios.defaults.baseURL +
+        '/' +
+        this.$store.state.auth.user.image_url,
+    }
+  },
+  mounted() {
+    if (!this.$store.state.auth.loggedIn) {
+      this.$router.push({ path: '/login' })
     }
   },
   methods: {
