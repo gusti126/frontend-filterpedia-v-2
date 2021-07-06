@@ -48,6 +48,8 @@ export default {
     '@nuxtjs/pwa',
     'vue-sweetalert2/nuxt',
     'vue-currency-filter/nuxt',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
 
     // Or if you have custom options...
     [
@@ -93,7 +95,32 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://backer-backend.buildwithangga.id',
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/api/v1/sessions',
+            method: 'post',
+            propertyName: 'data.token',
+          },
+          logout: false,
+          user: {
+            url: '/api/v1/users/fetch',
+            method: 'get',
+            propertyName: 'data',
+          },
+        },
+        // tokenRequired: true,
+        // tokenType: 'bearer',
+        // globalToken: true,
+        // autoFetchUser: true,
+      },
+    },
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {

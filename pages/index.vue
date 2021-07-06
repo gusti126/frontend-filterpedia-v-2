@@ -181,6 +181,11 @@ export default {
       },
     }
   },
+  async asyncData({ $axios }) {
+    const items = await $axios.$get('api/v1/campaigns')
+
+    return { items }
+  },
   beforeMount() {
     console.log('before mount')
   },
