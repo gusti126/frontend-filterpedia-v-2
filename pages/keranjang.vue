@@ -51,7 +51,7 @@
       </nuxt-link>
     </div>
     <nav-mobile :isKeranjang="true" />
-    <navbar :navScroll="100" />
+    <navbar :navScroll="100" :user="user.data" />
 
     <div class="flex md:px-20 pt-3 text-sm md:text-base md:pt-6 px-3">
       <nuxt-link to="/" class="mr-6 text-gray-400">Home</nuxt-link>
@@ -265,7 +265,16 @@ export default {
       ],
     }
   },
-  mounted() {},
+  middleware: 'auth',
+  async asyncData({ $axios }) {
+    const user = await $axios.$get('/profile')
+
+    return { user }
+  },
+
+  mounted() {
+    // console.log(this.user.data)
+  },
   methods: {
     plusHendle(id) {
       this.keranjang[id].counter += 1

@@ -18,10 +18,9 @@
               py-1
               w-full
               md:text-sm
-              focus:border-blue-500
-              focus:text-blue-500
+              focus:border-blue-500 focus:text-blue-500
             "
-            value="lisa@ciptaanekaair.co.id"
+            :value="this.$store.state.auth.user.email"
           />
         </div>
         <div class="col-span-12 md:col-span-4">
@@ -39,8 +38,7 @@
               py-1
               w-full
               md:text-sm
-              focus:border-blue-500
-              focus:text-blue-500
+              focus:border-blue-500 focus:text-blue-500
             "
           >
             <option value="banten">Aktif</option>
@@ -62,8 +60,7 @@
               py-1
               w-full
               md:text-sm
-              focus:border-blue-500
-              focus:text-blue-500
+              focus:border-blue-500 focus:text-blue-500
             "
             value="lisa@ciptaanekaair.co.id"
           />
@@ -83,8 +80,7 @@
               py-1
               w-full
               md:text-sm
-              focus:border-blue-500
-              focus:text-blue-500
+              focus:border-blue-500 focus:text-blue-500
             "
             value="lisa@ciptaanekaair.co.id"
           />
@@ -114,6 +110,7 @@
 <script>
 export default {
   layout: 'dashboard',
+  middleware: 'auth',
   head() {
     return {
       title: 'Pengaturan Akun Lisa Blackpink',

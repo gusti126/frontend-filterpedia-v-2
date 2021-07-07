@@ -96,20 +96,20 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://backer-backend.buildwithangga.id',
+    baseURL: 'https://admin.pohonpengetahuantambahilmu.co.id/api',
   },
   auth: {
     strategies: {
       local: {
         endpoints: {
           login: {
-            url: '/api/v1/sessions',
+            url: '/login',
             method: 'post',
-            propertyName: 'data.token',
+            propertyName: 'token',
           },
           logout: false,
           user: {
-            url: '/api/v1/users/fetch',
+            url: '/profile',
             method: 'get',
             propertyName: 'data',
           },

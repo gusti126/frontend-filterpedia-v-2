@@ -119,7 +119,7 @@
               md:text-sm
               focus:border-blue-500 focus:text-blue-500
             "
-            value="lisa@ciptaanekaair.co.id"
+            :value="this.$store.state.auth.user.email"
           />
         </div>
         <div class="col-span-12 md:col-span-4">
@@ -139,7 +139,7 @@
               md:text-sm
               focus:border-blue-500 focus:text-blue-500
             "
-            value="08991169449"
+            :value="this.$store.state.auth.user.phone"
           />
         </div>
         <div class="col-span-12 md:col-span-4">
@@ -159,7 +159,7 @@
               md:text-sm
               focus:border-blue-500 focus:text-blue-500
             "
-            value="Pagedangan Kabupaten Tangerang"
+            :value="this.$store.state.auth.user.profile.alamat"
           />
         </div>
         <div class="col-span-6 md:col-span-4">
@@ -237,12 +237,10 @@ export default {
       title: 'Profile Lisa Blackpink',
     }
   },
+  middleware: 'auth',
   data() {
     return {
-      imgUrl:
-        this.$axios.defaults.baseURL +
-        '/' +
-        this.$store.state.auth.user.image_url,
+      imgUrl: this.$store.state.auth.user.profile.image,
     }
   },
   mounted() {

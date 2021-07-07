@@ -124,7 +124,7 @@
             <div class="font-medium text-lg">Masuk</div>
           </nuxt-link>
           <!-- jika user sudah login -->
-          <div class="text-white ml-auto my-auto" v-else>
+          <div class="text-white ml-auto my-auto md:flex hidden" v-else>
             <nuxt-link to="/dashboard/profile">{{
               this.$store.state.auth.user.name
             }}</nuxt-link>
@@ -146,17 +146,13 @@
           >
             <div class="font-medium text-lg my-auto">Daftar</div>
           </nuxt-link>
-          <!-- jika user sudah login -->
+          <!-- image jika user sudah login -->
           <div class="" v-else>
             <nuxt-link to="/dashboard/profile"
               ><img
-                v-if="this.$store.state.auth.user.image_url"
-                :src="
-                  $axios.defaults.baseURL +
-                  '/' +
-                  this.$store.state.auth.user.image_url
-                "
-                class="rounded-full w-10 h-10 object-cover ml-4"
+                v-if="this.$store.state.auth.user.profile.image"
+                :src="this.$store.state.auth.user.profile.image"
+                class="rounded-full w-10 h-10 object-cover ml-4 md:flex hidden"
             /></nuxt-link>
           </div>
         </nav>
@@ -335,7 +331,10 @@
           >
             <div class="font-medium text-lg my-auto">Masuk</div>
           </nuxt-link>
-          <div class="ml-auto text-gray-800 font-medium my-auto" v-else>
+          <div
+            class="ml-auto text-gray-800 font-medium my-auto md:flex hidden"
+            v-else
+          >
             {{ this.$store.state.auth.user.name }}
           </div>
           <nuxt-link
@@ -359,13 +358,9 @@
           <div class="" v-else>
             <nuxt-link to="/dashboard/profile"
               ><img
-                v-if="this.$store.state.auth.user.image_url"
-                :src="
-                  $axios.defaults.baseURL +
-                  '/' +
-                  this.$store.state.auth.user.image_url
-                "
-                class="rounded-full w-10 h-10 object-cover ml-4"
+                v-if="this.$store.state.auth.user.profile.image"
+                :src="this.$store.state.auth.user.profile.image"
+                class="rounded-full w-10 h-10 object-cover ml-4 md:flex hidden"
             /></nuxt-link>
           </div>
         </nav>
@@ -378,7 +373,9 @@
 export default {
   props: {
     navScroll: Number,
+    user: [],
   },
+
   data() {
     return {
       keranjang: this.$store.state.keranjang,
@@ -386,6 +383,7 @@ export default {
       navHindden: this.navScroll + 100,
     }
   },
+
   mounted() {
     window.addEventListener('scroll', this.updateScroll)
   },

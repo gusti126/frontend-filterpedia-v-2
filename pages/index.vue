@@ -181,9 +181,9 @@ export default {
       },
     }
   },
-  async asyncData({ $axios }) {
-    const items = await $axios.$get('api/v1/campaigns')
 
+  async asyncData({ $axios }) {
+    const items = await $axios.$get('/course')
     return { items }
   },
   beforeMount() {
@@ -196,7 +196,7 @@ export default {
     console.log('created')
   },
   mounted() {
-    console.log('mounted')
+    console.log(this.user)
     // console.log(this.$auth.strategy.token.get())
   },
 }

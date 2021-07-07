@@ -14,7 +14,7 @@
     >
       <div>
         <img
-          src="~/assets/profile.jpg"
+          :src="user.data.profile.image"
           class="
             rounded-full
             border-2 border-white
@@ -27,8 +27,12 @@
         />
       </div>
       <div class="ml-4 my-auto">
-        <div class="font-semibold text-white text-lg">Lisa Blackpink</div>
-        <div class="text-gray-200">Tangerang</div>
+        <div class="font-semibold text-white text-lg">
+          {{ user.data.name }}
+        </div>
+        <div class="text-gray-200">
+          <!-- {{ user.alamat }} -->
+        </div>
       </div>
     </div>
 
@@ -175,7 +179,7 @@
           <div class="my-auto">Pengaturan</div>
         </div>
       </nuxt-link>
-      <nuxt-link to="/login">
+      <div @click="userLogout">
         <div class="mt-6 flex font-medium text-gray-500 hover:text-blue-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -193,17 +197,33 @@
           </svg>
           <div class="my-auto">Logout</div>
         </div>
-      </nuxt-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  middleware: 'auth',
+  async asyncData({ $axios }) {
+    const user = await $axios.$get('/profile')
+
+    return { user }
+  },
   data() {
     return {
       keranjang: this.$store.state.keranjang,
+      // user: []
     }
+  },
+  mounted() {
+    console.log(this.user)
+    this.$nuxt.refresh()
+  },
+  methods: {
+    async userLogout() {
+      await this.$auth.logout()
+    },
   },
 }
 </script>

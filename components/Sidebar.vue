@@ -3,12 +3,12 @@
     <!-- header sidebar -->
     <div class="">
       <img
-        src="~/assets/profile.jpg"
+        :src="this.$store.state.auth.user.profile.image"
         alt="img-profile"
         class="rounded-full w-16 h-16 object-cover mx-auto"
       />
       <div class="font-semibold text-lg text-gray-800 mt-2 text-center">
-        Lisa Blackpink
+        {{ this.$store.state.auth.user.name }}
       </div>
     </div>
     <!-- endheader sidebar -->
@@ -108,7 +108,7 @@
         <div class="my-auto">Pengaturan</div>
       </div>
     </nuxt-link>
-    <nuxt-link to="sign">
+    <div>
       <div class="mt-6 flex font-semibold text-gray-500 hover:text-blue-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -124,9 +124,9 @@
             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
           />
         </svg>
-        <div class="my-auto">Logout</div>
+        <div class="my-auto cursor-pointer" @click="userLogout">Logout</div>
       </div>
-    </nuxt-link>
+    </div>
     <!-- endmenu sidebar -->
   </div>
 </template>
@@ -141,6 +141,11 @@ export default {
   },
   data() {
     return {}
+  },
+  methods: {
+    async userLogout() {
+      await this.$auth.logout()
+    },
   },
 }
 </script>
