@@ -22,7 +22,7 @@
           md:mb-5
         "
       >
-        Product Populer Satu
+        Product Populer
       </div>
       <div
         class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-2 md:gap-4"

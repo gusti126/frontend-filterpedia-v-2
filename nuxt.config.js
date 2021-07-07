@@ -50,6 +50,7 @@ export default {
     'vue-currency-filter/nuxt',
     '@nuxtjs/axios',
     '@nuxtjs/auth',
+    'vue-social-sharing/nuxt',
 
     // Or if you have custom options...
     [
@@ -125,7 +126,7 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en',
+      lang: 'id',
     },
   },
 
