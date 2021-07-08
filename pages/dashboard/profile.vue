@@ -15,6 +15,7 @@
             border-2 border-blue-500
             p-2
           "
+          @click="$refs.file.click()"
           v-if="!imgUrl"
         />
         <img
@@ -28,13 +29,16 @@
             mx-auto
             border-2 border-blue-500
             p-2
+            cursor-pointer
           "
           v-if="imgUrl"
+          @click="$refs.file.click()"
         />
 
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="
+            cursor-pointer
             h-10
             w-10
             block
@@ -47,6 +51,7 @@
             rounded-full
             p-2
           "
+          @click="$refs.file.click()"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -68,17 +73,15 @@
           type="file"
           class="
             absolute
+            opacity-0
             bg-gray-700
-            h-full
             rounded-full
             md:left-80
-            opacity-0
-            w-40
-            top-0
-            left-16
             cursor-pointer
           "
+          ref="file"
           @change="onFileChange"
+          accept="image/*"
         />
       </div>
       <div class="grid grid-cols-12 grid-flow-row gap-4 mt-6">
@@ -99,7 +102,7 @@
               md:text-sm
               focus:border-blue-500 focus:text-blue-500
             "
-            value="Lisa Blackpink"
+            v-model="name"
           />
         </div>
         <div class="col-span-12 md:col-span-4">
@@ -219,6 +222,7 @@
               w-full
               rounded-2xl
             "
+            @click="updateHendle"
           >
             Simpan Perubahan
           </button>
@@ -241,6 +245,13 @@ export default {
   data() {
     return {
       imgUrl: this.$store.state.auth.user.profile.image,
+      updateImage: false,
+      selectedFiles: undefined,
+      name: this.$store.state.auth.user.name,
+      email: this.$store.state.auth.user.email,
+      phone: this.$store.state.auth.user.phone,
+      alamat: this.$store.state.auth.user.profile.alamat,
+      tanggal_lahir: this.$store.state.auth.user.profile.tanggal_lahir,
     }
   },
   mounted() {
@@ -252,6 +263,34 @@ export default {
     onFileChange(e) {
       const file = e.target.files[0]
       this.imgUrl = URL.createObjectURL(file)
+      this.selectedFiles = this.$refs.file.files
+      this.updateImage = true
+    },
+
+    async updateHendle(file) {
+      let formData = new FormData()
+      formData.append('image', this.selectedFiles.item(0))
+      formData.append('name', this.name)
+      formData.append('email', this.email)
+      formData.append('phone', this.phone)
+      formData.append('alamat', this.alamat)
+      formData.append('tanggal_lahir', this.tanggal_lahir)
+      try {
+        let response = await this.$axios
+          .post(
+            '/profile/update',
+            formData,
+
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            }
+          )
+          .then(() => {
+            this.$router.push('/dashboard/profile')
+          })
+      } catch (error) {}
     },
   },
 }

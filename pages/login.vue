@@ -10,16 +10,10 @@
         md:py-32
       "
     >
-      <div
-        class="
-          md:col-span-3 md:col-start-3 md:block
-          hidden
-          col-span-6 col-start-3
-        "
-      >
+      <div class="lg:col-span-3 lg:col-start-3 lg:block hidden col-span-4">
         <img src="~assets/login-hero.png" alt="" class="my-auto" />
       </div>
-      <div class="md:col-span-4 md:col-start-7 col-span-10 col-start-2">
+      <div class="lg:col-span-4 lg:col-start-7 col-span-10 col-start-2">
         <div class="text-gray-700 text-xl md:text-3xl">
           Belanja kebutuhan Air, menjadi lebih mudah
         </div>
@@ -78,9 +72,18 @@
               py-2
               text-center
             "
+            :class="
+              login.email.length < 1 || login.password.length < 1
+                ? 'cursor-not-allowed opacity-50'
+                : ''
+            "
+            :disabled="login.email.length < 1 || login.password.length < 1"
             @click="userLogin"
           >
-            Login
+            <span v-if="login.email.length < 1 || login.password.length < 1"
+              >Disabled</span
+            >
+            <span v-else>Login</span>
           </button>
         </div>
         <div class="mt-4 mb-20">
@@ -135,10 +138,23 @@ export default {
   methods: {
     async userLogin() {
       try {
-        let response = await this.$auth.loginWith('local', { data: this.login })
+        let response = await this.$auth
+          .loginWith('local', { data: this.login })
+          .then((res) => {
+            console.log(res)
+          })
+          .catch((err) => {
+            console.log('error satu' + err.response.data.message)
+            this.$swal({
+              icon: 'error',
+              title: 'Oops login gagal',
+              text: err.response.data.message,
+            })
+          })
         this.$auth.setUser(response.data.data)
         console.log(response)
       } catch (err) {
+        console.log('error di catch' + err)
         console.log(err)
       }
     },

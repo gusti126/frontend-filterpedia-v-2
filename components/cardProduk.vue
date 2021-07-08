@@ -66,18 +66,18 @@ export default {
   components: { Skeleton },
   data() {
     return {
-      load: false,
+      load: true,
     }
   },
   mounted() {
-    // this.hiddenLoad();
+    this.hiddenLoad()
   },
 
   methods: {
     hiddenLoad() {
       setTimeout(() => {
         this.load = false
-      }, 3000)
+      }, 2000)
     },
 
     start() {
