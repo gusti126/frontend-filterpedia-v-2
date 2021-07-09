@@ -18,11 +18,54 @@
     <hr />
     <!-- endhead footer -->
     <!-- items -->
-    <div class="flex mt-6">
-      <div class="text-white">
-        <div class="font-medium text-lg">Service</div>
+    <div class="mt-6 grid grid-cols-12 grid-flow-row gap-6">
+      <div class="text-white col-span-3">
+        <div class="font-medium text-lg">SERVICE</div>
         <div class="text-white text-sm mt-2 font-light">Online Help</div>
         <div class="text-white text-sm mt-2 font-light">Contact Us</div>
+        <div class="text-white text-sm mt-2 font-light">Order Status</div>
+        <div class="text-white text-sm mt-2 font-light">change location</div>
+        <div class="text-white text-sm mt-2 font-light">FAQ's</div>
+        <div></div>
+      </div>
+      <div class="text-white col-span-3">
+        <div class="font-medium text-lg">POLOCIES</div>
+        <div class="text-white text-sm mt-2 font-light">Term of use</div>
+        <div class="text-white text-sm mt-2 font-light">Privacy policy</div>
+        <div class="text-white text-sm mt-2 font-light">Refund policy</div>
+        <div class="text-white text-sm mt-2 font-light">Billing system</div>
+        <div></div>
+      </div>
+      <div class="text-white col-span-3">
+        <div class="font-medium text-lg">ABOUT SHOPPER</div>
+        <div class="text-white text-sm mt-2 font-light">
+          Company Information
+        </div>
+        <div class="text-white text-sm mt-2 font-light">Careers</div>
+        <div class="text-white text-sm mt-2 font-light">Affiliate Program</div>
+        <div class="text-white text-sm mt-2 font-light">&copy Copyright</div>
+        <div></div>
+      </div>
+      <div class="col-span-3">
+        <div class="font-medium text-base text-white">
+          Dapatkan info terbaru
+        </div>
+        <div class="text-sm mt-2 font-light">
+          <input
+            type="text"
+            class="
+              bg-white
+              focus:outline-none
+              text-gray-700
+              rounded
+              py-2
+              px-2
+              w-full
+            "
+            placeholder="input email"
+          />
+          <div class="mt-2 bg-purple-400 text-center py-2">Kirim</div>
+        </div>
         <div></div>
       </div>
     </div>

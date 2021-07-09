@@ -331,12 +331,13 @@
           >
             <div class="font-medium text-lg my-auto">Masuk</div>
           </nuxt-link>
-          <div
+          <nuxt-link
+            to="/dashboard/profile"
             class="ml-auto text-gray-800 font-medium my-auto md:flex hidden"
             v-else
           >
             {{ this.$store.state.auth.user.name }}
-          </div>
+          </nuxt-link>
           <nuxt-link
             to="/register"
             class="
