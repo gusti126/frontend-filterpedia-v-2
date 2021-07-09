@@ -34,7 +34,9 @@
           v-if="imgUrl"
           @click="$refs.file.click()"
         />
-
+        <div class="text-gray-400 text-center text-sm mt-2">
+          ubah foto profile
+        </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="
@@ -43,7 +45,7 @@
             w-10
             block
             absolute
-            bottom-2
+            bottom-8
             right-20
             md:right-80
             border
@@ -238,7 +240,7 @@ export default {
   layout: 'dashboard',
   head() {
     return {
-      title: 'Profile Lisa Blackpink',
+      title: 'Profile ' + this.$store.state.auth.user.name,
     }
   },
   middleware: 'auth',
@@ -261,15 +263,19 @@ export default {
   },
   methods: {
     onFileChange(e) {
-      const file = e.target.files[0]
-      this.imgUrl = URL.createObjectURL(file)
-      this.selectedFiles = this.$refs.file.files
-      this.updateImage = true
+      if (e.target.files.length !== 0) {
+        const file = e.target.files[0]
+        this.imgUrl = URL.createObjectURL(file)
+        this.selectedFiles = this.$refs.file.files
+        this.updateImage = true
+      }
     },
 
     async updateHendle(file) {
       let formData = new FormData()
-      formData.append('image', this.selectedFiles.item(0))
+      if (this.updateImage) {
+        formData.append('image', this.selectedFiles.item(0))
+      }
       formData.append('name', this.name)
       formData.append('email', this.email)
       formData.append('phone', this.phone)
@@ -287,9 +293,12 @@ export default {
               },
             }
           )
-          .then(() => {
-            this.$router.push('/dashboard/profile')
+          .then(function (response) {
+            console.log(response.data)
           })
+        let profile = await this.$axios
+          .get('/profile')
+          .then((res) => this.$auth.fetchUser())
       } catch (error) {}
     },
   },

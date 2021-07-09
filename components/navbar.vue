@@ -391,6 +391,9 @@ export default {
     updateScroll() {
       this.scrollPosition = window.scrollY
     },
+    updateProfile(request) {
+      console.log('hello ini dari navbar')
+    },
   },
 }
 </script>
