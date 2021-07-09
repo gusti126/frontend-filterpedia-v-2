@@ -64,7 +64,11 @@
             "
             placeholder="input email"
           />
-          <div class="mt-2 bg-purple-400 text-center py-2">Kirim</div>
+          <div
+            class="mt-3 cursor-pointer bg-purple-400 text-center py-2 rounded"
+          >
+            Kirim
+          </div>
         </div>
         <div></div>
       </div>

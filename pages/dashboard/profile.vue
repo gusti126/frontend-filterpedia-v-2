@@ -296,9 +296,18 @@ export default {
           .then(function (response) {
             console.log(response.data)
           })
-        let profile = await this.$axios
-          .get('/profile')
-          .then((res) => this.$auth.fetchUser())
+        let profile = await this.$axios.get('/profile').then((res) => {
+          this.$auth.fetchUser()
+          // Use sweetalert2
+          this.$swal({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Profile berhasil di update',
+            showConfirmButton: false,
+            timer: 1700,
+          })
+        })
       } catch (error) {}
     },
   },
