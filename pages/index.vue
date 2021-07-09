@@ -27,43 +27,37 @@
       <div
         class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-2 md:gap-4"
       >
-        <div class="md:col-span-3 col-span-1">
+        <div
+          class="md:col-span-3 col-span-1"
+          v-for="item in items"
+          :key="item.id"
+        >
           <nuxt-link to="/productdetail">
+            <!-- dekstop view -->
             <card-produk
+              class="md:hidden block"
               nameImage="Rectangle 20-1.jpg"
               v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk 1"
+              v-bind:price="item.harga"
+              :load="load"
+              :title="
+                item.nama.length > 18
+                  ? item.nama.substring(0, 18) + ' ...'
+                  : item.nama
+              "
             />
-          </nuxt-link>
-        </div>
-        <div class="md:col-span-3 col-span-1">
-          <nuxt-link to="/productdetail">
+            <!-- mobile view -->
             <card-produk
-              nameImage="Rectangle 20.jpg"
+              class="hidden md:block"
+              nameImage="Rectangle 20-1.jpg"
               v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk"
-            />
-          </nuxt-link>
-        </div>
-        <div class="md:col-span-3 col-span-1">
-          <nuxt-link to="/productdetail">
-            <card-produk
-              nameImage="Rectangle 20-3.jpg"
-              v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk"
-            />
-          </nuxt-link>
-        </div>
-        <div class="md:col-span-3 col-span-1">
-          <nuxt-link to="/productdetail">
-            <card-produk
-              nameImage="Rectangle 20-2.jpg"
-              v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk"
+              v-bind:price="item.harga"
+              :load="load"
+              :title="
+                item.nama.length > 23
+                  ? item.nama.substring(0, 23) + ' ...'
+                  : item.nama
+              "
             />
           </nuxt-link>
         </div>
@@ -172,32 +166,31 @@ export default {
   data() {
     return {
       load: true,
-
       options: {
         currentPage: 0,
         autoplay: 2000,
         loop: true,
         itemAnimation: true,
       },
+      items: [],
     }
   },
-
-  async asyncData({ $axios }) {
-    const items = await $axios.$get('/course')
-    return { items }
-  },
-  beforeMount() {
-    console.log('before mount')
-  },
-  beforeCreate() {
-    console.log('beforecreate')
-  },
-  created() {
-    console.log('created')
-  },
   mounted() {
-    console.log(this.user)
-    // console.log(this.$auth.strategy.token.get())
+    this.fetchSomething()
   },
+  methods: {
+    async fetchSomething() {
+      const data = await this.$axios.$get('/course').then((ress) => {
+        this.items = ress.data
+        this.load = false
+      })
+      // this.items = data
+      console.log(this.items)
+      console.log(this.load)
+    },
+  },
+  // created() {
+  //   console.log('created')
+  // },
 }
 </script>

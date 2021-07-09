@@ -1,7 +1,9 @@
 <template>
   <div class="bg-white rounded-lg md:rounded-xl p-2 md:p-3 border shadow">
     <div>
-      <Skeleton height="150px" v-show="load" />
+      <SkeletonTheme color="#645EFF" highlight="#8B86FF">
+        <Skeleton height="150px" v-show="load" />
+      </SkeletonTheme>
       <img
         :src="require(`~/assets/product/${nameImage}`)"
         :alt="nameImage"
@@ -10,9 +12,16 @@
       />
     </div>
     <div class="font-normal text-sm md:text-lg text-gray-800 mt-2">
-      <Skeleton height="50px">
-        {{ title }}
-      </Skeleton>
+      <SkeletonTheme color="#645EFF" highlight="#8B86FF">
+        <Skeleton
+          highlight="rgb(245, 222, 179)"
+          color="rgb(245, 222, 179)"
+          :count="3"
+          height="20px"
+          v-show="load"
+        />
+      </SkeletonTheme>
+      {{ title }}
     </div>
     <div class="flex my-2">
       <div class="text-blue-400 text-xs md:text-sm font-medium my-auto">
@@ -53,8 +62,9 @@
 </template>
 
 <script>
-import { Skeleton } from 'vue-loading-skeleton'
-import VueCurrencyFilter from 'vue-currency-filter'
+// import { Skeleton } from 'vue-loading-skeleton'
+import { Skeleton, SkeletonTheme } from 'vue-loading-skeleton'
+// import VueCurrencyFilter from 'vue-currency-filter'
 
 export default {
   props: {
@@ -62,31 +72,16 @@ export default {
     price: Number,
     nameImage: String,
     diskon: Number,
+    load: Boolean,
   },
-  components: { Skeleton },
+  components: { Skeleton, SkeletonTheme },
   data() {
-    return {
-      load: true,
-    }
+    return {}
   },
   mounted() {
-    this.hiddenLoad()
+    console.log(this.load)
   },
 
-  methods: {
-    hiddenLoad() {
-      setTimeout(() => {
-        this.load = false
-      }, 2000)
-    },
-
-    start() {
-      this.load = true
-      console.log('start loading')
-    },
-    finish() {
-      this.load = false
-    },
-  },
+  methods: {},
 }
 </script>

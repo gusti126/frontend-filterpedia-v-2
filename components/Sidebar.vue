@@ -15,8 +15,8 @@
     <!-- menu sidebar -->
     <nuxt-link to="profile">
       <div
-        class="mt-8 flex font-semibold text-gray-500 hover:text-blue-500"
-        :class="{ 'text-blue-500': isProfile }"
+        class="mt-8 flex text-gray-500 hover:text-blue-500"
+        :class="$route.path == '/dashboard/profile' ? 'text-blue-500' : ''"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -38,9 +38,9 @@
     <nuxt-link
       to="pesanan"
       class="text-gray-500 hover:text-blue-500"
-      :class="{ 'text-blue-500': isPesanan }"
+      :class="$route.path == '/dashboard/pesanan' ? 'text-blue-500' : ''"
     >
-      <div class="mt-6 flex font-semibold mr-3">
+      <div class="mt-6 flex mr-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 mr-3"
@@ -60,7 +60,7 @@
     </nuxt-link>
     <nuxt-link to="riwayat-pembelian">
       <div
-        class="mt-6 flex font-semibold text-gray-500 hover:text-blue-500"
+        class="mt-6 flex text-gray-500 hover:text-blue-500"
         :class="{ 'text-blue-500': isRiwayat }"
       >
         <svg
@@ -82,8 +82,8 @@
     </nuxt-link>
     <nuxt-link to="setting">
       <div
-        class="mt-6 flex font-semibold text-gray-500 hover:text-blue-500"
-        :class="{ 'text-blue-500': isPengaturan }"
+        class="mt-6 flex text-gray-500 hover:text-blue-500"
+        :class="$route.path == '/dashboard/setting' ? 'text-blue-500' : ''"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +109,7 @@
       </div>
     </nuxt-link>
     <div>
-      <div class="mt-6 flex font-semibold text-gray-500 hover:text-blue-500">
+      <div class="mt-6 flex text-gray-500 hover:text-blue-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 mr-3"
@@ -133,12 +133,6 @@
 
 <script>
 export default {
-  props: {
-    isProfile: false,
-    isPesanan: false,
-    isRiwayat: false,
-    isPengaturan: false,
-  },
   data() {
     return {}
   },
