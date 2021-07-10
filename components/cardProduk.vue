@@ -1,26 +1,14 @@
 <template>
   <div class="bg-white rounded-lg md:rounded-xl p-2 md:p-3 border shadow">
     <div>
-      <SkeletonTheme color="#645EFF" highlight="#8B86FF">
-        <Skeleton height="150px" v-show="load" />
-      </SkeletonTheme>
+      <!--  -->
       <img
         :src="require(`~/assets/product/${nameImage}`)"
         :alt="nameImage"
         class="rounded-lg md:rounded-xl"
-        v-show="!load"
       />
     </div>
     <div class="font-normal text-sm md:text-lg text-gray-800 mt-2">
-      <SkeletonTheme color="#645EFF" highlight="#8B86FF">
-        <Skeleton
-          highlight="rgb(245, 222, 179)"
-          color="rgb(245, 222, 179)"
-          :count="3"
-          height="20px"
-          v-show="load"
-        />
-      </SkeletonTheme>
       {{ title }}
     </div>
     <div class="flex my-2">
@@ -62,19 +50,13 @@
 </template>
 
 <script>
-// import { Skeleton } from 'vue-loading-skeleton'
-import { Skeleton, SkeletonTheme } from 'vue-loading-skeleton'
-// import VueCurrencyFilter from 'vue-currency-filter'
-
 export default {
   props: {
     title: String,
     price: Number,
     nameImage: String,
     diskon: Number,
-    load: Boolean,
   },
-  components: { Skeleton, SkeletonTheme },
   data() {
     return {}
   },

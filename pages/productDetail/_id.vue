@@ -1,24 +1,116 @@
 <template>
   <div class="md:mb-0 mb-20">
     <navbar :navScroll="100" />
-    <mobile-addcart />
-    <div class="md:px-20 px-4">
-      <div class="flex justify-start md:my-5 my-1" v-show="!load">
+    <mobile-addcart class="z-10" />
+    <!-- skeleton loading -->
+    <div class="md:px-20 px-4 mt-6" v-show="load">
+      <div class="animate-pulse mb-4 border">
+        <div class="bg-blue-400 h-8 rounded"></div>
+      </div>
+      <div class="grid grid-cols-12 grid-flow-row gap-4 md:gap-4">
+        <div
+          class="
+            col-span-12
+            md:col-span-7
+            animate-pulse
+            border
+            rounded
+            border-blue-500
+            p-4
+          "
+        >
+          <div class="w-full mx-auto">
+            <div class="">
+              <div
+                class="
+                  rounded
+                  bg-blue-400
+                  h-56
+                  align-text-bottom
+                  flex flex-wrap
+                  content-center
+                "
+              >
+                <div
+                  class="font-bold text-center mx-auto text-blue-600 text-xl"
+                >
+                  Sedang Loading Sebentar
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- skelton colom image -->
+          <div
+            class="
+              grid grid-cols-5 grid-flow-row
+              gap-2
+              md:gap-4
+              mt-4
+              animate-pulse
+            "
+          >
+            <div class="bg-blue-400 h-16 rounded"></div>
+            <div class="bg-blue-400 h-16 rounded"></div>
+            <div class="bg-blue-400 h-16 rounded"></div>
+            <div class="bg-blue-400 h-16 rounded"></div>
+            <div class="bg-blue-400 h-16 rounded"></div>
+          </div>
+          <!-- skelton button info produk -->
+          <div
+            class="
+              grid grid-cols-2 grid-flow-row
+              gap-2
+              md:gap-4
+              mt-4
+              animate-pulse
+            "
+          >
+            <div class="bg-blue-400 rounded h-4 md:h-8"></div>
+            <div class="bg-blue-400 rounded h-4 md:h-8"></div>
+          </div>
+          <!-- skleton deskripsi -->
+          <div class="md:col-span-5 mt-4">
+            <div class="animate-pulse">
+              <div
+                class="bg-blue-400 h-4 md:h-8 rounded"
+                style="width: 30%"
+              ></div>
+              <div
+                class="bg-blue-400 h-4 md:h-8 mt-2 rounded"
+                style="width: 50%"
+              ></div>
+              <div
+                class="bg-blue-400 h-4 md:h-8 mt-2 rounded"
+                style="width: 70%"
+              ></div>
+              <div class="bg-blue-400 h-4 md:h-8 mt-2 rounded"></div>
+            </div>
+          </div>
+        </div>
+        <!-- skelton harga dan title produk -->
+        <div class="md:col-span-5 hidden md:block h-full">
+          <div class="animate-pulse rounded border p-4 border-blue-500">
+            <div class="bg-blue-400 h-8 rounded"></div>
+            <div class="bg-blue-400 h-8 mt-2 rounded" style="width: 50%"></div>
+            <div class="bg-blue-400 h-8 mt-2 rounded" style="width: 70%"></div>
+            <div class="bg-blue-400 h-8 mt-2 rounded"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- endskeleton loading -->
+    <div class="md:px-20 px-4" v-show="!load">
+      <div class="flex justify-start md:my-5 my-1">
         <div class="mr-3 md:text-lg text-gray-500">Home</div>
         <div class="md:text-lg text-gray-500 mr-3">></div>
         <div class="md:text-lg text-gray-500 mr-3">Produk</div>
         <div class="md:text-lg text-gray-500 mr-3">></div>
         <div class="md:text-lg text-blue-500 mr-3">{{ nama }}</div>
       </div>
-      <div class="my-5">
-        <SkeletonTheme color="#645EFF" highlight="#8B86FF">
-          <Skeleton height="16px" v-show="load" />
-        </SkeletonTheme>
-      </div>
 
       <div class="grid grid-cols-12 grid-flow-row gap-4 md:gap-4">
         <div class="md:col-span-7 col-span-12">
-          <transition name="slide-fade" mode="out-in">
+          <div>
             <img
               :key="photos[activePhoto].id"
               :src="
@@ -27,7 +119,7 @@
               class="rounded"
               alt=""
             />
-          </transition>
+          </div>
           <div class="grid grid-cols-5 grid-flow-row gap-2 md:gap-4 mt-4">
             <div
               class="col-span-1 hover:border"
@@ -167,9 +259,6 @@
                 "
                 v-if="isInfoProduk"
               >
-                <SkeletonTheme color="#645EFF" highlight="#8B86FF">
-                  <Skeleton height="10px" :count="4" v-show="load" />
-                </SkeletonTheme>
                 <div v-html="subdeks"></div>
                 <span
                   class="text-blue-800 font-medium cursor-pointer"
@@ -185,14 +274,9 @@
           <div class="border p-4 rounded-lg sticky top-16">
             <div class="text-xl text-gray-700 font-medium">
               {{ nama }}
-              <SkeletonTheme color="#645EFF" highlight="#8B86FF">
-                <Skeleton height="20px" :count="3" v-show="load" />
-              </SkeletonTheme>
             </div>
-            <div class="my-3 text-gray-500" v-show="!load">
-              Terjual 700 | 680 Ulasan
-            </div>
-            <div class="my-3 text-blue-600 font-medium text-2xl" v-show="!load">
+            <div class="my-3 text-gray-500">Terjual 700 | 680 Ulasan</div>
+            <div class="my-3 text-blue-600 font-medium text-2xl">
               Rp.{{ price | currency }}
             </div>
             <div class="flex my-4">
@@ -381,15 +465,13 @@
 import botfooter from '~/components/botfooter.vue'
 // dependency ckeditor
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-// skelteon
-import { Skeleton, SkeletonTheme } from 'vue-loading-skeleton'
+
 export default {
-  components: { botfooter, ClassicEditor, Skeleton, SkeletonTheme },
+  components: { botfooter, ClassicEditor },
 
   data() {
     return {
       components: {},
-      // loading skelton
       load: true,
       isInfoProduk: true,
       activePhoto: 0,

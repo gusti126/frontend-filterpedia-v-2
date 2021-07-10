@@ -27,10 +27,35 @@
       <div
         class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-2 md:gap-4"
       >
+        <div class="md:col-span-3 col-span-1" v-for="range in 4" v-show="load">
+          <div
+            class="
+              border border-blue-300
+              shadow
+              rounded-md
+              p-4
+              max-w-sm
+              w-full
+              mx-auto
+            "
+          >
+            <div class="animate-pulse">
+              <div class="rounded bg-blue-400 h-32 py-8">
+                <div class="font-bold text-center text-blue-600 text-xl">
+                  Sedang Loading Sebentar
+                </div>
+              </div>
+              <div class="rounded bg-blue-400 h-4 mt-2"></div>
+              <div class="rounded bg-blue-400 h-4 mt-2"></div>
+              <!-- <div class="bg-red-700"></div> -->
+            </div>
+          </div>
+        </div>
         <div
           class="md:col-span-3 col-span-1"
           v-for="item in items"
           :key="item.id"
+          v-show="!load"
         >
           <nuxt-link :to="'/productDetail/' + item.id">
             <!-- dekstop view -->
@@ -46,6 +71,7 @@
                   : item.nama
               "
             />
+
             <!-- mobile view -->
             <card-produk
               class="hidden md:block"
@@ -184,13 +210,9 @@ export default {
         this.items = ress.data
         this.load = false
       })
-      // this.items = data
       console.log(this.items)
       console.log(this.load)
     },
   },
-  // created() {
-  //   console.log('created')
-  // },
 }
 </script>
