@@ -101,11 +101,14 @@
     <!-- endskeleton loading -->
     <div class="md:px-20 px-4" v-show="!load">
       <div class="flex justify-start md:my-5 my-1">
-        <div class="mr-3 md:text-lg text-gray-500">Home</div>
-        <div class="md:text-lg text-gray-500 mr-3">></div>
-        <div class="md:text-lg text-gray-500 mr-3">Produk</div>
-        <div class="md:text-lg text-gray-500 mr-3">></div>
-        <div class="md:text-lg text-blue-500 mr-3">{{ nama }}</div>
+        <div class="mr-3 md:text-base text-sm text-gray-500">Home</div>
+        <div class="md:text-base text-sm text-gray-500 mr-3">></div>
+        <div class="md:text-base text-sm text-gray-500 mr-3">Produk</div>
+        <div class="md:text-base text-sm text-gray-500 mr-3">></div>
+        <div class="md:text-base text-sm text-blue-500 mr-3">
+          <span class="md:hidden block">{{ nama.substring(0, 20) }}...</span>
+          <span class="hidden md:block">{{ nama }} </span>
+        </div>
       </div>
 
       <div class="grid grid-cols-12 grid-flow-row gap-4 md:gap-4">
@@ -327,7 +330,7 @@
             </div>
             <div class="my-7 flex justify-between">
               <nuxt-link
-                to="/belilangsung"
+                :to="'/beli-langsung/' + this.$route.params.id"
                 class="
                   bg-blue-700
                   text-white
