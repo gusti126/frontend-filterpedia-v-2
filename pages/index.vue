@@ -32,7 +32,7 @@
           v-for="item in items"
           :key="item.id"
         >
-          <nuxt-link to="/productdetail">
+          <nuxt-link :to="'/productDetail/' + item.id">
             <!-- dekstop view -->
             <card-produk
               class="md:hidden block"
