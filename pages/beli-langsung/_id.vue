@@ -277,7 +277,7 @@
               <div class="col-span-12 mt-4 md:mt-0 md:col-span-3 mb-10">
                 <div class="w-full">
                   <nuxt-link
-                    to="chekoutsuccess"
+                    to="/chekoutsuccess"
                     class="
                       bg-blue-600
                       text-center

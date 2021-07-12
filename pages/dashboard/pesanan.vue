@@ -170,6 +170,7 @@
 <script>
 export default {
   layout: 'dashboard',
+  middleware: 'auth',
   data() {
     return {
       isBayaran: true,
@@ -180,7 +181,7 @@ export default {
   },
   head() {
     return {
-      title: 'Pesanan Lisa Blackpink',
+      title: 'Dashboard Pesanan ' + this.$auth.user.name,
     }
   },
   mounted() {

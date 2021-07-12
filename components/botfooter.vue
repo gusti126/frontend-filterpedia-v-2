@@ -21,9 +21,10 @@
     <div class="mt-6 grid grid-cols-12 grid-flow-row gap-6">
       <div class="text-white col-span-3">
         <div class="font-medium text-lg">SERVICE</div>
-        <div class="text-white text-sm mt-2 font-light">Online Help</div>
-        <div class="text-white text-sm mt-2 font-light">Contact Us</div>
-        <div class="text-white text-sm mt-2 font-light">Order Status</div>
+        <div class="text-white text-sm mt-2 font-light">0221221921</div>
+        <div class="text-white text-sm mt-2 font-light">
+          <nuxt-link to="/footer/cekstatus">Cek Order Status</nuxt-link>
+        </div>
         <div class="text-white text-sm mt-2 font-light">change location</div>
         <div class="text-white text-sm mt-2 font-light">FAQ's</div>
         <div></div>

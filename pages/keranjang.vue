@@ -272,9 +272,7 @@ export default {
     return { user }
   },
 
-  mounted() {
-    // console.log(this.user.data)
-  },
+  mounted() {},
   methods: {
     plusHendle(id) {
       this.keranjang[id].counter += 1
