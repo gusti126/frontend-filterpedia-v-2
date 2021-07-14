@@ -61,7 +61,9 @@
     <nuxt-link to="/dashboard/pesanan-proses">
       <div
         class="mt-6 flex text-gray-500 hover:text-blue-500"
-        :class="{ 'text-blue-500': isRiwayat }"
+        :class="
+          $route.path == '/dashboard/pesanan-proses' ? 'text-blue-500' : ''
+        "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -93,6 +93,32 @@ export default {
         },
       ],
     ],
+    // firebaser konfig
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          // apiKey: '<apiKey>',
+          // authDomain: '<authDomain>',
+          // projectId: '<projectId>',
+          // storageBucket: '<storageBucket>',
+          // messagingSenderId: '<messagingSenderId>',
+          // appId: '<appId>',
+          // measurementId: '<measurementId>',
+          apiKey: 'AIzaSyBr-rRP4d2acYkSiViGdXN6W5GY2Kdj81I',
+          authDomain: 'filterpedia-c4e3b.firebaseapp.com',
+          projectId: 'filterpedia-c4e3b',
+          storageBucket: 'filterpedia-c4e3b.appspot.com',
+          messagingSenderId: '1005173319044',
+          appId: '1:1005173319044:web:6f84b6dbdf378c5882e9d1',
+          measurementId: 'G-EM8RRCD85L',
+        },
+        services: {
+          auth: true,
+          realtimeDb: true, // Just as example. Can be any other service.
+        },
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
