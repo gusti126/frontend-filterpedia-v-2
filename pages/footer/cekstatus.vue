@@ -3,7 +3,7 @@
     <nav-mobile :isHome="true" />
     <navbar :navScroll="170" />
     <div class="mt-6 md:px-20 px-6">
-      <img src="~assets/footer/Group 4.png" alt="" class="w-96 mx-auto" />
+      <img src="~assets/footer/Group 4.svg" alt="" class="w-96 mx-auto" />
       <div
         class="
           md:text-3xl
@@ -13,7 +13,7 @@
           mt-2
         "
       >
-        Cara cek orderan kita
+        Cara cek orderan
       </div>
       <div>
         Setelah selasai melakukan pemesanan barang akan langsung di proses dan
@@ -48,7 +48,7 @@
           </div>
           <div class="p-4">
             Status belum di bayar untuk barang yang sudah di pesan namun belum
-            di bayar anda bisa melihat cara bayarnya dengan mengklik cara bayar
+            di bayar kamu bisa melihat cara bayarnya dengan mengklik cara bayar
           </div>
         </div>
         <div class="shadow-md rounded">
@@ -108,29 +108,9 @@ export default {
     BannerHeader,
   },
   data() {
-    return {
-      load: true,
-      options: {
-        currentPage: 0,
-        autoplay: 2000,
-        loop: true,
-        itemAnimation: true,
-      },
-      items: [],
-    }
+    return {}
   },
-  mounted() {
-    this.fetchSomething()
-  },
-  methods: {
-    async fetchSomething() {
-      const data = await this.$axios.$get('/course').then((ress) => {
-        this.items = ress.data
-        this.load = false
-      })
-      console.log(this.items)
-      console.log(this.load)
-    },
-  },
+  mounted() {},
+  methods: {},
 }
 </script>

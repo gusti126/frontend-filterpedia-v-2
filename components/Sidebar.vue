@@ -58,7 +58,7 @@
         <div class="my-auto">Pesanan saya</div>
       </div>
     </nuxt-link>
-    <nuxt-link to="riwayat-pembelian">
+    <nuxt-link to="/dashboard/pesanan-proses">
       <div
         class="mt-6 flex text-gray-500 hover:text-blue-500"
         :class="{ 'text-blue-500': isRiwayat }"
