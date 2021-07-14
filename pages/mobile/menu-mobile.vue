@@ -135,7 +135,7 @@
         </div>
       </nuxt-link>
 
-      <nuxt-link to="riwayat-pembelian">
+      <nuxt-link to="/dashboard/pesanan-proses">
         <div class="mt-6 flex font-medium text-gray-500 hover:text-blue-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +151,7 @@
               d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
             />
           </svg>
-          <div class="my-auto">Riwayat Pembelian</div>
+          <div class="my-auto">Pesanan di Proses</div>
         </div>
       </nuxt-link>
       <nuxt-link to="/dashboard/setting">
