@@ -38,4 +38,14 @@ export const state = () => ({
       ischeked: false,
     },
   ],
+  produk: [],
 })
+
+export const mutations = {
+  increment(state) {
+    state.subtotal++
+  },
+  setProduk(state, data) {
+    state.produk = data
+  },
+}

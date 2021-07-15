@@ -73,32 +73,18 @@
         </div>
       </div>
       <div class="" v-show="isBayaran">
-        <!-- data belum dibayar -->
-        <card-pesanan
-          title="Filter air botolan"
-          :batalkan="true"
-          :harga="80000"
-          :pembayaran="false"
-          noPesanan="200212123121"
-          nameImage="Rectangle 20-2.jpg"
-        />
-        <card-pesanan
-          title="Filter air botolan"
-          :batalkan="true"
-          :harga="80000"
-          :pembayaran="false"
-          noPesanan="200212123121"
-          nameImage="Rectangle 20.jpg"
-        />
-        <card-pesanan
-          title="Filter air botolan"
-          :batalkan="true"
-          :harga="80000"
-          :pembayaran="false"
-          noPesanan="200212123121"
-          nameImage="Rectangle 20-3.jpg"
-        />
-        <!-- enddata belum dibayar -->
+        <div v-for="produk in this.$store.state.produk" :key="produk.id">
+          <card-pesanan
+            :title="produk.kememberan.nama"
+            :batalkan="true"
+            :harga="produk.kememberan.harga"
+            :pembayaran="false"
+            :id="produk.id"
+            noPesanan="200212123121"
+            nameImage="Rectangle 20-2.jpg"
+          />
+        </div>
+        <!-- endtesdata state produk -->
       </div>
       <div class="" v-show="isKemasan">
         <!-- data dikemas -->
@@ -177,6 +163,8 @@ export default {
       isKemasan: false,
       isKiriman: false,
       isSelesai: false,
+      transaction_riwayat: [],
+      // produks: this.$store.state.produk,
     }
   },
   head() {
@@ -185,9 +173,12 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      this.$nuxt.$loading.start()
-      setTimeout(() => this.$nuxt.$loading.finish(), 2000)
+    this.produks = this.$store.state.produk
+  },
+  async fetch() {
+    let items = await this.$axios.get('/profile').then((ress) => {
+      this.$store.commit('setProduk', ress.data.riwayat_transaksi)
+      // this.produks = this.$store.state.produk
     })
   },
   methods: {

@@ -70,8 +70,7 @@
         "
         >Chat penjual</nuxt-link
       >
-      <nuxt-link
-        to="/"
+      <div
         class="
           text-sm
           hover:text-purple-700
@@ -80,10 +79,13 @@
           ml-3
           md:ml-3
           rounded
+          cursor-pointer
         "
+        @click="confirmHapus(id)"
         v-if="batalkan"
-        >Batalkan</nuxt-link
       >
+        Batalkan
+      </div>
     </div>
   </div>
 </template>
@@ -100,6 +102,7 @@ export default {
     dikirim: Boolean,
     namaPengirim: String,
     hiddenCaraBayar: Boolean,
+    id: Number,
   },
   data() {
     return {
@@ -111,9 +114,70 @@ export default {
     start() {
       this.loading = true
     },
+    confirmHapus(id) {
+      this.$swal
+        .fire({
+          title: 'Yakin batalkan pesanan',
+          showCancelButton: true,
+          confirmButtonText: `yakin`,
+        })
+        .then((result) => {
+          console.log(result)
+          console.log(result.dismiss)
+          // console.log(id)
+          if (result.isConfirmed) {
+            console.log(result.isConfirmed)
+            this.hapus(id)
+          }
+        })
+    },
+    async hapus(id) {
+      // // get data
+      let item = await this.$axios
+        .delete('/transaksi/' + id)
+        .then((ress) => {
+          this.$swal.fire({
+            toast: true,
+            position: 'top',
+            width: 600,
+            icon: 'success',
+            title: 'Berhasil masukan Keranjang',
+            showConfirmButton: false,
+            timer: 1700,
+          })
+        })
+        .catch((err) => {
+          console.log('error satu' + err.response.data.message)
+          this.$swal({
+            icon: 'error',
+            title: 'Oops Gagal Hapus',
+            text: err.response.data.message,
+          })
+        })
+
+      let produk = await this.$axios
+        .get('/profile')
+        .then((ress) => {
+          this.$store.commit('setProduk', ress.data.riwayat_transaksi)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+
+      console.log(id)
+    },
     finish() {
       this.loading = false
     },
   },
 }
 </script>
+
+<style scoped>
+.swal-wide {
+  width: 850px !important;
+}
+.sweet-alert .swal-wide {
+  background: black !important;
+}
+</style>
