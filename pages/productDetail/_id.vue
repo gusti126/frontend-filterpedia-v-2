@@ -279,9 +279,10 @@
               {{ nama }}
             </div>
             <div class="my-3 text-gray-500">Terjual 700 | 680 Ulasan</div>
-            <div class="my-3 text-blue-600 font-medium text-2xl">
+            <div class="mt-3 text-blue-600 font-medium text-2xl">
               Rp.{{ price | currency }}
             </div>
+            <div>Harga sudah termasuk PPN</div>
             <div class="flex my-4">
               <div
                 class="

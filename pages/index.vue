@@ -210,8 +210,6 @@ export default {
         this.items = ress.data
         this.load = false
       })
-      // console.log(this.items)
-      // console.log(this.load)
     },
   },
 }

@@ -272,6 +272,7 @@ export default {
     },
 
     async updateHendle(file) {
+      this.$store.commit('setLoading', true)
       let formData = new FormData()
       if (this.updateImage) {
         formData.append('image', this.selectedFiles.item(0))
@@ -298,6 +299,7 @@ export default {
           })
         let profile = await this.$axios.get('/profile').then((res) => {
           this.$auth.fetchUser()
+          this.$store.commit('setLoading', false)
           // Use sweetalert2
           this.$swal({
             toast: true,

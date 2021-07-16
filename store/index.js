@@ -39,6 +39,7 @@ export const state = () => ({
     },
   ],
   produk: [],
+  loading: false,
 })
 
 export const mutations = {
@@ -47,5 +48,8 @@ export const mutations = {
   },
   setProduk(state, data) {
     state.produk = data
+  },
+  setLoading(state, data) {
+    state.loading = data
   },
 }

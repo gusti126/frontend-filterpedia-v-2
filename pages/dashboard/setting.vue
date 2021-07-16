@@ -25,11 +25,10 @@
         </div>
         <div class="col-span-12 md:col-span-4">
           <div>
-            <label for="Phone">Status Akun</label>
+            <label for="Phone">Nama PT</label>
           </div>
-          <select
-            name=""
-            id="Provinsi"
+          <input
+            type="text"
             class="
               border border-gray-300
               rounded-2xl
@@ -40,10 +39,8 @@
               md:text-sm
               focus:border-blue-500 focus:text-blue-500
             "
-          >
-            <option value="banten">Aktif</option>
-            <option value="Bogor">Non aktif</option>
-          </select>
+            value="PT Garuda Cyber"
+          />
         </div>
         <div class="col-span-12 md:col-span-4 md:col-start-3">
           <div>
