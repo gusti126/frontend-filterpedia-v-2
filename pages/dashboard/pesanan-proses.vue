@@ -17,7 +17,7 @@
           <div class="text-base text-gray-600 mt-2 md:mt-2 md:w-72">
             hubungi customer service kita jika kamu memiliki pertanyaan
           </div>
-          <nuxt-link to="chat">
+          <div>
             <div
               class="
                 text-center
@@ -28,11 +28,13 @@
                 py-2
                 to-purple-500
                 text-white
+                cursor-pointer
               "
+              @click="hubungi"
             >
               Hubungi Cs
             </div>
-          </nuxt-link>
+          </div>
         </div>
       </div>
     </div>
@@ -78,6 +80,20 @@ export default {
     return {}
   },
   mounted() {},
-  methods: {},
+  methods: {
+    hubungi() {
+      this.$swal({
+        html: ` <div class="text-left">
+                  <div class="text-gray-700 font-medium  text-lg mb-6">Hubungi Customer Service</div>
+                  <a href="" class="bg-gradient-to-r from-blue-500 rounded-t py-2 px-6 text-white to-green-500 rounded">WhatsApp</a>
+                  <a href="" class="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 py-2 px-6 text-white rounded">Telepon</a>
+                  <div class="">
+                    
+                  </div>
+                </div>`,
+        showConfirmButton: false,
+      })
+    },
+  },
 }
 </script>

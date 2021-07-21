@@ -7,13 +7,13 @@
       <banner-header />
     </div>
     <!--end banner header -->
-    <div class="md:px-20 px-2">
+    <div class="md:px-20 px-2 mt-10">
       <kategori />
 
       <!-- Product populer -->
       <div
         class="
-          mt-6
+          mt-10
           font-semibold
           text-base
           md:text-2xl
@@ -91,7 +91,7 @@
       <!-- endProduct populer -->
     </div>
     <!-- banner info -->
-    <div class="md:px-20 px-2 my-5">
+    <div class="md:px-20 px-2 my-10">
       <img
         src="~/assets/banner/bannerinfo.png"
         alt=""
@@ -117,6 +117,12 @@
       </div>
     </div>
     <!-- endbanner info -->
+
+    <!-- brand logo -->
+    <div class="md:px-20 px-2 my-10">
+      <brand-logo />
+    </div>
+    <!-- endbrand logo -->
 
     <!-- produk spesial diskon -->
     <div class="md:px-20 px-2">

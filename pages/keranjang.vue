@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-40 md:pb-0">
+  <div class="pb-40 md:pb-20">
     <div
       class="
         md:hidden

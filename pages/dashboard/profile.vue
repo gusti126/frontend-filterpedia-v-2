@@ -2,7 +2,7 @@
   <div>
     <!-- content -->
     <div class="bg-white w-full min-h-full p-6 rounded-xl">
-      <div class="relative">
+      <div class="relative h-36 w-36 mx-auto">
         <img
           src="~/assets/profile.jpg"
           alt=""
