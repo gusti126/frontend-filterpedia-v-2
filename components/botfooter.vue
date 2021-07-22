@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-blue-700 hidden md:block w-full px-10 py-8 mt-8 text-white">
+  <footer class="bg-ungusuez hidden md:block w-full px-10 py-8 mt-8 text-white">
     <!-- head footer -->
     <div class="flex justify-between mb-6">
       <div>

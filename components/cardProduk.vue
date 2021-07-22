@@ -12,7 +12,7 @@
       {{ title }}
     </div>
     <div class="flex my-2">
-      <div class="text-blue-400 text-xs md:text-sm font-medium my-auto">
+      <div class="text-blue-900 text-xs md:text-sm font-medium my-auto">
         70%
       </div>
       <div
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="flex">
-      <div class="font-medium text-sm md:text-base text-blue-800">
+      <div class="font-medium text-sm md:text-base text-green-600">
         Rp.{{ price | currency }}
       </div>
       <svg

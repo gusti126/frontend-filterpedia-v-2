@@ -10,10 +10,6 @@
           <div class="text-lg text-blue-900 font-semibold">
             2 Pesanan sedang di proses
           </div>
-          <!-- <div class="text-xl text-blue-900 font-semibold mt-2">
-            Butuh bantuan ?
-          </div> -->
-
           <div class="text-base text-gray-600 mt-2 md:mt-2 md:w-72">
             hubungi customer service kita jika kamu memiliki pertanyaan
           </div>

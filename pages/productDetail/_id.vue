@@ -279,10 +279,10 @@
               {{ nama }}
             </div>
             <div class="my-3 text-gray-500">Terjual 700 | 680 Ulasan</div>
-            <div class="mt-3 text-blue-600 font-medium text-2xl">
+            <div class="mt-3 text-green-600 font-medium text-2xl">
               Rp.{{ price | currency }}
             </div>
-            <div>Harga sudah termasuk PPN</div>
+            <div class="text-gray-700 text-md">Harga sudah termasuk PPN</div>
             <div class="flex my-4">
               <div
                 class="
@@ -301,56 +301,29 @@
               </div>
               <div class="">Rp.800.000</div>
             </div>
-            <div class="my-4 flex">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="my-auto mr-2 text-blue-700 h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              <div class="text-gray-600">Original Produk</div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="my-auto mx-2 text-blue-700 h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              <div class="text-gray-600">Garansi Resmi Satu Tahun</div>
-            </div>
+
             <div class="my-7 flex justify-between">
               <nuxt-link
                 :to="'/beli-langsung/' + this.$route.params.id"
                 class="
-                  bg-blue-700
+                  bg-ungusuez
                   text-white
                   px-9
                   py-2
                   rounded-lg
-                  border-2 border-blue-700
+                  border-2 border-ungusuez
                 "
               >
                 Beli Langsung
               </nuxt-link>
               <div
                 class="
-                  border-2 border-blue-700
-                  text-blue-700
+                  border-2 border-ungusuez
+                  text-ungusuez
                   px-9
                   py-2
                   rounded-lg
-                  hover:border-0 hover:bg-blue-600 hover:text-white
+                  hover:border-0 hover:bg-ungusuez hover:text-white
                   cursor-pointer
                 "
                 @click="showAlert"

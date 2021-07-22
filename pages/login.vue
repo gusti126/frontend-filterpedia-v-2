@@ -66,7 +66,7 @@
               block
               w-full
               text-white
-              rounded-lg
+              rounded-full
               hover:bg-purple-700
               bg-blue-700
               py-2
@@ -86,21 +86,32 @@
             <span v-else>Login</span>
           </button>
         </div>
-        <div class="mt-4 mb-20">
+        <div class="mt-4 mb-6">
           <nuxt-link
             to="/register"
             class="
               block
               w-full
-              text-white
-              rounded-lg
-              hover:bg-purple-700
-              bg-gray-400
+              text-gray-700
+              rounded-full
+              hover:bg-purple-700 hover:text-white
+              bg-gray-300
               py-2
               text-center
             "
             >Register</nuxt-link
           >
+          <div class="text-center my-4">atau login dengan</div>
+          <div class="flex justify-between">
+            <nuxt-link to="" class="flex">
+              <img src="~assets/icon/icons_google.svg" class="mr-2 w-8" />
+              <div class="my-auto">Google</div>
+            </nuxt-link>
+            <nuxt-link to="" class="flex">
+              <img src="~assets/icon/logos_facebook.svg" class="mr-2 w-8" />
+              <div class="my-auto">Facebook</div>
+            </nuxt-link>
+          </div>
         </div>
       </div>
     </div>
