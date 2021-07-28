@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-12 md:mb-20">
     <div
       class="
         bg-gradient-to-r
@@ -9,17 +9,30 @@
         z-10
         w-full
         bg-ungusuez
+        md:bg-white
       "
+      :class="scrollPosition < navHindden ? '' : 'md:shadow'"
     >
-      <div class="px-2 md:px-20 py-2">
+      <div class="px-2 md:px-20 py-2 md:py-3">
         <nav class="flex">
           <nuxt-link to="/" class="my-auto mr-4 md:flex hidden">
             <div class="text-white font-medium text-lg">
-              <img src="~assets/footer/logo.png" alt="" class="w-10" />
+              <img src="~assets/filterpedia.png" alt="" class="w-24" />
             </div>
           </nuxt-link>
           <!-- input search -->
-          <div class="my-auto flex bg-white rounded-full md:w-96 w-full pr-4">
+          <div
+            class="
+              my-auto
+              flex
+              bg-white
+              border border-gray-400
+              rounded-full
+              md:w-96
+              w-full
+              pr-4
+            "
+          >
             <input
               type="text"
               class="
@@ -30,15 +43,17 @@
                 rounded-full
                 focus:outline-none
                 font-medium
-                text-gray-600
+                bg-white
+                text-gray-400
               "
               placeholder="Cari Produk ..."
+              v-model="keyCari"
               id="cari-nav"
             />
             <label for="cari-nav" class="my-auto">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-blue-700"
+                class="h-5 w-5 text-blue-700 md:text-gray-500"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -61,9 +76,9 @@
                 h-8
                 w-8
                 text-white
-                md:flex
+                md:text-ungusuez md:flex
                 hidden
-                hover:text-purple-200
+                hover:text-purple-500
               "
               fill="none"
               viewBox="0 0 24 24"
@@ -90,7 +105,10 @@
                 leading-tight
                 text-center
               "
-              >{{ keranjang.length }}
+              v-if="this.$auth.loggedIn"
+              ><span v-if="this.$store.state.auth.user.cart_count">{{
+                this.$store.state.auth.user.cart_count
+              }}</span>
             </span>
           </nuxt-link>
 
@@ -99,7 +117,7 @@
               <a href="https://tawk.to/chat/607859d7067c2605c0c2c3a9/1f3b4dbk4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-8 w-8 text-white"
+                  class="h-8 w-8 text-white md:text-ungusuez"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -133,7 +151,18 @@
             <div class="font-medium text-lg">Masuk</div>
           </nuxt-link>
           <!-- jika user sudah login -->
-          <div class="text-white ml-auto my-auto md:flex hidden" v-else>
+          <div
+            class="
+              text-white
+              md:text-ungusuez
+              font-medium
+              ml-auto
+              my-auto
+              md:flex
+              hidden
+            "
+            v-else
+          >
             <nuxt-link to="/dashboard/profile">{{
               this.$store.state.auth.user.name
             }}</nuxt-link>
@@ -159,8 +188,8 @@
           <div class="" v-else>
             <nuxt-link to="/dashboard/profile"
               ><img
-                v-if="this.$store.state.auth.user.profile.image"
-                :src="this.$store.state.auth.user.profile.image"
+                v-if="this.$store.state.auth.user.profile_photo_url"
+                :src="this.$store.state.auth.user.profile_photo_url"
                 class="rounded-full w-10 h-10 object-cover ml-4 md:flex hidden"
             /></nuxt-link>
           </div>
@@ -172,16 +201,12 @@
 
 <script>
 export default {
-  props: {
-    navScroll: Number,
-    user: [],
-  },
-
   data() {
     return {
       keranjang: this.$store.state.keranjang,
       scrollPosition: null,
-      navHindden: this.navScroll + 100,
+      navHindden: 200,
+      keyCari: '',
     }
   },
 

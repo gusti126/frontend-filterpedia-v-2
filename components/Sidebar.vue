@@ -3,7 +3,7 @@
     <!-- header sidebar -->
     <div class="">
       <img
-        :src="this.$store.state.auth.user.profile.image"
+        :src="this.$store.state.auth.user.profile_photo_url"
         alt="img-profile"
         class="rounded-full w-16 h-16 object-cover mx-auto"
       />

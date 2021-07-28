@@ -21,7 +21,7 @@
       <div class="w-full ml-4 md:flex">
         <div class="">
           <div class="font-medium text-gray-700">{{ title }}</div>
-          <div class="text-sm text-blue-500 my-1">
+          <div class="text-sm text-green-500 my-1">
             Rp.{{ harga | currency }}
           </div>
         </div>

@@ -120,83 +120,17 @@
       <div
         class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-4 md:gap-4"
       >
-        <div class="md:col-span-3 col-span-1">
+        <div
+          class="md:col-span-3 col-span-1"
+          v-for="(produk, index) in produks"
+          :key="index"
+        >
           <nuxt-link to="/productdetail">
             <card-produk
-              nameImage="Rectangle 20-1.jpg"
+              :nameImage="produk.imageurl"
               v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk 1"
-            />
-          </nuxt-link>
-        </div>
-        <div class="md:col-span-3 col-span-1">
-          <nuxt-link to="/productdetail">
-            <card-produk
-              nameImage="Rectangle 20.jpg"
-              v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk"
-            />
-          </nuxt-link>
-        </div>
-        <div class="md:col-span-3 col-span-1">
-          <nuxt-link to="/productdetail">
-            <card-produk
-              nameImage="Rectangle 20-3.jpg"
-              v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk"
-            />
-          </nuxt-link>
-        </div>
-        <div class="md:col-span-3 col-span-1">
-          <nuxt-link to="/productdetail">
-            <card-produk
-              nameImage="Rectangle 20-2.jpg"
-              v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk"
-            />
-          </nuxt-link>
-        </div>
-        <div class="md:col-span-3 col-span-1">
-          <nuxt-link to="/productdetail">
-            <card-produk
-              nameImage="Rectangle 20-1.jpg"
-              v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk 1"
-            />
-          </nuxt-link>
-        </div>
-        <div class="md:col-span-3 col-span-1">
-          <nuxt-link to="/productdetail">
-            <card-produk
-              nameImage="Rectangle 20.jpg"
-              v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk"
-            />
-          </nuxt-link>
-        </div>
-        <div class="md:col-span-3 col-span-1">
-          <nuxt-link to="/productdetail">
-            <card-produk
-              nameImage="Rectangle 20-3.jpg"
-              v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk"
-            />
-          </nuxt-link>
-        </div>
-        <div class="md:col-span-3 col-span-1">
-          <nuxt-link to="/productdetail">
-            <card-produk
-              nameImage="Rectangle 20-2.jpg"
-              v-bind:diskon="80000"
-              v-bind:price="70000"
-              title="Nama Produk"
+              v-bind:price="produk.product_price"
+              :title="produk.product_name"
             />
           </nuxt-link>
         </div>
@@ -211,14 +145,22 @@ export default {
   data() {
     return {
       scrollPosition: null,
+      produks: [],
     }
   },
   mounted() {
     window.addEventListener('scroll', this.updateScroll)
+    this.getProduk()
   },
   methods: {
     updateScroll() {
       this.scrollPosition = window.scrollY
+    },
+    async getProduk() {
+      let data = await this.$axios.$get('/products').then((ress) => {
+        this.produks = ress.data
+        console.log(ress.data)
+      })
     },
   },
 }

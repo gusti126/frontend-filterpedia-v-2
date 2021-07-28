@@ -14,7 +14,7 @@
     >
       <div>
         <img
-          :src="user.data.profile.image"
+          :src="user.data.profile_photo_url"
           class="
             rounded-full
             border-2 border-white

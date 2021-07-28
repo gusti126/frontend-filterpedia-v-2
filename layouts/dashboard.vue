@@ -1,5 +1,6 @@
 <template>
   <div class="font-poppins bg-blue-100 min-h-screen">
+    <!-- loading state -->
     <div
       class="
         fixed
@@ -33,22 +34,23 @@
           ></div>
         </div>
         <div class="text-gray-500 text-xs font-light mt-2 text-center">
-          Loading sebentar....
+          memuat data sebentar....
         </div>
       </div>
     </div>
+    <!-- endloading state -->
     <div class="bg-blue-100 pb-44 md:pb-0">
       <navbar :navScroll="140" />
       <nav-mobile />
       <div class="md:px-20 px-2">
         <div class="grid grid-cols-12 grid-flow-row mt-6 gap-4">
           <!-- sidebar -->
-          <div class="md:col-span-3 hidden md:block">
+          <div class="md:col-span-3 hidden md:block mt-4">
             <sidebar />
           </div>
           <!-- endsidebar -->
           <!-- content -->
-          <div class="col-span-12 md:col-span-9">
+          <div class="col-span-12 md:col-span-9 mt-4">
             <Nuxt />
           </div>
           <!-- endcontent -->

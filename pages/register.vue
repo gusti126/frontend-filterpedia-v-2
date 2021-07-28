@@ -65,56 +65,116 @@
           </div>
         </div>
       </div>
+
       <div class="col-span-4 md:col-start-5 mt-8">
         <div>
           <label for="Password">Password</label>
         </div>
-        <div>
+        <div class="border-2 px-2 py-2 mt-3 rounded w-full bg-gray-100 flex">
           <input
-            type="password"
+            :type="showPassword ? 'text' : 'password'"
             id="Password"
             v-model="register.password"
-            class="
-              focus:outline-none
-              rounded-lg
-              py-2
-              mt-3
-              border-2
-              focus:border-blue-500 focus:text-blue-800
-              px-2
-              w-full
-              bg-gray-100
-            "
+            class="focus:outline-none rounded-lg w-full bg-gray-100 px-2"
           />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-gray-600 my-auto ml-auto cursor-pointer"
+            v-show="showPassword"
+            @click="hendleShowPassword"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            />
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-gray-600 my-auto ml-auto cursor-pointer"
+            v-show="!showPassword"
+            @click="hendleShowPassword"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+            />
+          </svg>
         </div>
       </div>
+
       <div class="col-span-4 md:col-start-5 mt-8">
         <div>
           <label for="Ulangi Password">Ulangi Password </label>
         </div>
-        <div>
+        <div class="border-2 px-2 py-2 mt-3 rounded w-full bg-gray-100 flex">
           <input
-            type="password"
-            id="Ulangi Password"
-            v-model="passwordConfirm"
-            @keyup.enter="userRegister"
-            class="
-              focus:outline-none
-              rounded-lg
-              py-2
-              mt-3
-              border-2
-              focus:border-blue-500 focus:text-blue-800
-              px-2
-              w-full
-              bg-gray-100
-            "
+            :type="showConfirmPassword ? 'text' : 'password'"
+            id="Password_confirm"
+            v-model="register.password_confirmation"
+            class="focus:outline-none rounded-lg w-full bg-gray-100 px-2"
           />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-gray-600 my-auto ml-auto cursor-pointer"
+            v-show="showConfirmPassword"
+            @click="hendleShowConfirmPassword"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            />
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-gray-600 my-auto ml-auto cursor-pointer"
+            v-show="!showConfirmPassword"
+            @click="hendleShowConfirmPassword"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+            />
+          </svg>
         </div>
-        <div class="text-sm text-green-700" v-if="passwordConfirm < 1"></div>
+        <div
+          class="text-sm text-green-700"
+          v-if="register.password_confirmation < 1"
+        ></div>
         <div
           class="text-sm text-red-600"
-          v-else-if="register.password != passwordConfirm"
+          v-else-if="register.password != register.password_confirmation"
         >
           Password tidak sama
         </div>
@@ -140,7 +200,7 @@
         </div>
         <div class="mt-4 mb-20">
           <nuxt-link
-            to="/register"
+            to="/login"
             class="
               block
               w-full
@@ -163,20 +223,22 @@
 export default {
   data() {
     return {
+      showPassword: false,
+      showConfirmPassword: false,
       register: {
         name: '',
         email: '',
-        occupation: 'tesaja',
         password: '',
+        password_confirmation: '',
       },
-      passwordConfirm: '',
+
       messageError: '',
     }
   },
   computed: {
     // untuk validasi form
     validasi() {
-      if (this.register.password !== this.passwordConfirm) {
+      if (this.register.password !== this.register.password_confirmation) {
         this.messageError = 'password tidak sama'
         return false
       } else if (this.register.name.length < 1) {
@@ -191,11 +253,41 @@ export default {
     },
   },
   mounted() {
-    console.log('Hello ' + this.passwordConfirm)
+    console.log('Hello ' + this.register.password_confirmation)
   },
   methods: {
+    async userLogin() {
+      try {
+        // this.$auth.setUser(response.data.data)
+        await this.$auth
+          .loginWith('local', {
+            data: {
+              email: this.register.email,
+              password: this.register.password,
+            },
+          })
+
+          .then((res) => {
+            this.$auth.fetchUser()
+            console.log('udah lewti fetch user ya ')
+          })
+          .catch((err) => {
+            console.log('error satu' + err.response.data.message)
+            this.$swal({
+              icon: 'error',
+              title: 'Oops login gagal',
+              text: err.response.data.message,
+            })
+          })
+
+        console.log(response)
+      } catch (err) {
+        console.log('error di catch' + err)
+        console.log(err)
+      }
+    },
     async userRegister() {
-      if (this.register.password !== this.passwordConfirm) {
+      if (this.register.password !== this.register.password_confirmation) {
         this.$swal({
           position: 'center',
           icon: 'info',
@@ -205,12 +297,41 @@ export default {
         return event.stopPropagation()
       }
       try {
-        let response = await this.$axios.post('/api/v1/users', this.register)
-        console.log(response.data.data.token)
+        let response = await this.$axios
+          .post('/register', this.register)
+          .then((ress) => {
+            this.userLogin()
+          })
+          .catch((err) => {
+            console.log(err.response.data.message.email)
+            this.$swal({
+              icon: 'error',
+              title: 'Gagal Register',
+              text: err.response.data.message.email,
+            })
+          })
+        // login
+        console.log(response.data.token)
         this.$auth.setUser(response.data.data)
-        this.$router.push({ path: '/' })
+
+        // this.$router.push({ path: '/' })
       } catch (error) {
         console.log(error)
+      }
+    },
+
+    hendleShowPassword() {
+      if (this.showPassword) {
+        this.showPassword = false
+      } else {
+        this.showPassword = true
+      }
+    },
+    hendleShowConfirmPassword() {
+      if (this.showConfirmPassword) {
+        this.showConfirmPassword = false
+      } else {
+        this.showConfirmPassword = true
       }
     },
   },

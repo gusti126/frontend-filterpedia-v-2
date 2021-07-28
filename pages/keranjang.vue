@@ -17,7 +17,9 @@
     >
       <div class="text-gray-800">
         Total Belanjaan
-        <div class="text-blue-600 font-medium">Rp.{{ 1000000 | currency }}</div>
+        <div class="text-green-800 font-medium">
+          Rp.{{ this.$store.state.subtotal | currency }}
+        </div>
       </div>
 
       <nuxt-link
@@ -27,7 +29,7 @@
           px-6
           rounded
           my-auto
-          bg-blue-600
+          bg-ungusuez
           text-white
           hover:bg-purple-700
           flex
@@ -51,167 +53,261 @@
       </nuxt-link>
     </div>
     <nav-mobile :isKeranjang="true" />
-    <navbar :navScroll="100" :user="user.data" />
+    <navbar />
 
-    <div class="flex md:px-20 pt-3 text-sm md:text-base md:pt-6 px-3">
-      <nuxt-link to="/" class="mr-6 text-gray-400">Home</nuxt-link>
-      <div class="mr-6 text-gray-600">/</div>
-      <div class="text-gray-600">Keranjang</div>
-    </div>
-    <!-- desktop view -->
-    <div class="md:px-20 pt-6 md:block hidden">
-      <div class="grid grid-cols-4 mb-8 text-gray-500">
-        <div>Image</div>
-        <div>Nama</div>
-        <div>Harga</div>
-        <div>Action</div>
+    <!-- skeleton loading -->
+    <div class="md:px-20 px-4 mt-14" v-show="load">
+      <div class="animate-pulse mb-4 border">
+        <div class="bg-blue-400 h-8 rounded">
+          <div class="font-bold text-center mx-auto text-blue-600">
+            Sedang memuat data Sebentar
+          </div>
+        </div>
       </div>
       <div
-        class="grid grid-cols-4 mt-8"
+        class="grid grid-cols-5 grid-flow-row gap-2 animate-pulse mb-4"
+        v-for="a of 4"
+      >
+        <div class="bg-blue-400 h-16 col-span-2 rounded"></div>
+        <div class="rounded col-span-3 my-auto">
+          <div class="bg-blue-400 h-4 rounded"></div>
+          <div class="bg-blue-400 h-4 mt-2 rounded"></div>
+        </div>
+      </div>
+    </div>
+    <!-- endskeleton loading -->
+
+    <div v-show="!load">
+      <div class="flex md:px-20 pt-3 text-sm md:text-base md:pt-6 px-3">
+        <nuxt-link to="/" class="mr-6 text-gray-400">Home</nuxt-link>
+        <div class="mr-6 text-gray-600">/</div>
+        <div class="text-gray-600">Keranjang</div>
+      </div>
+      <!-- desktop view -->
+      <div class="md:px-20 pt-6 md:block hidden" v-if="keranjang">
+        <div class="grid grid-cols-4 mb-8 text-gray-500">
+          <div>Image</div>
+          <div>Nama</div>
+          <div>Harga</div>
+          <div>Action</div>
+        </div>
+        <div
+          class="grid grid-cols-4 mt-8"
+          v-for="(b, index) in keranjang"
+          :key="index"
+        >
+          <div>
+            <img :src="b.products[0].imageurl" alt="" class="rounded w-32" />
+          </div>
+          <div class="text-lg mt-2">
+            <nuxt-link to="productdetail" class="hover:text-blue-500">{{
+              b.products[0].product_name
+            }}</nuxt-link>
+            <div class="text-xs mt-1 text-blue-400">
+              70%
+              <span class="line-through text-gray-400 ml-2">Rp.1000000</span>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-green-600 font-medium">
+              Rp.{{ b.products[0].product_price | currency }}
+            </div>
+            <div class="flex mt-4">
+              <div class="" @click="hendlePlus(b.id)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-blue-600 cursor-pointer"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <div class="mx-4 font-medium text-gray-700">
+                {{ b.qty }}
+              </div>
+              <div @click="hendleMin(b.id, index)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 cursor-pointer"
+                  :class="{
+                    'text-gray-400': b.qty < 2,
+                    'text-blue-600': b.qty > 1,
+                  }"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-red-400 my-auto cursor-pointer"
+            @click="removeCart(b.id)"
+          >
+            Hapus
+          </div>
+        </div>
+        <div class="mt-10">
+          <div class="text-lg font-semibold text-gray-800">
+            Subtotal Belanjaan
+          </div>
+          <div class="text-green-700 font-medium mb-4">
+            Rp.{{ this.$store.state.subtotal | currency }}
+          </div>
+          <nuxt-link
+            to="/konfirmasi-checkout"
+            class="
+              py-2
+              px-6
+              rounded
+              cursor-pointer
+              bg-ungusuez
+              text-white
+              hover:bg-purple-700
+              inline-block
+            "
+          >
+            Checkout
+          </nuxt-link>
+          <!-- <div
+          @click="checkout"
+          class="
+            py-2
+            px-6
+            rounded
+            cursor-pointer
+            bg-ungusuez
+            text-white
+            hover:bg-purple-700
+            inline-block
+          "
+        >
+          Beli Sekarang
+        </div> -->
+        </div>
+      </div>
+      <div v-else>
+        <div class="text-center text-xl mt-10 text-gray-500">
+          Keranjang mu kosong
+        </div>
+        <div class="text-center mt-8">
+          <nuxt-link
+            to="/"
+            class="
+              bg-ungusuez
+              px-4
+              py-1
+              text-white text-sm
+              rounded
+              hover:bg-indigo-900
+            "
+            >Belanja dulu</nuxt-link
+          >
+        </div>
+      </div>
+      <!-- end desktop view -->
+
+      <!-- mobile view -->
+      <div
+        class=""
         v-for="(b, index) in keranjang"
         :key="index"
+        v-if="keranjang"
       >
-        <div>
-          <img
-            :src="require(`~/assets/product/${b.image}`)"
-            alt=""
-            class="rounded w-32"
-          />
-        </div>
-        <div class="text-lg mt-2">
-          <nuxt-link to="productdetail" class="hover:text-blue-500">{{
-            b.nama
-          }}</nuxt-link>
-          <div class="text-xs mt-1 text-blue-400">
-            70% <span class="line-through text-gray-400 ml-2">Rp.1000000</span>
+        <div class="px-3 md:hidden flex mt-6">
+          <div>
+            <img :src="b.products[0].imageurl" alt="" class="h-16 rounded" />
+          </div>
+          <div class="w-full ml-4 md:mt-4">
+            <div class="text-sm">{{ b.products[0].product_name }}</div>
+            <div class="text-xs mt-1 text-blue-400">
+              80%
+              <span class="line-through text-gray-400 ml-2">Rp.1000000</span>
+            </div>
+            <div class="flex">
+              <div class="text-sm font-medium mr-4">
+                Rp.{{ b.products[0].product_price | currency }}
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <div class="" @click="hendlePlus(b.id)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-blue-600 cursor-pointer"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <div class="mx-4 font-medium text-gray-700">
+                {{ b.qty }}
+              </div>
+              <div @click="hendleMin(b.id, index)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 cursor-pointer"
+                  :class="{
+                    'text-gray-400': b.qty < 2,
+                    'text-blue-600': b.qty > 1,
+                  }"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="mt-4">
-          <div class="text-green-600 font-medium">Rp.{{ b.harga }}</div>
-          <div class="flex mt-4">
-            <div class="" @click="plusHendle(index)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-blue-600 cursor-pointer"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <div class="mx-4 font-medium text-gray-700">
-              {{ b.counter }}
-            </div>
-            <div @click="minHendle(index)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 cursor-pointer"
-                :class="{
-                  'text-gray-400': b.counter < 2,
-                  'text-blue-600': b.counter > 1,
-                }"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div class="text-red-400 my-auto">Hapus</div>
       </div>
-      <div class="mt-10">
-        <div class="text-lg font-semibold text-gray-800">
-          Subtotal Belanjaan
+      <div v-else>
+        <div class="text-center text-xl mt-10 text-gray-500">
+          Keranjang mu kosong
         </div>
-        <div class="text-blue-600 font-medium mb-4">
-          Rp.{{ this.$store.state.subtotal }}
+        <div class="text-center mt-8">
+          <nuxt-link
+            to="/"
+            class="
+              bg-ungusuez
+              px-4
+              py-1
+              text-white text-sm
+              rounded
+              hover:bg-indigo-900
+            "
+            >Belanja dulu</nuxt-link
+          >
         </div>
-        <nuxt-link
-          to="belilangsung"
-          class="py-2 px-6 rounded bg-blue-600 text-white hover:bg-purple-700"
-          >Beli Sekarang</nuxt-link
-        >
       </div>
+      <!-- endmobile view -->
     </div>
-    <!-- end desktop view -->
-
-    <!-- mobile view -->
-    <div class="" v-for="(b, index) in keranjang" :key="index">
-      <div class="px-3 md:hidden flex mt-9">
-        <div>
-          <img
-            :src="require(`~/assets/product/${b.image}`)"
-            alt=""
-            class="h-16 rounded"
-          />
-        </div>
-        <div class="w-full ml-4 md:mt-4">
-          <div class="text-sm">{{ b.nama }}</div>
-          <div class="text-xs mt-1 text-blue-400">
-            80%
-            <span class="line-through text-gray-400 ml-2">Rp.1000000</span>
-          </div>
-          <div class="flex">
-            <div class="text-sm font-medium mr-4">Rp.{{ b.harga }}</div>
-          </div>
-          <div class="flex justify-end">
-            <div class="" @click="plusHendle(index)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-blue-600 cursor-pointer"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <div class="mx-4 font-medium text-gray-700">
-              {{ b.counter }}
-            </div>
-            <div @click="minHendle(index)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 cursor-pointer"
-                :class="{
-                  'text-gray-400': b.counter < 2,
-                  'text-blue-600': b.counter > 1,
-                }"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- endmobile view -->
   </div>
 </template>
 
@@ -224,16 +320,17 @@ export default {
   // @click="$store.commit('increment')"
   head() {
     return {
-      title: 'Keranjang Pesanan Lisa Blackpink',
+      title: 'Keranjang Pesanan ' + this.$store.state.auth.user.name,
     }
   },
 
   data() {
     return {
+      load: true,
       cheked: [1, 3],
       counter1: 1,
       subtotal: '',
-      keranjang: this.$store.state.keranjang,
+      keranjang: [],
       barang: [
         {
           id: 1,
@@ -272,37 +369,65 @@ export default {
     return { user }
   },
 
-  mounted() {},
+  mounted() {
+    this.getProduk()
+  },
   methods: {
-    plusHendle(id) {
-      this.keranjang[id].counter += 1
-      this.subtotal += this.keranjang[id].harga
+    async getProduk() {
+      let cart = await this.$axios.$get('/cart').then((ress) => {
+        this.$store.commit('setSubTotal', ress.harga_total)
+        this.keranjang = ress.data
+        this.load = false
+      })
     },
-    minHendle(id) {
-      if (this.keranjang[id].counter < 2) {
-        return event.preventDefault()
-      }
-
-      this.keranjang[id].counter -= 1
-      this.subtotal -= this.keranjang[id].harga
-    },
-    hendleCheked(id) {
-      if (this.keranjang[id].ischeked == false) {
-        document.getElementById(id).checked = true
-        this.keranjang[id].ischeked = true
-        this.subtotal += this.keranjang[id].harga * this.keranjang[id].counter
-        console.log(this.keranjang[id].ischeked)
+    async hendleMin(id, index) {
+      if (this.keranjang[index].qty < 2) {
+        this.removeCart(id)
       } else {
-        document.getElementById(id).checked = false
-        this.keranjang[id].ischeked = false
-        this.subtotal -= this.keranjang[id].harga * this.keranjang[id].counter
-        console.log(this.keranjang[id])
-        console.log(this.keranjang[id].ischeked)
+        let item = await this.$axios
+          .$post('/minus_one', {
+            user_id: this.$store.state.auth.user.id,
+            cart_id: id,
+          })
+          .then((ress) => {
+            this.getProduk()
+          })
+          .catch((err) => console.log(err))
       }
-
-      if (this.subtotal < 1) {
-        this.subtotal = 0
-      }
+    },
+    async hendlePlus(id) {
+      let item = await this.$axios
+        .$post('/plus_one', {
+          user_id: this.$store.state.auth.user.id,
+          cart_id: id,
+        })
+        .then((ress) => {
+          this.getProduk()
+        })
+        .catch((err) => console.log(err))
+    },
+    async removeCart(id) {
+      console.log(id)
+      let item = await this.$axios
+        .$delete('/cart/delete/' + id)
+        .then((ress) => {
+          this.getProduk()
+          this.$auth.fetchUser()
+          this.$swal({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Berhasil hapus item di keranjang',
+            showConfirmButton: false,
+            timer: 1700,
+          })
+        })
+        .catch((err) => console.log(err))
+    },
+    async checkout() {
+      let items = await this.$axios.post('/checkout', {
+        user_id: this.$store.state.auth.user.id,
+      })
     },
   },
 }

@@ -14,10 +14,15 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'Jual Water Treatment Filter Mudah dan Aman',
+        name: 'Jual Water Treatment Filter Mudah dan Aman',
+        content:
+          'Filter Air menghilangkan kotoran yang tidak diinginkan dari air seperti sedimen, rasa dan bau, kekerasan dan bakteri untuk menghasilkan kualitas air yang lebih baik. Dari memproduksi air minum dengan rasa yang lebih baik hingga aplikasi yang lebih khusus seperti menyeduh kopi dan membuat es yang jernih, kami menawarkan berbagai macam filter dan kartrid untuk memecahkan sejumlah masalah terkait air.',
+      },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/filterpedia.png' },
       {
         rel: 'stylesheet',
         href: '//fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap',
@@ -123,7 +128,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://admin.pohonpengetahuantambahilmu.co.id/api',
+    baseURL: 'https://admin.filterpedia.co.id/api',
+    // withCredentials: true,
   },
   auth: {
     strategies: {
@@ -134,6 +140,9 @@ export default {
             method: 'post',
             propertyName: 'token',
           },
+          // token: {
+          //   property: 'access_token',
+          // },
           logout: false,
           user: {
             url: '/profile',

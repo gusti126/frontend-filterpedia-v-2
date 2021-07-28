@@ -100,7 +100,10 @@
                 text-center
               "
               :class="{ 'bg-green-700': isKeranjang }"
-              >{{ keranjang.length }}
+              v-if="this.$auth.loggedIn"
+              ><span v-if="this.$store.state.auth.user.cart_count">{{
+                this.$store.state.auth.user.cart_count
+              }}</span>
             </span>
             Keranjang
           </div>

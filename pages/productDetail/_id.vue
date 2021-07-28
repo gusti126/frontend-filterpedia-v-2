@@ -1,9 +1,9 @@
 <template>
   <div class="md:mb-0 mb-20">
     <navbar :navScroll="100" />
-    <mobile-addcart class="z-10" />
+    <mobile-addcart class="z-10" :id_product="this.product_id" />
     <!-- skeleton loading -->
-    <div class="md:px-20 px-4 mt-6" v-show="load">
+    <div class="md:px-20 px-4 mt-8" v-show="load">
       <div class="animate-pulse mb-4 border">
         <div class="bg-blue-400 h-8 rounded"></div>
       </div>
@@ -34,7 +34,7 @@
                 <div
                   class="font-bold text-center mx-auto text-blue-600 text-xl"
                 >
-                  Sedang Loading Sebentar
+                  Sedang memuat data Sebentar
                 </div>
               </div>
             </div>
@@ -68,7 +68,7 @@
             <div class="bg-blue-400 rounded h-4 md:h-8"></div>
             <div class="bg-blue-400 rounded h-4 md:h-8"></div>
           </div>
-          <!-- skleton deskripsi -->
+          <!-- skleton product_description -->
           <div class="md:col-span-5 mt-4">
             <div class="animate-pulse">
               <div
@@ -99,7 +99,7 @@
       </div>
     </div>
     <!-- endskeleton loading -->
-    <div class="md:px-20 px-4" v-show="!load">
+    <div class="md:px-20 px-4 mt-13 mb-3 md:mt-16" v-show="!load">
       <div class="flex justify-start md:my-5 my-1">
         <div class="mr-3 md:text-base text-sm text-gray-500">Home</div>
         <div class="md:text-base text-sm text-gray-500 mr-3">></div>
@@ -113,40 +113,37 @@
 
       <div class="grid grid-cols-12 grid-flow-row gap-4 md:gap-4">
         <div class="md:col-span-7 col-span-12">
-          <div>
+          <div v-if="photos.length">
             <img
               :key="photos[activePhoto].id"
-              :src="
-                require(`~/assets/product/Rectangle ${photos[activePhoto].url}`)
-              "
+              :src="photos[activePhoto].imageurl"
               class="rounded"
               alt=""
             />
           </div>
+          <!-- else -->
+          <div v-else></div>
           <div class="grid grid-cols-5 grid-flow-row gap-2 md:gap-4 mt-4">
             <div
+              v-if="photos.length"
               class="col-span-1 hover:border"
               v-for="(photo, index) in photos"
               :key="index"
             >
               <div
                 class="border-blue-700 cursor-pointer"
-                :class="{ border: index == activePhoto }"
+                :class="{ 'border-2 rounded': index == activePhoto }"
                 @click="changeActive(index)"
               >
-                <img
-                  :src="require(`~/assets/product/Rectangle ${photo.url}`)"
-                  class=""
-                  alt=""
-                />
+                <img :src="photo.imageurl" class="" alt="" />
               </div>
             </div>
             <div class="block md:hidden col-span-12 my-3">
               <div class="justify-between">
-                <div class="text-gray-700 text-xl font-semibold">
+                <div class="text-gray-700 text-lg font-semibold">
                   {{ nama }}
                 </div>
-                <div class="text-base text-blue-600 font-semibold">
+                <div class="text-base text-green-600 font-semibold">
                   Rp.{{ 7000000 | currency }}
                 </div>
               </div>
@@ -178,6 +175,7 @@
               </div>
             </div>
 
+            <!-- ulasan -->
             <div class="md:col-span-5 col-span-12">
               <!-- ulasan -->
               <div v-show="!isInfoProduk">
@@ -326,7 +324,7 @@
                   hover:border-0 hover:bg-ungusuez hover:text-white
                   cursor-pointer
                 "
-                @click="showAlert"
+                @click="addCart"
               >
                 +Keranjang
               </div>
@@ -397,40 +395,7 @@
       </div>
 
       <!-- Product serupa -->
-      <div
-        class="
-          mt-10
-          font-semibold
-          text-base
-          md:text-2xl
-          text-gray-800
-          mb-4
-          md:mb-5
-        "
-      >
-        Product Serupa
-      </div>
-      <div
-        class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-2 md:gap-4"
-      >
-        <div
-          class="md:col-span-3 col-span-1"
-          v-for="p in produkSerupa"
-          :key="p.id"
-        >
-          <nuxt-link to="/productdetail">
-            <card-produk
-              :load="load"
-              nameImage="Rectangle 20-1.jpg"
-              v-bind:diskon="80000"
-              v-bind:price="70000"
-              :title="
-                p.nama.length > 23 ? p.nama.substring(0, 23) + ' ...' : p.nama
-              "
-            />
-          </nuxt-link>
-        </div>
-      </div>
+
       <!-- endProduct serupa -->
     </div>
     <div>
@@ -452,36 +417,14 @@ export default {
       load: true,
       isInfoProduk: true,
       activePhoto: 0,
-      photos: [
-        {
-          id: 1,
-          url: '20-2.jpg',
-        },
-        {
-          id: 2,
-          url: '20-1.jpg',
-        },
-        {
-          id: 3,
-          url: '20-2.jpg',
-        },
-        {
-          id: 4,
-          url: '20-3.jpg',
-        },
-        {
-          id: 6,
-          url: '20-1.jpg',
-        },
-      ],
+      photos: [],
       nama: '',
       item: '',
       price: '',
-      deskripsi: '',
+      product_id: null,
+      product_description: '',
       subdeks: '',
       readmore: true,
-      // produk serupa
-      produkSerupa: [],
     }
   },
   mounted() {
@@ -490,28 +433,71 @@ export default {
   methods: {
     ulasan: function () {
       this.isInfoProduk = false
-      console.log(this.deskripsi.length)
     },
     async getData() {
-      let produkSerupa = await this.$axios.$get('/course').then((ress) => {
-        this.produkSerupa = ress.data
-        console.log(this.produkSerupa)
-      })
-      const item = await this.$axios
-        .$get('/course/' + this.$route.params.id)
+      let item = await this.$axios
+        .$get('/products/' + this.$route.params.id)
         .then((ress) => {
-          this.deskripsi = ress.data.deskripsi
-          this.nama = ress.data.nama
-          this.price = ress.data.harga
+          this.product_id = ress.data.id
+          this.product_description = ress.data.product_description
+          this.nama = ress.data.product_name
+          this.price = ress.data.product_price
+          this.subdeks = this.product_description.substring(0, 290)
+          // // image thumbnail
+          this.photos.push({
+            id: 220900 + this.product_id,
+            imageurl: ress.data.imageurl,
+          })
+          if (ress.image.length) {
+            // this.photos = ress.image
+            // this.photos.push(ress.image)
+            for (let i = 0; i < ress.image.length; i++) {
+              this.photos.push({
+                id: ress.image[i].id,
+                imageurl: ress.image[i].imageurl,
+              })
+            }
+          }
+
           // berhentikan preload
           this.load = false
-
-          console.log(this.deskripsi.length)
-          this.subdeks = this.deskripsi.substring(0, 290)
-          console.log(this.subdeks)
-          console.log(this.deskripsi)
-          console.log('bawah consol subdesk')
         })
+    },
+    async addCart() {
+      if (!this.$auth.loggedIn) {
+        this.$store.commit(
+          'setSessionUrl',
+          '/productDetail/' + this.$route.params.id
+        )
+
+        this.$router.push({ path: '/login' })
+        return
+      }
+      this.$store.commit('setLoading', true)
+      let addCart = await this.$axios
+        .$post('add-to-cart', {
+          user_id: this.$store.state.auth.user.id,
+          product_id: this.product_id,
+          qty: 1,
+        })
+        .then()
+        .catch((err) => console.log(err))
+      // get data all cart user
+      let cart = await this.$axios.$get('/cart').then((ress) => {
+        this.$store.commit('setKeranjang', ress.data)
+        this.$store.commit('setSubTotal', ress.harga_total)
+        this.$auth.fetchUser()
+        // Use sweetalert2
+        this.$swal({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'Berhasil masukan Keranjang',
+          showConfirmButton: false,
+          timer: 1700,
+        })
+        this.$store.commit('setLoading', false)
+      })
     },
 
     produk: function () {
@@ -521,20 +507,10 @@ export default {
     changeActive: function (id) {
       this.activePhoto = id
     },
-    showAlert() {
-      // Use sweetalert2
-      this.$swal({
-        toast: true,
-        position: 'top-end',
-        icon: 'success',
-        title: 'Berhasil masukan Keranjang',
-        showConfirmButton: false,
-        timer: 1700,
-      })
-    },
+    showAlert() {},
     readMore: function () {
       this.readmore = false
-      this.subdeks = this.deskripsi
+      this.subdeks = this.product_description
       console.log(this.readmore)
     },
   },
