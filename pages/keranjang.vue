@@ -23,7 +23,7 @@
       </div>
 
       <nuxt-link
-        to="belilangsung"
+        to="/checkout/konfirmasi"
         class="
           py-2
           px-6
@@ -169,7 +169,7 @@
             Rp.{{ this.$store.state.subtotal | currency }}
           </div>
           <nuxt-link
-            to="/konfirmasi-checkout"
+            to="/checkout/konfirmasi"
             class="
               py-2
               px-6

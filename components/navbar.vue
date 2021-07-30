@@ -137,12 +137,12 @@
             to="/login"
             class="
               ml-auto
-              border-2 border-white
+              border-2 border-ungusuez
               rounded-lg
               px-4
               py-1
-              hover:bg-white hover:text-blue-500
-              text-white
+              hover:bg-ungusuez hover:text-white
+              text-ungusuez
               md:flex
               hidden
             "
@@ -170,12 +170,12 @@
           <nuxt-link
             to="/register"
             class="
-              bg-white
+              bg-ungusuez
               rounded
               px-4
               py-1
               hover:bg-blue-200 hover:text-white
-              text-ungusuez
+              text-white
               ml-4
               md:flex
               hidden

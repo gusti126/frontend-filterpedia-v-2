@@ -149,9 +149,9 @@
             v-model="alamat_user"
           />
         </div>
-        <div class="col-span-6 md:col-span-4">
+        <div class="col-span-12 md:col-span-4">
           <div>
-            <label for="Provinsi">Provinsi id : {{ provinsiId_user }}</label>
+            <label for="Provinsi">Provinsi id : </label>
           </div>
           <select
             name="provinsi"
@@ -164,6 +164,7 @@
               py-1
               w-full
               md:text-sm
+              bg-white
               focus:border-blue-500 focus:text-blue-500
             "
             v-model="provinsiId_user"
@@ -190,6 +191,8 @@
               border border-gray-300
               rounded-2xl
               focus:outline-none
+              w-full
+              bg-white
               px-4
               py-1
               md:w-full

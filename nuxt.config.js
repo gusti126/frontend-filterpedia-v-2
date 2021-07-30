@@ -10,22 +10,47 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Filter Pedia Indonesia',
+    titleTemplate: '%s - Filterpedia Indonesia',
+    title: 'FilterPedia Indonesia',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        hid: 'Jual Water Treatment Filter Mudah dan Aman',
-        name: 'Jual Water Treatment Filter Mudah dan Aman',
-        content:
-          'Filter Air menghilangkan kotoran yang tidak diinginkan dari air seperti sedimen, rasa dan bau, kekerasan dan bakteri untuk menghasilkan kualitas air yang lebih baik. Dari memproduksi air minum dengan rasa yang lebih baik hingga aplikasi yang lebih khusus seperti menyeduh kopi dan membuat es yang jernih, kami menawarkan berbagai macam filter dan kartrid untuk memecahkan sejumlah masalah terkait air.',
+        hid: 'description',
+        name: 'description',
+        content: 'Filterpedia Water Treatment Filter Mudah dan Aman ',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        name: 'og:description',
+        content: 'Filterpedia Water Treatment Filter Mudah dan Aman',
+      },
+      {
+        hid: 'og:url',
+        name: 'og:url',
+        content: 'https://filterpedia.co.id/',
       },
     ],
+
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/filterpedia.png' },
+      { rel: 'icon', type: 'image/png', href: '/filterpedia.png' },
       {
         rel: 'stylesheet',
         href: '//fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap',
+      },
+      {
+        hid: 'shortcut-icon',
+        rel: 'shortcut icon',
+        type: 'image/png',
+        href: '/filterpedia.png',
+      },
+      {
+        hid: 'apple-touch-icon',
+        rel: 'apple-touch-icon',
+        type: 'image/png',
+        href: '/filterpedia.png',
+        sizes: '512x512',
       },
     ],
   },
@@ -34,7 +59,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~plugins/vue-js-modal.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -43,6 +68,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/google-analytics',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -56,6 +82,8 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     'vue-social-sharing/nuxt',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/google-analytics',
 
     // Or if you have custom options...
     [
@@ -126,6 +154,22 @@ export default {
     ],
   ],
 
+  googleAnalytics: {
+    id: '202224250',
+    dev: false,
+  },
+
+  sitemap: {
+    hostname: 'https://filterpedia.co.id/',
+    gzip: true,
+    exclude: ['/', '/mobile/explore'],
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
+      lastmod: new Date(),
+    },
+  },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: 'https://admin.filterpedia.co.id/api',
@@ -162,6 +206,10 @@ export default {
   pwa: {
     manifest: {
       lang: 'id',
+      name: 'Filterpedia Indonesia ',
+    },
+    icon: {
+      source: '~/static/icon.png',
     },
   },
 
