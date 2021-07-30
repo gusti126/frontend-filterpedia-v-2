@@ -250,7 +250,7 @@ export default {
           hid: 'description',
           name: 'description',
           property: 'description',
-          content: 'Filterpedia Water Treatment Indonesia',
+          content: 'Home Filterpedia Water Treatment Indonesia',
         },
 
         {

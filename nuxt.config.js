@@ -3,6 +3,7 @@ export default {
     fallback: true,
   },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
+
   ssr: false,
 
   // Target: https://go.nuxtjs.dev/config-target
@@ -15,22 +16,22 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Filterpedia Water Treatment Filter Mudah dan Aman ',
-      },
-      {
-        hid: 'og:description',
-        property: 'og:description',
-        name: 'og:description',
-        content: 'Filterpedia Water Treatment Filter Mudah dan Aman',
-      },
-      {
-        hid: 'og:url',
-        name: 'og:url',
-        content: 'https://filterpedia.co.id/',
-      },
+      // {
+      //   hid: 'description',
+      //   name: 'description',
+      //   content: 'Filterpedia Water Treatment Filter Mudah dan Aman ',
+      // },
+      // {
+      //   hid: 'og:description',
+      //   property: 'og:description',
+      //   name: 'og:description',
+      //   content: 'Filterpedia Water Treatment Filter Mudah dan Aman',
+      // },
+      // {
+      //   hid: 'og:url',
+      //   name: 'og:url',
+      //   content: 'https://filterpedia.co.id/',
+      // },
     ],
 
     link: [
@@ -215,4 +216,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  router: {
+    // middleware: ['mobile-menu']
+    mode: 'hash',
+    // base: '/nuxt/'
+  },
 }

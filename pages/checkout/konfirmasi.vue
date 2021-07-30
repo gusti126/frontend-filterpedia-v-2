@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- Kumpulan  -->
-    < />
-    <!-- endKumpulan  -->
     <navbar :navScroll="100" />
     <!-- loading skeleton  -->
     <div class="animate-pulse md:px-20 px-6 mt-6" v-show="load">

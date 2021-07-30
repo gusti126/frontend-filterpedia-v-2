@@ -414,76 +414,59 @@ export default {
       title: 'Filterpedia The Water Treatment Filter',
       meta: [
         {
-          hid: 'og:url',
-          name: 'og:url',
-          content: 'https://filterpedia.co.id/' + this.$route.params.id,
+          property: 'og:type',
+          content: 'article',
         },
         {
-          hid: 'og:title',
-          name: 'og:title',
-          content: this.nama + ' Filterpedia The Water Treatment Filter',
-        },
-        {
-          hid: 'og:description',
-          name: 'og:description',
-          content:
-            'Beli ' + this.nama + ' Filterpedia The Water Treatment Filter',
+          property: 'og:title',
+          content: 'Beli ' + this.nama,
         },
         {
           hid: 'description',
+          property: 'description',
           name: 'description',
-          content: '& I will not be <sanitized>',
+          content: this.product_description,
         },
         {
-          hid: 'og:image',
-          name: 'og:image',
+          hid: 'og:description',
+          property: 'og:description',
+          name: 'og:description',
+          content: this.product_description,
+        },
+        {
+          property: 'og:description',
+          content: this.product_description,
+        },
+        {
+          property: 'og:image',
           content: this.imgThumbnail,
         },
         {
-          hid: 'og:image:secure_url',
-          name: 'og:image:secure_url',
-          content: this.imgThumbnail,
-        },
-        {
-          hid: 'og:image:alt',
-          name: 'og:image:alt',
-          content: this.imgThumbnail,
-        },
-        {
-          hid: 'keyword',
-          name: 'keyword',
+          property: 'og:url',
           content:
-            'Beli ' + this.nama + ' Jual Water Treatment Filter Mudah dan Aman',
+            'https://filterpedia.co.id/#/productDetail/' +
+            this.$route.params.slug,
         },
         {
-          hid: 'twitter:card',
-          name: 'twitter:card',
-          content: this.nama + ' Filterpedia Indonesia ',
+          name: 'description',
+          property: 'description',
+          content: this.product_description,
+        },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/png', href: this.imgThumbnail },
+        {
+          hid: 'shortcut-icon',
+          rel: 'shortcut icon',
+          type: 'image/png',
+          href: this.imgThumbnail,
         },
         {
-          hid: 'twitter:image',
-          name: 'twitter:image',
-          content: this.imgThumbnail,
-        },
-        {
-          hid: 'twitter:title',
-          name: 'twitter:title',
-          content: this.nama + ' Filterpedia Indonesia ',
-        },
-        {
-          hid: 'twitter:description',
-          name: 'twitter:description',
-          content: 'Beli' + this.nama,
-        },
-        {
-          hid: 'twitter:site',
-          name: 'twitter:site',
-          content: '@Filterpedia',
-        },
-        {
-          hid: 'twitter:creator',
-          name: 'twitter:creator',
-          content: '@Filterpedia',
+          hid: 'apple-touch-icon',
+          rel: 'apple-touch-icon',
+          type: 'image/png',
+          href: this.imgThumbnail,
+          sizes: '512x512',
         },
       ],
     }
@@ -494,7 +477,7 @@ export default {
     return {
       components: {},
       share: {
-        url: 'https://filterpedia.co.id/' + this.$route.params.slug,
+        url: 'https://filterpedia.co.id/#/' + this.$route.params.slug,
         title: 'Beli ' + this.nama + ' di filterpedia mudah dan aman',
         description: 'Beli kebutuhan Water Treatment Filter. filterpedia.co.id',
         media: this.imgThumbnail,
