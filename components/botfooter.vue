@@ -3,7 +3,7 @@
     <!-- head footer -->
     <div class="flex justify-between mb-6">
       <div>
-        <div class="text-xl text-white font-medium">PT CIPTA ANEKA AIR</div>
+        <div class="text-xl text-white font-medium">FILTERPEDIA</div>
         <div class="text-gray-300 text-sm mt-1">
           Water and Waste Water Treatment Engineering
         </div>

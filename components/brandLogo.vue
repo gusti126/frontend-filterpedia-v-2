@@ -1,31 +1,10 @@
 <template>
   <div>
     <VueSlickCarousel v-bind="settings" class="">
-      <div class="">
+      <div class="" v-for="p of 4">
         <img
           class="mr-10 w-20 md:w-auto"
-          src="~assets/brand-logo/image 14.svg"
-          alt=""
-        />
-      </div>
-      <div class="">
-        <img
-          class="mr-10 w-20 md:w-auto"
-          src="~assets/brand-logo/image 15.svg"
-          alt=""
-        />
-      </div>
-      <div class="">
-        <img
-          class="mr-10 w-20 md:w-auto"
-          src="~assets/brand-logo/image 18.svg"
-          alt=""
-        />
-      </div>
-      <div class="">
-        <img
-          class="mr-10 w-20 md:w-auto"
-          src="~assets/brand-logo/image 15.svg"
+          src="~assets/brand-logo/suez-logo.png"
           alt=""
         />
       </div>
