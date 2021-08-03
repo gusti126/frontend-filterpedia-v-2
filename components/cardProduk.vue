@@ -59,6 +59,7 @@ export default {
     price: Number,
     nameImage: String,
     diskon: Number,
+    noPesanan: String,
   },
   data() {
     return {}

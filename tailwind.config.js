@@ -1,9 +1,9 @@
 module.exports = {
   theme: {
-    fontFamily: ['Poppins', 'sans-serif'],
-    fontFamily: {
-      poppins: ['Poppins'],
-    },
+    // fontFamily: ['Poppins', 'sans-serif'],
+    // fontFamily: {
+    //   poppins: ['Poppins'],
+    // },
     extend: {
       colors: {
         pesanan: '#EBFDFE',

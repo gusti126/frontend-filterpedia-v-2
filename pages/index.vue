@@ -216,95 +216,23 @@ export default {
     slideritem,
     BannerHeader,
   },
-  head() {
-    return {
-      title: 'Filterpedia The Water Treatment Filter',
-      meta: [
-        {
-          hid: 'og:url',
-          name: 'og:url',
-          property: 'og:url',
-          content: 'https://filterpedia.co.id/',
-        },
-        {
-          hid: 'og:title',
-          name: 'og:title',
-          property: 'og:title',
-          content:
-            'Filterpedia Jual The Water Treatment Filter. Jual Water Treatment Filter Mudah dan Aman',
-        },
-        {
-          hid: 'og:image',
-          name: 'og:image',
-          property: 'og:image',
-          content: 'https://filterpedia.co.id/filterpedia.png',
-        },
-        {
-          hid: 'og:description',
-          name: 'og:description',
-          property: 'og:description',
-          content:
-            'filterpedia kami menawarkan berbagai macam filter dan kartrid untuk memecahkan sejumlah masalah terkait air.',
-        },
-        {
-          hid: 'description',
-          name: 'description',
-          property: 'description',
-          content: 'Home Filterpedia Water Treatment Indonesia',
-        },
-
-        {
-          hid: 'og:title',
-          name: 'og:title',
-          content: 'filterpedia Membrane Filter',
-        },
-        {
-          hid: 'og:title',
-          name: 'og:title',
-          content: 'Cartridge Filter',
-        },
-        {
-          hid: 'og:title',
-          name: 'og:title',
-          content: 'EDI ( Electro Deionization ) Filter',
-        },
-        {
-          hid: 'keyword',
-          name: 'keyword',
-          property: 'keyword',
-          content:
-            'Jual The Water Treatment Filter. Jual Water Treatment Filter Mudah dan Aman',
-        },
-        {
-          hid: 'twitter:card',
-          name: 'twitter:card',
-          content:
-            'Filterpedia Indonesia Water Treatment Filter Mudah dan Aman',
-        },
-        {
-          hid: 'twitter:title',
-          name: 'twitter:title',
-          content:
-            'Filterpedia Indonesia Water Treatment Filter Mudah dan Aman',
-        },
-        {
-          hid: 'twitter:description',
-          name: 'twitter:description',
-          content:
-            'filterpedia kami menawarkan berbagai macam filter dan kartrid untuk memecahkan sejumlah masalah terkait air.',
-        },
-        {
-          hid: 'twitter:site',
-          name: 'twitter:site',
-          content: '@Filterpedia',
-        },
-        {
-          hid: 'twitter:creator',
-          name: 'twitter:creator',
-          content: '@Filterpedia',
-        },
-      ],
-    }
+  head: function () {
+    return this.$seo({
+      title: 'Filterpedia Water Treatment Indonesia',
+      description:
+        'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original',
+      openGraph: {
+        title: 'Filterpedia Water Treatment Indonesia',
+        description:
+          'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original index',
+      },
+      twitter: {
+        title: 'Filterpedia Indonesia',
+        description:
+          'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original',
+        card: 'produk',
+      },
+    })
   },
   data() {
     return {

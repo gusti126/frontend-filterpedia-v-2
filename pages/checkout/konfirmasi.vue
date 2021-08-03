@@ -1,6 +1,7 @@
 <template>
   <div>
     <navbar :navScroll="100" />
+
     <!-- loading skeleton  -->
     <div class="animate-pulse md:px-20 px-6 mt-6" v-show="load">
       <div class="bg-blue-400 h-8 rounded mb-4 md:w-96"></div>
@@ -56,7 +57,12 @@
           <div class="rounded border w-full p-3">
             <!-- detail profile pembeli -->
             <div v-show="!ubah.profile">
-              <div class="font-semibold text-gray-800">Profile Anda</div>
+              <div class="font-semibold text-gray-800">
+                Profile Anda
+                <span class="text-red-500" v-if="!kelengkapan"
+                  >Belum Lengkap!</span
+                >
+              </div>
               <div class="p-2 bg-gray-100 rounded mt-4 w-full md:flex">
                 <div>
                   <span>Nama : {{ this.$store.state.auth.user.name }} </span>
@@ -104,7 +110,12 @@
 
             <!-- edit detail profile pembeli -->
             <div v-show="ubah.profile">
-              <div class="font-semibold text-gray-800">Ubah Profile</div>
+              <div class="font-semibold text-gray-800">
+                Profile
+                <span class="text-red-400" v-if="!kelengkapan"
+                  >Belum Lengkap!</span
+                >
+              </div>
               <div class="p-2 bg-gray-100 rounded mt-4 w-full">
                 <div>
                   <span>Nama </span>
@@ -184,6 +195,9 @@
             <div v-show="!ubah.pengiriman">
               <div class="font-semibold text-gray-800 mt-4">
                 Alamat Pengiriman
+                <span class="text-red-400" v-if="!kelengkapan"
+                  >Belum Lengkap!</span
+                >
               </div>
               <div class="p-2 bg-gray-100 rounded mt-4 md:flex w-full">
                 <div>
@@ -233,6 +247,9 @@
             <div v-show="ubah.pengiriman">
               <div class="font-semibold text-gray-800 mt-4">
                 Alamat Pengiriman
+                <span class="text-red-400" v-if="!kelengkapan"
+                  >Belum Lengkap!</span
+                >
               </div>
               <div class="p-2 bg-gray-100 rounded mt-4 w-full">
                 <div>
@@ -355,9 +372,16 @@
                 name=""
                 id=""
                 class="bg-white px-3 py-1 border rounded w-full"
+                v-model="method_pembayaran_id"
               >
-                <option value="">Transfer Bank BCA</option>
-                <option value="">Transfer Bank BNI</option>
+                <option
+                  v-for="met in lis_metshod_pembayaran"
+                  :key="met.id"
+                  :value="met.id"
+                  :selected="met.id === method_pembayaran_id"
+                >
+                  {{ met.nama_bank }}
+                </option>
               </select>
               <span class="text-blue-600 text-xs ml-4"
                 >Lihat Cara Bayar disini</span
@@ -427,6 +451,7 @@
                 rounded
                 cursor-pointer
               "
+              @click="createTransaksi"
             >
               Buat Transaksi
             </div>
@@ -442,15 +467,20 @@
 
 <script>
 import Botfooter from '~/components/botfooter.vue'
+import Modal from '~/components/modal.vue'
 import navMobile from '~/components/nav-mobile.vue'
 export default {
-  components: { navMobile, Botfooter },
+  components: { navMobile, Botfooter, Modal },
   data() {
     return {
+      // validasi profile lengkap ?
+      kelengkapan: true,
+
       ubah: {
         profile: false,
         pengiriman: false,
       },
+
       user: {
         nama: this.$store.state.auth.user.name,
         phone: this.$store.state.auth.user.user_detail.handphone,
@@ -461,6 +491,9 @@ export default {
         kota_id: this.$store.state.auth.user.user_detail.kota_id,
         kode_pos: this.$store.state.auth.user.user_detail.kode_pos,
       },
+
+      lis_metshod_pembayaran: [],
+      method_pembayaran_id: 1,
 
       provinsi: [],
       provinsi_id: this.$store.state.auth.user.user_detail.provinsi_id,
@@ -474,29 +507,58 @@ export default {
   },
   mounted() {
     this.getData()
+    if (
+      !this.user.phone ||
+      !this.pengiriman.alamat ||
+      !this.pengiriman.provinsi_id ||
+      !this.pengiriman.kota_id ||
+      !this.pengiriman.kode_pos ||
+      this.pengiriman.kode_pos == 'null'
+    ) {
+      this.kelengkapan = false
+      this.ubah.profile = true
+      this.ubah.pengiriman = true
+    } else {
+      this.kelengkapan = true
+    }
   },
   methods: {
     async getData() {
       let items = this.$axios.get('/cart').then((ress) => {
-        // console.log(ress.data.data)
         this.items = ress.data.data
-        console.log(ress)
         this.total = ress.data.harga_total
-        console.log(this.items)
       })
+
       let provin = await this.$axios.get('/provinsi').then((ress) => {
         this.provinsi = ress.data.data
-        console.log(ress)
-        console.log(this.provinsi)
       })
+
       let kota = await this.$axios
         .get('/provinsi/' + this.provinsi_id)
         .then((ress) => {
           this.kota = ress.data.data.kota
-          console.log(this.kota)
-          console.log('kota in up')
+
           // berhentikan loading
           this.load = false
+        })
+        .catch((err) => {
+          // console.log(err.response.data.message)
+          this.$swal({
+            icon: 'info',
+            title: 'Profile anda belum lengkap',
+            text: 'lengkapi dulu, bisa langsung klik edit di halaman checkout ini',
+          })
+
+          this.kelengkapan = false
+
+          this.load = false
+        })
+
+      let paymenMethod = await this.$axios
+        .get('/payment-method')
+        .then((ress) => {
+          this.lis_metshod_pembayaran = ress.data.data
+          console.log(this.lis_metshod_pembayaran)
         })
     },
 
@@ -527,6 +589,20 @@ export default {
       })
       this.ubah.pengiriman = false
       this.ubah.profile = false
+      if (
+        !this.user.phone ||
+        !this.pengiriman.alamat ||
+        !this.pengiriman.provinsi_id ||
+        !this.pengiriman.kota_id ||
+        !this.pengiriman.kode_pos ||
+        this.pengiriman.kode_pos == 'null'
+      ) {
+        // this.kelengkapan = false
+        this.ubah.profile = true
+        this.ubah.pengiriman = true
+      } else {
+        this.kelengkapan = true
+      }
     },
     editPengiriman() {
       if (this.ubah.pengiriman) {
@@ -545,6 +621,27 @@ export default {
     hendleCancleUpdate() {
       this.ubah.profile = false
       this.ubah.pengiriman = false
+    },
+    async createTransaksi() {
+      try {
+        let response = await this.$axios
+          .post('/checkout', {
+            user_id: this.$store.state.auth.user.id,
+            payment_code_id: this.method_pembayaran_id,
+          })
+          .then((ress) => {
+            console.log(ress)
+            this.$router.push({
+              path: '/checkout/success/' + ress.data.data.id,
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+            console.log('ada error')
+          })
+      } catch (err) {
+        console.log(err)
+      }
     },
   },
 

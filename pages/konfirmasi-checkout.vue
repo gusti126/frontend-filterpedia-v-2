@@ -431,7 +431,7 @@
                 cursor-pointer
               "
             >
-              Buat Transaksi
+              Buat Transaksi tes
             </div>
           </div>
         </div>
@@ -502,6 +502,7 @@ export default {
           // berhentikan loading
           this.load = false
         })
+        .catch((err) => console.log('Hello'))
     },
 
     async hendleUpdate() {

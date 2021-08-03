@@ -16,17 +16,18 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      // {
-      //   hid: 'description',
-      //   name: 'description',
-      //   content: 'Filterpedia Water Treatment Filter Mudah dan Aman ',
-      // },
-      // {
-      //   hid: 'og:description',
-      //   property: 'og:description',
-      //   name: 'og:description',
-      //   content: 'Filterpedia Water Treatment Filter Mudah dan Aman',
-      // },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Filterpedia Water Treatment Filter Mudah dan Aman ',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        name: 'og:description',
+        content:
+          'Filterpedia Water Treatment Filter Mudah dan Aman by Cipta Aneka Air',
+      },
       // {
       //   hid: 'og:url',
       //   name: 'og:url',
@@ -85,6 +86,7 @@ export default {
     'vue-social-sharing/nuxt',
     '@nuxtjs/sitemap',
     '@nuxtjs/google-analytics',
+    'nuxt-seo',
 
     // Or if you have custom options...
     [
@@ -155,20 +157,66 @@ export default {
     ],
   ],
 
+  // dependency seo
+  seo: {
+    // Module options
+    baseUrl: 'https://filterpedia.co.id/#/',
+    name: 'Filterpedia Indonesia',
+    title: 'Filterpedia Water Treatment Indonesia',
+    description: 'Filterpedia Water Treatment Indonesia Deskripsi',
+    canonical: 'auto',
+    isForcedTrailingSlash: false,
+    url: 'https://filterpedia.co.id/#/',
+    openGraph: {
+      title: 'Filterpedia Water Treatment Indonesia',
+      description:
+        'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original opengraph',
+      type: 'article',
+      image: {
+        width: '850',
+        height: '850',
+        url: 'https://filterpedia.co.id/_nuxt/img/filterpedia.6981af1.png',
+      },
+      og: {
+        name: 'Filterpedia o:g name',
+        title: 'Filterpedia Water Treatment Indonesia From Seo',
+        description:
+          'description Filterpedia Water Treatment Indonesia From Seo nuxt config',
+        type: 'article',
+        url: 'https://filterpedia.co.id/#/nuxtconfig',
+        image: 'https://filterpedia.co.id/_nuxt/img/filterpedia.6981af1.png',
+        image: {
+          url: 'https://filterpedia.co.id/_nuxt/img/filterpedia.6981af1.png',
+          width: '850',
+          height: '850',
+          type: 'image/png',
+        },
+      },
+    },
+    twitter: {
+      title: 'Filterpedia Indonesia',
+      description:
+        'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original',
+      card: 'produk',
+    },
+  },
+
   googleAnalytics: {
     id: '202224250',
     dev: false,
   },
 
   sitemap: {
-    hostname: 'https://filterpedia.co.id/',
+    hostname: 'https://filterpedia.co.id',
     gzip: true,
     exclude: ['/', '/mobile/explore'],
+    path: '/sitemap.xml',
     defaults: {
       changefreq: 'daily',
       priority: 1,
       lastmod: new Date(),
     },
+    routes: ['/#', 'static-vue-cms-part-1', 'login', 'register'],
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

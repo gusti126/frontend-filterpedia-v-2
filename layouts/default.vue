@@ -1,5 +1,5 @@
 <template>
-  <div class="font-poppins m-0">
+  <div class="font-sans m-0">
     <!-- loading state -->
     <div
       class="

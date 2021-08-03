@@ -155,10 +155,24 @@
             </div>
           </div>
           <div
-            class="text-red-400 my-auto cursor-pointer"
+            class="my-auto cursor-pointer flex text-red-600 rounded"
             @click="removeCart(b.id)"
           >
-            Hapus
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 my-auto"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              />
+            </svg>
+            <div class="ml-2">Hapus</div>
           </div>
         </div>
         <div class="mt-10">
@@ -183,21 +197,6 @@
           >
             Checkout
           </nuxt-link>
-          <!-- <div
-          @click="checkout"
-          class="
-            py-2
-            px-6
-            rounded
-            cursor-pointer
-            bg-ungusuez
-            text-white
-            hover:bg-purple-700
-            inline-block
-          "
-        >
-          Beli Sekarang
-        </div> -->
         </div>
       </div>
       <div v-else>
@@ -318,10 +317,20 @@ import { mapMutations } from 'vuex'
 export default {
   components: { navbar, NavMobile },
   // @click="$store.commit('increment')"
-  head() {
-    return {
-      title: 'Keranjang Pesanan ' + this.$store.state.auth.user.name,
-    }
+  head: function ({ $seo }) {
+    $seo({
+      name: 'Filterpedia Indonesia Mendunia',
+      title: 'Keranjang',
+      description: 'keranjang Page',
+      image: this.$store.state.auth.user.profile_photo_url,
+
+      openGraph: {
+        title: 'Keranjang belanja ' + this.$store.state.auth.user.name,
+        image: this.$store.state.auth.user.profile_photo_url,
+        images: this.$store.state.auth.user.profile_photo_url,
+        description: 'Belanja mudah dan aman',
+      },
+    })
   },
 
   data() {

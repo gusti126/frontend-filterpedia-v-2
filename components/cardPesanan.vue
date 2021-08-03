@@ -12,11 +12,7 @@
   >
     <div class="flex">
       <div>
-        <img
-          :src="require(`~/assets/product/${nameImage}`)"
-          :alt="nameImage"
-          class="rounded w-36 md:w-24"
-        />
+        <img :src="nameImage" :alt="nameImage" class="rounded w-36 md:w-24" />
       </div>
       <div class="w-full ml-4 md:flex">
         <div class="">
@@ -36,9 +32,11 @@
             No pesanan ( {{ noPesanan }} )
           </div>
           <div class="text-sm text-green-500 my-1" v-if="pembayaran">
-            Sudah di bayar
+            {{ status_payment }}
           </div>
-          <div class="text-sm text-red-500 my-1" v-else>Belum di bayar</div>
+          <div class="text-sm text-red-500 my-1" v-else>
+            {{ status_payment }}
+          </div>
         </div>
       </div>
     </div>
@@ -48,7 +46,7 @@
         class="
           text-sm
           hover:bg-purple-600
-          bg-blue-600
+          bg-ungusuez
           text-white
           px-3
           py-1
@@ -61,20 +59,24 @@
         to="/"
         class="
           text-sm
-          hover:text-purple-700
-          text-blue-600
+          hover:bg-ungusuez hover:text-white
+          text-ungusuez
           py-1
           ml-3
+          px-2
           md:ml-3
           rounded
+          border border-ungusuez
         "
         >Chat penjual</nuxt-link
       >
       <div
         class="
           text-sm
-          hover:text-purple-700
+          hover:text-white hover:bg-red-600
           text-red-600
+          border border-red-600
+          px-2
           py-1
           ml-3
           md:ml-3
@@ -103,6 +105,7 @@ export default {
     namaPengirim: String,
     hiddenCaraBayar: Boolean,
     id: Number,
+    status_payment: String,
   },
   data() {
     return {
@@ -134,18 +137,10 @@ export default {
     async hapus(id) {
       // // get data
       let item = await this.$axios
-        .delete('/transaksi/' + id)
-        .then((ress) => {
-          this.$swal.fire({
-            toast: true,
-            position: 'top',
-            width: 600,
-            icon: 'success',
-            title: 'Berhasil masukan Keranjang',
-            showConfirmButton: false,
-            timer: 1700,
-          })
+        .post('/cancel/transactions', {
+          transaction_id: id,
         })
+        .then((ress) => {})
         .catch((err) => {
           console.log('error satu' + err.response.data.message)
           this.$swal({
@@ -155,17 +150,25 @@ export default {
           })
         })
 
-      let produk = await this.$axios
-        .get('/profile')
-        .then((ress) => {
-          this.$store.commit('setProduk', ress.data.riwayat_transaksi)
+      // get data
+      let response = await this.$axios.get('/transactions').then((ress) => {
+        console.log(ress)
+        console.log('get data dari component cardpesanan')
+        this.$store.commit('setProduk', ress.data.data)
+        this.$swal.fire({
+          toast: true,
+          position: 'top',
+          width: 600,
+          icon: 'success',
+          title: 'Berhasil masukan Keranjang',
+          showConfirmButton: false,
+          timer: 2000,
         })
-        .catch((err) => {
-          console.log(err)
-        })
+      })
 
       console.log(id)
     },
+
     finish() {
       this.loading = false
     },

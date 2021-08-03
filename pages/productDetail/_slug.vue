@@ -99,6 +99,7 @@
       </div>
     </div>
     <!-- endskeleton loading -->
+
     <div class="md:px-20 px-4 mt-13 mb-3 md:mt-16" v-show="!load">
       <div class="flex justify-start md:my-5 my-1">
         <div class="mr-3 md:text-base text-sm text-gray-500">Home</div>
@@ -409,68 +410,47 @@ import botfooter from '~/components/botfooter.vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 export default {
-  head() {
-    return {
-      title: 'Filterpedia The Water Treatment Filter',
-      meta: [
-        {
-          property: 'og:type',
-          content: 'article',
-        },
-        {
-          property: 'og:title',
-          content: 'Beli ' + this.nama,
-        },
-        {
-          hid: 'description',
-          property: 'description',
-          name: 'description',
-          content: this.product_description,
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          name: 'og:description',
-          content: this.product_description,
-        },
-        {
-          property: 'og:description',
-          content: this.product_description,
-        },
-        {
-          property: 'og:image',
-          content: this.imgThumbnail,
-        },
-        {
-          property: 'og:url',
-          content:
-            'https://filterpedia.co.id/#/productDetail/' +
-            this.$route.params.slug,
-        },
-        {
-          name: 'description',
-          property: 'description',
-          content: this.product_description,
-        },
-      ],
-      link: [
-        { rel: 'icon', type: 'image/png', href: this.imgThumbnail },
-        {
-          hid: 'shortcut-icon',
-          rel: 'shortcut icon',
+  head: function () {
+    return this.$seo({
+      title: 'Beli > ' + this.nama,
+      description: this.product_description,
+      openGraph: {
+        title: 'openGraph title',
+        image: this.imgThumbnail,
+        description: this.product_description,
+      },
+      twitter: {
+        title: 'Beli > ' + this.nama + '> Filterpedia Indonesia',
+        description: this.product_description,
+        card: 'produk',
+        description: this.product_description,
+      },
+      image: {
+        width: '850',
+        height: '850',
+        url: this.imgThumbnail,
+        type: 'image/png',
+      },
+      og: {
+        name: 'Filterpedia o:g name',
+        title: 'Filterpedia Water Treatment Indonesia From Seo',
+        description:
+          'description Filterpedia Water Treatment Indonesia From Seo nuxt config',
+        type: 'article',
+        url:
+          'https://filterpedia.co.id/#/productDetail/' +
+          this.$route.params.slug,
+        image: this.imgThumbnail,
+        image: {
+          url: this.imgThumbnail,
+          width: '850',
+          height: '850',
           type: 'image/png',
-          href: this.imgThumbnail,
         },
-        {
-          hid: 'apple-touch-icon',
-          rel: 'apple-touch-icon',
-          type: 'image/png',
-          href: this.imgThumbnail,
-          sizes: '512x512',
-        },
-      ],
-    }
+      },
+    })
   },
+
   components: { botfooter, ClassicEditor },
 
   data() {
@@ -502,8 +482,6 @@ export default {
   },
   mounted() {
     this.getData()
-    console.log('down nama')
-    console.log(this.$route.params.id)
   },
   methods: {
     ulasan: function () {

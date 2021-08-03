@@ -180,6 +180,19 @@
         </div>
       </div>
       <div class="col-span-4 md:col-start-5 mt-8">
+        <div class="flex">
+          <div>
+            <input type="radio" id="yes" class="my-auto" />
+            <label for="yes">Iya</label>
+          </div>
+          <div>
+            <input type="radio" id="no" class="my-auto" />
+            <label for="no">Tidak</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-4 md:col-start-5 mt-8">
         <div class="mt-4">
           <button
             class="
