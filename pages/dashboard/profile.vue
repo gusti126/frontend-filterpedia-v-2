@@ -257,7 +257,7 @@
         <div class="col-span-12 md:col-span-4 text-center">
           <button
             class="
-              bg-blue-600
+              bg-ungusuez
               hover:bg-indigo-700
               text-white text-sm
               px-5

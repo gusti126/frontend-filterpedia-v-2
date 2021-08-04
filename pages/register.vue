@@ -7,6 +7,7 @@
           menjadi lebih mudah
         </div>
       </div>
+
       <div class="col-span-4 md:col-start-5 mt-5 md:mt-8">
         <div>
           <label for="Nama">Nama Lengkap</label>
@@ -39,6 +40,7 @@
           </div>
         </div>
       </div>
+
       <div class="col-span-4 md:col-start-5 mt-8">
         <div>
           <label for="Email">Email</label>
@@ -179,16 +181,108 @@
           Password tidak sama
         </div>
       </div>
+
       <div class="col-span-4 md:col-start-5 mt-8">
+        <div class="text-gray-700 font-medium mb-2">
+          Belanja untuk kebutuhan perusahaan ?
+        </div>
         <div class="flex">
-          <div>
-            <input type="radio" id="yes" class="my-auto" />
-            <label for="yes">Iya</label>
-          </div>
-          <div>
-            <input type="radio" id="no" class="my-auto" />
-            <label for="no">Tidak</label>
-          </div>
+          <label class="inline-flex items-center mt-3">
+            <input
+              type="radio"
+              class="form-radio h-5 w-5 text-gray-600"
+              v-model="isPerusahaan"
+              :value="true"
+            /><span class="text-gray-700 mx-2">Untuk Perusahaan</span>
+          </label>
+
+          <label class="inline-flex items-center mt-3">
+            <input
+              type="radio"
+              name="isCompany"
+              class="form-radio h-5 w-5 text-red-600"
+              v-model="isPerusahaan"
+              :value="false"
+            /><span class="mx-2 text-gray-700">Untuk Perorang</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-span-4 md:col-start-5 mt-5 md:mt-8" v-if="isPerusahaan">
+        <div>
+          <label for="Nama">Nama Perusahaan</label>
+        </div>
+        <div>
+          <input
+            type="text"
+            id="Nama"
+            v-model="register.nama_pt"
+            class="
+              focus:outline-none
+              rounded-lg
+              py-2
+              mt-3
+              border-2
+              focus:border-blue-500 focus:text-blue-800
+              px-2
+              w-full
+              bg-gray-100
+            "
+          />
+        </div>
+      </div>
+
+      <div class="col-span-4 md:col-start-5 mt-5 md:mt-8" v-if="isPerusahaan">
+        <div>
+          <label for="Nama">Nomor NPWP Perusahaan</label>
+        </div>
+        <div>
+          <input
+            type="number"
+            id="Nama"
+            v-model="register.npwp"
+            class="
+              focus:outline-none
+              rounded-lg
+              py-2
+              mt-3
+              border-2
+              focus:border-blue-500 focus:text-blue-800
+              px-2
+              w-full
+              bg-gray-100
+            "
+          />
+        </div>
+      </div>
+
+      <div class="col-span-4 md:col-start-5 mt-5 md:mt-8" v-if="isPerusahaan">
+        <div>
+          <label for="Nama">Foto NPWP Perusahaan</label>
+        </div>
+        <div>
+          <img
+            src="~/assets/npwp.jpg"
+            alt=""
+            class="mx-auto rounded my-2 cursor-pointer"
+            v-if="!updateImage"
+            @click="$refs.file.click()"
+          />
+          <img
+            :src="npwpImgUrl"
+            alt=""
+            class="mx-auto rounded my-2 cursor-pointer"
+            @click="$refs.file.click()"
+          />
+        </div>
+        <div>
+          <input
+            type="file"
+            class="cursor-pointer"
+            ref="file"
+            @change="onFileChange"
+            accept="image/*"
+          />
         </div>
       </div>
 
@@ -243,7 +337,14 @@ export default {
         email: '',
         password: '',
         password_confirmation: '',
+        nama_pt: '',
+        npwp: '',
+        npwp_image: undefined,
       },
+      isPerusahaan: true,
+      npwpImgUrl: null,
+      selectedFiles: undefined,
+      updateImage: false,
 
       messageError: '',
     }
@@ -299,6 +400,7 @@ export default {
         console.log(err)
       }
     },
+
     async userRegister() {
       if (this.register.password !== this.register.password_confirmation) {
         this.$swal({
@@ -310,8 +412,24 @@ export default {
         return event.stopPropagation()
       }
       try {
+        let formData = new FormData()
+        // jika daftar untuk company
+        if (this.isPerusahaan) {
+          formData.append('nama_pt', this.register.nama_pt)
+          formData.append('npwp_image', this.selectedFiles.item(0))
+          formData.append('npwp', this.register.npwp)
+        }
+
+        formData.append('name', this.register.name)
+        formData.append('email', this.register.email)
+        formData.append('password', this.register.password)
+        formData.append(
+          'password_confirmation',
+          this.register.password_confirmation
+        )
+
         let response = await this.$axios
-          .post('/register', this.register)
+          .post('/register', formData)
           .then((ress) => {
             this.userLogin()
           })
@@ -345,6 +463,17 @@ export default {
         this.showConfirmPassword = false
       } else {
         this.showConfirmPassword = true
+      }
+    },
+
+    onFileChange(e) {
+      if (e.target.files.length !== 0) {
+        const file = e.target.files[0]
+        this.npwpImgUrl = URL.createObjectURL(file)
+        this.selectedFiles = this.$refs.file.files
+        this.updateImage = true
+        console.log('ok')
+        console.log(this.selectedFiles[0])
       }
     },
   },
