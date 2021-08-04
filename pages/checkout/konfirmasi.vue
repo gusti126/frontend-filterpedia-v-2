@@ -512,8 +512,7 @@ export default {
       !this.pengiriman.alamat ||
       !this.pengiriman.provinsi_id ||
       !this.pengiriman.kota_id ||
-      !this.pengiriman.kode_pos ||
-      this.pengiriman.kode_pos == 'null'
+      !this.pengiriman.kode_pos
     ) {
       this.kelengkapan = false
       this.ubah.profile = true
@@ -521,6 +520,8 @@ export default {
     } else {
       this.kelengkapan = true
     }
+
+    console.log(this.pengiriman.kode_pos !== null)
   },
   methods: {
     async getData() {
@@ -568,8 +569,10 @@ export default {
       formData.append('alamat', this.pengiriman.alamat)
       formData.append('provinsi_id', this.provinsi_id)
       formData.append('kota_id', this.pengiriman.kota_id)
-      formData.append('kode_pos', this.pengiriman.kode_pos)
       formData.append('handphone', this.user.phone)
+      if (this.pengiriman.kode_pos !== null) {
+        formData.append('kode_pos', this.pengiriman.kode_pos)
+      }
       this.$store.commit('setLoading', true)
       let item = await this.$axios.post('/profile', formData).then((ress) => {
         this.$auth.fetchUser()
@@ -594,15 +597,16 @@ export default {
         !this.pengiriman.alamat ||
         !this.pengiriman.provinsi_id ||
         !this.pengiriman.kota_id ||
-        !this.pengiriman.kode_pos ||
-        this.pengiriman.kode_pos == 'null'
+        !this.pengiriman.kode_pos
       ) {
-        // this.kelengkapan = false
+        this.kelengkapan = false
         this.ubah.profile = true
         this.ubah.pengiriman = true
       } else {
         this.kelengkapan = true
       }
+      console.log(this.ubah.profile)
+      console.log(this.ubah.pengiriman)
     },
     editPengiriman() {
       if (this.ubah.pengiriman) {
@@ -631,6 +635,7 @@ export default {
           })
           .then((ress) => {
             console.log(ress)
+            this.$auth.fetchUser()
             this.$router.push({
               path: '/checkout/success/' + ress.data.data.id,
             })

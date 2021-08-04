@@ -210,12 +210,12 @@
 
       <div class="col-span-4 md:col-start-5 mt-5 md:mt-8" v-if="isPerusahaan">
         <div>
-          <label for="Nama">Nama Perusahaan</label>
+          <label for="Nama_pt">Nama Perusahaan</label>
         </div>
         <div>
           <input
             type="text"
-            id="Nama"
+            id="Nama_pt"
             v-model="register.nama_pt"
             class="
               focus:outline-none
@@ -230,16 +230,24 @@
             "
           />
         </div>
+        <div class="text-gray-500 text-sm" v-if="register.nama_pt.length == 0">
+          nama perusahaan harus di isi
+        </div>
+        <div class="text-gray-500 text-sm" v-else>
+          <span v-if="register.nama_pt.length < 5"
+            >nama perusahaan harus lebih dari 5 karakter</span
+          >
+        </div>
       </div>
 
       <div class="col-span-4 md:col-start-5 mt-5 md:mt-8" v-if="isPerusahaan">
         <div>
-          <label for="Nama">Nomor NPWP Perusahaan</label>
+          <label for="nomor_npwp">Nomor NPWP Perusahaan</label>
         </div>
         <div>
           <input
             type="number"
-            id="Nama"
+            id="nomor_npwp"
             v-model="register.npwp"
             class="
               focus:outline-none
@@ -254,15 +262,23 @@
             "
           />
         </div>
+        <div class="text-gray-500 text-sm" v-if="register.npwp.length == 0">
+          nomor npwp harus di isi
+        </div>
+        <div class="text-gray-500 text-sm" v-else>
+          <span v-if="register.nama_pt.length < 5"
+            >nomor npwp harus lebih dari 8</span
+          >
+        </div>
       </div>
 
       <div class="col-span-4 md:col-start-5 mt-5 md:mt-8" v-if="isPerusahaan">
         <div>
-          <label for="Nama">Foto NPWP Perusahaan</label>
+          <label>Foto NPWP Perusahaan</label>
         </div>
         <div>
           <img
-            src="~/assets/npwp.jpg"
+            src="~/assets/npwp.svg"
             alt=""
             class="mx-auto rounded my-2 cursor-pointer"
             v-if="!updateImage"
@@ -287,23 +303,85 @@
       </div>
 
       <div class="col-span-4 md:col-start-5 mt-8">
-        <div class="mt-4">
-          <button
-            class="
-              block
-              w-full
-              text-white
-              rounded-lg
-              hover:bg-purple-700
-              bg-blue-700
-              py-2
-              text-center
-            "
-            @click="userRegister"
-            :disabled="!validasi"
-          >
-            Register
-          </button>
+        <!-- jika memilih perusahaan -->
+        <div v-if="isPerusahaan">
+          <div class="mt-4">
+            <button
+              class="
+                block
+                w-full
+                text-white
+                rounded-lg
+                hover:bg-purple-700
+                bg-blue-700
+                py-2
+                text-center
+                cursor-not-allowed
+              "
+              disabled
+              v-if="register.nama_pt.length < 5 || register.npwp.length < 5"
+            >
+              Data tidak komplet
+            </button>
+            <button
+              class="
+                block
+                w-full
+                text-white
+                rounded-lg
+                hover:bg-purple-700
+                bg-blue-700
+                py-2
+                text-center
+              "
+              v-else
+              @click="userRegister"
+            >
+              Register
+            </button>
+          </div>
+        </div>
+        <!-- else jika memilih perorang -->
+        <div v-if="!isPerusahaan">
+          <div class="mt-4">
+            <button
+              class="
+                block
+                w-full
+                text-white
+                rounded-lg
+                hover:bg-purple-700
+                bg-blue-700
+                py-2
+                text-center
+                cursor-not-allowed
+              "
+              v-if="
+                register.name.length < 5 ||
+                register.email.length < 5 ||
+                register.password.length < 5 ||
+                register.password_confirmation.length < 5
+              "
+            >
+              Data tidak komplet
+            </button>
+            <button
+              class="
+                block
+                w-full
+                text-white
+                rounded-lg
+                hover:bg-purple-700
+                bg-blue-700
+                py-2
+                text-center
+              "
+              v-else
+              @click="userRegister"
+            >
+              Register
+            </button>
+          </div>
         </div>
         <div class="mt-4 mb-20">
           <nuxt-link
@@ -345,6 +423,7 @@ export default {
       npwpImgUrl: null,
       selectedFiles: undefined,
       updateImage: false,
+      validasi_err: true,
 
       messageError: '',
     }
@@ -366,8 +445,10 @@ export default {
       return true
     },
   },
+
   mounted() {
     console.log('Hello ' + this.register.password_confirmation)
+    // console.log(this.register.nama_pt.length)
   },
   methods: {
     async userLogin() {
@@ -412,6 +493,7 @@ export default {
         return event.stopPropagation()
       }
       try {
+        this.$store.commit('setLoading', true)
         let formData = new FormData()
         // jika daftar untuk company
         if (this.isPerusahaan) {
@@ -434,9 +516,11 @@ export default {
           .post('/register', formData)
           .then((ress) => {
             this.userLogin()
+            this.$store.commit('setLoading', false)
           })
           .catch((err) => {
             console.log(err.response.data.message.email)
+            this.$store.commit('setLoading', false)
             this.$swal({
               icon: 'error',
               title: 'Gagal Register',

@@ -164,6 +164,14 @@ export default {
     }
   },
 
+  mounted() {
+    if (this.company.phone) {
+      console.log(this.company.phone)
+    } else {
+      console.log('else')
+    }
+  },
+
   methods: {
     async updateHendle() {
       let formData = new FormData()

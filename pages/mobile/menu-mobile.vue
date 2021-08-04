@@ -135,7 +135,10 @@
         </div>
       </nuxt-link>
 
-      <nuxt-link to="/dashboard/company">
+      <nuxt-link
+        to="/dashboard/company"
+        v-if="this.$store.state.auth.user.detail_perusahaan"
+      >
         <div class="mt-6 flex font-medium text-gray-500 hover:text-blue-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"

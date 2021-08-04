@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded p-2 md:p-3 border shadow">
+  <div class="bg-white rounded p-2 md:p-3 border">
     <div>
       <!--  -->
       <img :src="nameImage" :alt="nameImage" class="rounded" />

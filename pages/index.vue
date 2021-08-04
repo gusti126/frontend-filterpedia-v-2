@@ -166,7 +166,7 @@
           :key="item.id"
           v-show="!load"
         >
-          <nuxt-link :to="'/produk/' + item.slug">
+          <nuxt-link :to="'/productDetail/' + item.slug">
             <!-- dekstop view -->
             <card-produk
               class="md:hidden block"
