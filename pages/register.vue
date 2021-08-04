@@ -416,7 +416,9 @@ export default {
         // jika daftar untuk company
         if (this.isPerusahaan) {
           formData.append('nama_pt', this.register.nama_pt)
-          formData.append('npwp_image', this.selectedFiles.item(0))
+          if (this.updateImage) {
+            formData.append('npwp_image', this.selectedFiles.item(0))
+          }
           formData.append('npwp', this.register.npwp)
         }
 

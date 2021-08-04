@@ -347,6 +347,7 @@ export default {
           console.log('alamat in down')
           // console.log(this.alamat)
         })
+        .catch((ress) => console.log(ress))
     },
 
     async updateHendle(file) {
