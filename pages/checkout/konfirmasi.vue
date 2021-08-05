@@ -37,6 +37,7 @@
     <!-- endloading skeleton  -->
 
     <div class="md:px-20 px-2 pb-10" v-show="!load">
+      <div class="text-gray-900 font-bold">Konfirmasi checkout</div>
       <div class="mt-2 md:mt-4 md:p-4 flex">
         <div>
           <img
@@ -45,9 +46,13 @@
             class="w-16 mr-6"
           />
         </div>
-        <div class="md:text-xl text-sm my-auto text-gray-500">
-          Halaman terakhir <br />
-          untuk proses pembelian anda
+        <div class="">
+          <div class="md:text-lg text-sm my-auto text-gray-700 leading-3">
+            Halaman terakhir
+          </div>
+          <div class="md:text-lg text-sm my-auto text-gray-700">
+            untuk proses pembelian anda
+          </div>
         </div>
       </div>
 
@@ -383,8 +388,10 @@
                   {{ met.nama_bank }}
                 </option>
               </select>
-              <span class="text-blue-600 text-xs ml-4"
-                >Lihat Cara Bayar disini</span
+              <nuxt-link
+                to="/cara-bayar"
+                class="text-blue-800 hover:text-purple-600 text-xs ml-4"
+                >Lihat Cara Bayar disini</nuxt-link
               >
             </div>
             <!-- enddetail metode pembayaran  -->
@@ -393,8 +400,8 @@
         <!-- detail penerima -->
 
         <!-- detail orderan -->
-        <div class="md:col-span-4 col-span-12 border rounded p-3">
-          <div>
+        <div class="md:col-span-4 col-span-12">
+          <div class="border rounded p-3">
             <div class="font-semibold mb-5">Orderan Kamu</div>
             <hr class="mb-5" />
             <div class="flex" v-for="item in items" :key="item.id">
@@ -510,7 +517,7 @@ export default {
     if (
       !this.user.phone ||
       !this.pengiriman.alamat ||
-      !this.pengiriman.provinsi_id ||
+      !this.provinsi_id ||
       !this.pengiriman.kota_id ||
       !this.pengiriman.kode_pos
     ) {
@@ -520,6 +527,8 @@ export default {
     } else {
       this.kelengkapan = true
     }
+
+    console.log(!this.$store.state.auth.user.user_detail.alamat)
 
     console.log(this.pengiriman.kode_pos !== null)
   },
@@ -564,6 +573,28 @@ export default {
     },
 
     async hendleUpdate() {
+      if (
+        !this.user.phone ||
+        !this.pengiriman.alamat ||
+        !this.provinsi_id ||
+        !this.pengiriman.kota_id ||
+        !this.pengiriman.kode_pos
+      ) {
+        this.kelengkapan = false
+        this.ubah.profile = true
+        this.ubah.pengiriman = true
+
+        this.$swal({
+          icon: 'info',
+          title: 'Profile anda belum lengkap',
+          text: 'Isi semua kolom yang kosong dengan benar',
+        })
+
+        console.log('kosong')
+
+        return
+      }
+
       let formData = new FormData()
       formData.append('name', this.user.nama)
       formData.append('alamat', this.pengiriman.alamat)
@@ -573,6 +604,7 @@ export default {
       if (this.pengiriman.kode_pos !== null) {
         formData.append('kode_pos', this.pengiriman.kode_pos)
       }
+
       this.$store.commit('setLoading', true)
       let item = await this.$axios.post('/profile', formData).then((ress) => {
         this.$auth.fetchUser()
@@ -595,7 +627,7 @@ export default {
       if (
         !this.user.phone ||
         !this.pengiriman.alamat ||
-        !this.pengiriman.provinsi_id ||
+        !this.provinsi_id ||
         !this.pengiriman.kota_id ||
         !this.pengiriman.kode_pos
       ) {
@@ -627,6 +659,21 @@ export default {
       this.ubah.pengiriman = false
     },
     async createTransaksi() {
+      if (
+        !this.user.phone ||
+        !this.pengiriman.alamat ||
+        !this.provinsi_id ||
+        !this.pengiriman.kota_id ||
+        !this.pengiriman.kode_pos
+      ) {
+        console.log('kosong')
+        this.$swal({
+          icon: 'info',
+          title: 'Profile anda belum lengkap',
+          text: 'Isi semua kolom yang kosong dengan benar',
+        })
+        return
+      }
       try {
         let response = await this.$axios
           .post('/checkout', {
