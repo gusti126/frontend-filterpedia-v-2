@@ -31,11 +31,15 @@
           driver cipta aneka air
         </div>
         <div class="border rounded-lg p-4 mx-4 md:mx-10 mb-4">
-          <div class="font-medium text-gray-800 text-sm md:text-base">
-            Pembayaran Via Alfamart
-          </div>
-          <div class="font-medium text-gray-800 text-sm md:text-base">
-            Kode pembayaran 191999012997134012
+          <div class="flex">
+            <div class="">
+              <div class="font-medium text-gray-800 text-sm md:text-base">
+                Pembayaran Via Alfamart
+              </div>
+              <div class="font-medium text-gray-800 text-sm md:text-base">
+                Kode pembayaran 191999012997134012
+              </div>
+            </div>
           </div>
           <div class="mt-4 text-xs font-light md:text-base">
             Cara Bayar <br />

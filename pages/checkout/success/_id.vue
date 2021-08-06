@@ -2,8 +2,12 @@
   <div>
     <navbar :navScroll="100" />
     <nav-mobile />
-    <div class="h-screen md:px-20 px-2">
-      <div class="border shadow-lg mx-auto mt-4 md:mt-20 rounded-lg">
+    <!-- <div class="min-h-screen bg-ungusuez absolute w-full bg-opacity-25"></div> -->
+    <modal />
+    <div class="md:min-h-screen md:px-20 px-2 pb-28 md:pb-0">
+      <div
+        class="border shadow-lg mx-auto mt-4 pb-6 md:mt-20 rounded-lg md:px-6"
+      >
         <div>
           <img
             src="~/assets/icon/success-chekout.svg"
@@ -11,16 +15,18 @@
             class="mx-auto p-4 w-36"
           />
         </div>
-        <div class="text-gray-800 text-xl md:text-3xl text-center">
-          Pemesanan Berhasil
+        <div class="text-gray-800 text-xl md:text-2xl text-center">
+          Terimakasih! Kami akan mengemas dan kirim pesanan Anda segera setelah
+          Anda melakukan <br />
+          <span class="font-bold"> konfirmasi pembayaran!</span>
+
+          <!--  -->
         </div>
         <div
           class="
-            text-gray-600
+            text-gray-800
             mx-auto
             text-base
-            md:text-xl
-            font-light
             md:w-3/6
             text-center
             my-2
@@ -28,61 +34,109 @@
           "
         >
           Silahkan lakukan pembayaran, Pesanan akan di kemas dan diantar oleh
-          driver cipta aneka air
+          driver filterpedia
         </div>
-        <div class="border rounded-lg p-4 mx-4 md:mx-10 mb-4">
-          <div class="font-medium text-gray-800 text-sm md:text-base">
-            Pembayaran Via {{ method_pembayaran.nama_bank }}
-          </div>
-          <div class="font-medium text-gray-800 text-sm md:text-base">
-            Nomor Rekening {{ method_pembayaran.nomor_rekening }}
-          </div>
-          <div class="font-medium text-gray-800 text-sm md:text-base">
-            Atas Nama {{ method_pembayaran.atas_nama_rekening }}
-          </div>
-          <div class="mt-4 text-xs font-light md:text-base">
-            Cara Bayar <br />
-            1. Silakan pergi ke gerai Alfamart, Alfamidi, atau Dan+Dan terdekat
-            dan berikanlah nomorKode Pembayaran Anda (191999012997134012) ke
-            kasir. <br />
-            2. Kasir akan mengkonfirmasi transaksi dengan menanyakan jumlah
-            transaksi dan nama merchant.
-          </div>
-        </div>
-        <div class="flex justify-center">
-          <nuxt-link
-            to="/dashboard/pesanan"
+        <div class="flex items-center mb-4">
+          <span
             class="
-              text-white
-              mb-10
-              text-center text-sm
-              border-2 border-blue-600
-              bg-blue-600
-              px-3
-              md:px-6
+              bg-ungusuez
+              px-4
               py-2
-              rounded-md
+              rounded-lg
+              mx-auto
+              text-center text-white
+              cursor-pointer
+              hover:bg-purple-700
             "
-            >Lihat pesanan</nuxt-link
-          >
-          <nuxt-link
-            to="/"
-            class="
-              text-blue-600
-              mb-10
-              text-center
-              border-2 border-blue-600
-              px-3
-              md:px-6
-              py-2
-              rounded-md
-              ml-5
-              text-sm
-              md:ml-10
-            "
-            >Lanjut belanja</nuxt-link
+            @click="konfirmasiPembayaran"
+            >Konfirmasi pembayaran</span
           >
         </div>
+
+        <div class="p-4 mb-6 border">
+          <div>
+            <div class="font-semibold text-gray-800 my-1">
+              Menunggu pembayaran.
+              <nuxt-link to="#" class="text-green-800 underline"
+                >Kirim Bukti Bayar</nuxt-link
+              >
+            </div>
+          </div>
+          <div class="my-1">
+            Nomor Tagihan
+            <span class="text-base font-semibold text-gray-900">
+              {{ this.item.transaction_code }}</span
+            >
+          </div>
+          <div class="my-1">
+            Nominal Tagihan
+            <span class="text-base font-semibold text-gray-900"
+              >Rp.{{ item.sub_total_price | currency }}</span
+            >
+          </div>
+
+          <div class="flex justify-center md:justify-start mt-4">
+            <nuxt-link
+              to="/dashboard/pesanan"
+              class="
+                text-white text-center text-sm
+                border-2 border-ungusuez
+                hover:bg-purple-700 hover:border-purple-700
+                bg-ungusuez
+                px-3
+                md:px-6
+                py-2
+                rounded-lg
+              "
+              >Lihat pesanan</nuxt-link
+            >
+            <nuxt-link
+              to="/"
+              class="
+                text-ungusuez text-center
+                border-2 border-ungusuez
+                hover:bg-ungusuez hover:text-white
+                px-3
+                md:px-6
+                py-2
+                rounded-lg
+                ml-5
+                text-sm
+                md:ml-10
+              "
+              >Lanjut belanja</nuxt-link
+            >
+          </div>
+        </div>
+
+        <!-- detail pembelian barang -->
+        <div class="border p-2 rounded">
+          <div class="text-lg font-medium text-gray-700">Detil pembelian</div>
+
+          <div
+            v-for="produk in item.transaction_detail"
+            :key="produk.id"
+            class="mt-6 flex"
+          >
+            <div>
+              <img
+                :src="produk.products.imageurl"
+                alt=""
+                class="rounded w-32 mr-4"
+              />
+            </div>
+            <div>
+              <div class="text-gray-700 font-medium text-lg">
+                {{ produk.products.product_name }}
+              </div>
+              <div class="text-gray-500">jumlah {{ produk.qty }}</div>
+              <div class="text-green-700 font-medium">
+                Rp.{{ produk.products.product_price }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- enddetail pembelian barang -->
       </div>
     </div>
     <botfooter nameImage="logo.png" />
@@ -90,7 +144,9 @@
 </template>
 
 <script>
+import modal from '~/components/modal.vue'
 export default {
+  components: { modal },
   data() {
     return {
       item: [],
@@ -127,6 +183,9 @@ export default {
 
           console.log(this.method_pembayaran)
         })
+    },
+    async konfirmasiPembayaran() {
+      this.$modal.show('modalProfile')
     },
   },
 }
