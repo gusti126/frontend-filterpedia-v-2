@@ -85,6 +85,9 @@ export default {
         .post('/confirm-payment', formData)
         .then((ress) => {
           console.log(ress)
+          this.$modal.hideAll()
+          console.log('suksess konformasi pembayaran')
+          this.$modal.hide('modalProfile')
         })
     },
   },

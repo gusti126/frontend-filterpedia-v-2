@@ -93,7 +93,7 @@
     <!-- banner info -->
     <div class="md:px-20 px-2 mt-6">
       <img
-        src="~/assets/banner/bannerinfo.png"
+        src="~/assets/banner/bannerinfo.svg"
         alt=""
         class="rounded md:rounded-xl md:block hidden"
       />

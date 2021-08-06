@@ -2,8 +2,6 @@
   <div>
     <navbar :navScroll="100" />
     <nav-mobile />
-    <!-- <div class="min-h-screen bg-ungusuez absolute w-full bg-opacity-25"></div> -->
-    <modal />
     <div class="md:min-h-screen md:px-20 px-2 pb-28 md:pb-0">
       <div
         class="border shadow-lg mx-auto mt-4 pb-6 md:mt-20 rounded-lg md:px-6"
@@ -54,25 +52,42 @@
         </div>
 
         <div class="p-4 mb-6 border">
-          <div>
-            <div class="font-semibold text-gray-800 my-1">
-              Menunggu pembayaran.
-              <nuxt-link to="#" class="text-green-800 underline"
-                >Kirim Bukti Bayar</nuxt-link
-              >
+          <div class="md:flex justify-between">
+            <div>
+              <div>
+                <div class="font-semibold text-gray-800 my-1">
+                  Menunggu pembayaran.
+                  <nuxt-link to="#" class="text-green-800 underline"
+                    >Kirim Bukti Bayar</nuxt-link
+                  >
+                </div>
+              </div>
+              <div class="my-1">
+                Nomor Tagihan
+                <span class="text-base font-semibold text-gray-900">
+                  {{ this.item.transaction_code }}</span
+                >
+              </div>
+              <div class="my-1">
+                Nominal Tagihan
+                <span class="text-base font-semibold text-gray-900"
+                  >Rp.{{ item.sub_total_price | currency }}</span
+                >
+              </div>
             </div>
-          </div>
-          <div class="my-1">
-            Nomor Tagihan
-            <span class="text-base font-semibold text-gray-900">
-              {{ this.item.transaction_code }}</span
-            >
-          </div>
-          <div class="my-1">
-            Nominal Tagihan
-            <span class="text-base font-semibold text-gray-900"
-              >Rp.{{ item.sub_total_price | currency }}</span
-            >
+
+            <div class="my-1 md:mt-0 mt-4">
+              <div class="font-semibold">Pembayaran Via Bank Transfer BCA</div>
+              <div>
+                <img
+                  src="~assets/brand-logo/bca-logo.png"
+                  alt=""
+                  class="w-32 my-2 md:mx-auto"
+                />
+              </div>
+              <div>Nomor rekening 123456789012</div>
+              <div>PT. Cipta Aneka Air</div>
+            </div>
           </div>
 
           <div class="flex justify-center md:justify-start mt-4">
@@ -172,20 +187,10 @@ export default {
         .then((ress) => {
           this.method_pembayaran = ress.data.data
           //   console.log(this.method_pembayaran)
-
-          for (var i = 0; i < this.method_pembayaran.length; i++) {
-            console.log('id bank : ' + this.method_pembayaran[i].id)
-            console.log(this.item.payment_code_id)
-            if (this.method_pembayaran[i].id == this.item.payment_code_id) {
-              this.method_pembayaran = this.method_pembayaran[i]
-            }
-          }
-
           console.log(this.method_pembayaran)
         })
-    },
-    async konfirmasiPembayaran() {
-      this.$modal.show('modalProfile')
+
+      console.log(this.method_pembayaran)
     },
   },
 }

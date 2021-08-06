@@ -108,7 +108,6 @@
       <div class="" v-show="isBayaran">
         <div v-for="bayar in this.$store.state.produk" :key="bayar.id">
           <card-pesanan
-            v-if="bayar.status == 0"
             :title="bayar.transaction_detail[0].products.product_name"
             :batalkan="true"
             :harga="bayar.transaction_detail[0].products.product_price"
@@ -221,12 +220,6 @@ export default {
   mounted() {
     this.historyTransaksi()
   },
-  // async fetch() {
-  //   let items = await this.$axios.get('/profile').then((ress) => {
-  //     this.$store.commit('setProduk', ress.data.riwayat_transaksi)
-  //     // this.produks = this.$store.state.produk
-  //   })
-  // },
   methods: {
     async historyTransaksi() {
       let data = await this.$axios.get('/transactions').then((ress) => {

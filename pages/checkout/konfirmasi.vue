@@ -675,6 +675,7 @@ export default {
         return
       }
       try {
+        this.$store.commit('setLoading', true)
         let response = await this.$axios
           .post('/checkout', {
             user_id: this.$store.state.auth.user.id,
@@ -684,7 +685,7 @@ export default {
             console.log(ress)
             this.$auth.fetchUser()
             this.$router.push({
-              path: '/checkout/success/' + ress.data.data.id,
+              path: '/checkout/berhasil/' + ress.data.data.id,
             })
           })
           .catch((err) => {
