@@ -151,7 +151,7 @@
         </div>
         <div class="col-span-12 md:col-span-4">
           <div>
-            <label for="Provinsi">Provinsi id : </label>
+            <label for="Provinsi">Provinsi id </label>
           </div>
           <select
             name="provinsi"
@@ -211,27 +211,7 @@
             </option>
           </select>
         </div>
-        <div class="col-span-6 md:col-span-4">
-          <div>
-            <label for="Kota">Kecamatan</label>
-          </div>
-          <select
-            name=""
-            id="Kota"
-            class="
-              border border-gray-300
-              rounded-2xl
-              focus:outline-none
-              px-4
-              py-1
-              md:w-full
-              text-sm
-              focus:border-blue-500 focus:text-blue-500
-            "
-          >
-            <option value="">Kecamatan</option>
-          </select>
-        </div>
+
         <div class="col-span-6 md:col-span-4">
           <div>
             <label for="Kota">Kode pos</label>
@@ -263,6 +243,7 @@
               px-5
               py-2
               w-full
+              focus:outline-none
               rounded-2xl
             "
             @click="updateHendle"

@@ -144,7 +144,7 @@
               <div class="text-gray-700 font-medium text-lg">
                 {{ produk.products.product_name }}
               </div>
-              <div class="text-gray-500">jumlah {{ produk.qty }}</div>
+              <div class="text-gray-500">jumlah X {{ produk.id }}</div>
               <div class="text-green-700 font-medium">
                 Rp.{{ produk.products.product_price }}
               </div>

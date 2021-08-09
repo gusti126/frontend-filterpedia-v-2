@@ -303,7 +303,7 @@
 
             <div class="my-7 flex justify-between">
               <nuxt-link
-                :to="'/beli-langsung/' + this.$route.params.id"
+                :to="'/beli-langsung/' + this.$route.params.slug"
                 class="
                   bg-ungusuez
                   text-white

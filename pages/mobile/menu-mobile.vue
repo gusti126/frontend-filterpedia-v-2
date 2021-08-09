@@ -158,6 +158,30 @@
         </div>
       </nuxt-link>
 
+      <nuxt-link
+        to="tagihan"
+        class="mt-6 flex font-medium text-gray-500 hover:text-blue-500"
+      >
+        <div class="flex mr-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 mr-3"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+            />
+          </svg>
+
+          <div class="my-auto">Tagihan</div>
+        </div>
+      </nuxt-link>
+
       <nuxt-link to="/dashboard/pesanan-proses">
         <div class="mt-6 flex font-medium text-gray-500 hover:text-blue-500">
           <svg
@@ -237,16 +261,29 @@ export default {
   data() {
     return {
       keranjang: this.$store.state.keranjang,
+      statusTransaksi: {
+        unpaid: [],
+        pengiriman: [],
+        selesai: [],
+      },
       // user: []
     }
   },
   mounted() {
-    console.log(this.user)
-    this.$nuxt.refresh()
+    this.transaksi()
   },
   methods: {
     async userLogout() {
       await this.$auth.logout()
+    },
+
+    async transaksi() {
+      let pengiriman = await this.$axios
+        .get('/transactions/pengiriman')
+        .then((ress) => {
+          this.statusTransaksi.pengiriman = ress.data.data
+          console.log(this.statusTransaksi.pengiriman)
+        })
     },
   },
 }

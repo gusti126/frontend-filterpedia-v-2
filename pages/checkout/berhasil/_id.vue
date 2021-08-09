@@ -28,7 +28,7 @@
           "
         >
           Silahkan lakukan pembayaran, Pesanan akan di kemas dan diantar oleh
-          driver cipta aneka air
+          driver filterpedia
         </div>
 
         <div class="border rounded-lg p-4 mx-4 md:mx-10 mb-4">
@@ -41,7 +41,8 @@
                   >
                   <div>
                     <span v-if="met.id == item.payment_code_id"
-                      >Kode pembayaran {{ met.nomor_rekening }}</span
+                      >Nomor Rekening {{ met.nomor_rekening }}
+                      <span>({{ met.atas_nama_rekening }})</span></span
                     >
                   </div>
                 </span>
@@ -52,19 +53,27 @@
               <div class="font-medium text-gray-800 text-sm md:text-base"></div>
             </div>
             <div>
-              <div>Harga semua barang : 750000</div>
-              <div>PPN : 750000</div>
-              <div>Total tagihan : 750000</div>
+              <div>
+                Harga semua barang : Rp.{{
+                  item.price_after_discount | currency
+                }}
+              </div>
+              <div>PPN : Rp.{{ item.pajak_ppn | currency }}</div>
+              <div>
+                Total tagihan : Rp.{{ item.sub_total_price | currency }}
+              </div>
             </div>
           </div>
-          <div class="mt-4 text-xs font-light md:text-base">
-            Cara Bayar <br />
-            1. Silakan pergi ke gerai Alfamart, Alfamidi, atau Dan+Dan terdekat
-            dan berikanlah nomorKode Pembayaran Anda (191999012997134012) ke
-            kasir. <br />
-            2. Kasir akan mengkonfirmasi transaksi dengan menanyakan jumlah
-            transaksi dan nama merchant.
+
+          <div class="mt-4">
+            <!-- <div class="font-medium mb-2 text-lg">Cara Bayar</div> -->
+            <div v-for="met in method_pembayaran" :key="met.id">
+              <div v-if="met.id == item.payment_code_id">
+                <div v-html="met.cara_bayar"></div>
+              </div>
+            </div>
           </div>
+
           <div class="mb-4">
             <img
               :src="imgUrl"
@@ -73,7 +82,8 @@
               v-if="imgUrl.length > 4"
             />
           </div>
-          <div class="flex justify-center">
+          <!-- jika status pembayaran unpaid -->
+          <div class="md:flex justify-center" v-if="item.status === 0">
             <nuxt-link
               to="/dashboard/pesanan"
               class="
@@ -87,6 +97,10 @@
                 mr-5
                 text-sm
                 md:ml-10
+                block
+                md:inline
+                mb-4
+                md:mb-0
               "
               v-if="imgUrl < 2"
               >Lihat pesanan</nuxt-link
@@ -94,16 +108,18 @@
             <!-- button sebelum user upload bukti bayar -->
             <div
               class="
-                text-ungusuez text-center text-sm
+                text-white text-center text-sm
                 border-2 border-ungusuez
-                hover:bg-ungusuez hover:text-white
+                bg-ungusuez
+                hover:bg-purple-700
                 px-3
                 md:px-6
                 py-2
                 rounded-md
                 cursor-pointer
-                mr-4
+                font-medium
               "
+              v-if="imgUrl < 2"
               @click="$refs.file.click()"
             >
               Upload Bukti Pembayaran
@@ -137,6 +153,33 @@
               />
             </div>
           </div>
+          <!-- jika status pembayaran  -->
+          <div class="md:flex justify-center" v-if="item.status === 2">
+            <div>
+              <img
+                src="~/assets/Admin-bro.svg"
+                alt=""
+                class="w-44 md:mr-6 mx-auto"
+              />
+            </div>
+            <div class="my-auto">
+              <div class="font-semibold text-xl">
+                Status {{ item.status_transaksi }}
+              </div>
+              <div>
+                Kamu sudah mengkonfirmasi bukti pembayaran selanjutnya akan
+                admin proses. <br />
+                ini tidak memakan waktu lama <br />
+                <div class="text-gray-600 mb-3">Punya pertanyaan ?</div>
+                <nuxt-link
+                  to="#"
+                  class="px-2 py-1 rounded bg-blue-700 text-white"
+                >
+                  Hubungi Admin
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="border rounded-lg p-4 mx-4 md:mx-10 mb-4">
@@ -151,7 +194,7 @@
             </div>
             <div>
               {{ produk.products.product_name }}
-              <div class="text-gray-500">jumlah</div>
+              <div class="text-gray-500">jumlah {{ produk.qty }}</div>
               <div class="text-green-800 font-semibold">
                 Rp.{{ produk.products.product_price | currency }}
               </div>
@@ -183,21 +226,24 @@ export default {
 
   methods: {
     async getData() {
+      this.$store.commit('setLoading', true)
       let response = await this.$axios
         .get('/transactions/' + this.$route.params.id)
         .then((ress) => {
           this.item = ress.data.data
-          console.log(this.item)
         })
 
       let metode_pembayaran = await this.$axios
         .get('/payment-method')
         .then((ress) => {
           this.method_pembayaran = ress.data.data
+
           this.$store.commit('setLoading', false)
         })
 
-      console.log(this.method_pembayaran)
+      console.log(this.item)
+
+      this.$store.commit('setLoading', false)
     },
     onFileChange(e) {
       if (e.target.files.length !== 0) {
@@ -207,6 +253,7 @@ export default {
       }
     },
     async confirmCheckout() {
+      this.$store.commit('setLoading', true)
       let formData = new FormData()
       formData.append('transactions_id', this.$route.params.id)
       formData.append('images', this.selectedFiles[0])
@@ -219,6 +266,9 @@ export default {
             title: 'Berhasil upload bukti Pembayaran',
             text: 'Selanjutnya akan di verify oleh admin ',
           })
+          this.getData()
+          this.imgUrl = ''
+          this.$store.commit('setLoading', false)
         })
         .catch((err) => {
           this.$swal({
