@@ -42,7 +42,7 @@
     </div>
     <div class="mt-6 flex justify-between md:justify-start">
       <nuxt-link
-        to="/chekoutsuccess"
+        :to="'/checkout/berhasil/' + id"
         class="
           text-sm
           hover:bg-purple-600
@@ -118,6 +118,17 @@ export default {
       this.loading = true
     },
     confirmHapus(id) {
+      console.log(this.status_payment)
+      if (this.status_payment === 'Canceled') {
+        this.$swal.fire({
+          icon: 'info',
+          title: 'Status transaksi dibatalkan',
+          text: 'Status transaksi sudah di batalkan, anda bisa melakukan pemesanan lagi',
+          confirmButtonText: `Ok`,
+        })
+
+        return
+      }
       this.$swal
         .fire({
           title: 'Yakin batalkan pesanan',

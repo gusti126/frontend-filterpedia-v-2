@@ -45,7 +45,7 @@
           @click="bayaran"
           :class="{ 'text-blue-500': isBayaran }"
         >
-          Belum di bayar({{ this.$store.state.produk.length }})
+          Semua({{ this.$store.state.produk.length }})
           <div
             class="mt-2 border border-blue-500 rounded-full"
             v-show="isBayaran"

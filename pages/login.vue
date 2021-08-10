@@ -90,6 +90,13 @@
             />
           </svg>
         </div>
+
+        <div class="mt-4 text-right">
+          <nuxt-link to="/lupa-password" class="text-blue-800"
+            >Lupa password ?</nuxt-link
+          >
+        </div>
+
         <div class="mt-4">
           <button
             class="

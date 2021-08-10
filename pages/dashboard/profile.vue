@@ -180,6 +180,7 @@
             </option>
           </select>
         </div>
+
         <div class="col-span-12 md:col-span-4">
           <div>
             <label for="Kota">Kota </label>
@@ -307,6 +308,7 @@ export default {
     },
 
     async getAlamat() {
+      this.$store.commit('setLoading', true)
       let provin = await this.$axios.get('/provinsi').then((ress) => {
         this.provinsi = ress.data.data
       })
@@ -318,6 +320,7 @@ export default {
           console.log('alamat in down')
           console.log(this.alamat)
         })
+      this.$store.commit('setLoading', false)
     },
     async getKota() {
       let items = await this.$axios

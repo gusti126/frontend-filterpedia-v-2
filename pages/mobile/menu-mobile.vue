@@ -159,7 +159,7 @@
       </nuxt-link>
 
       <nuxt-link
-        to="tagihan"
+        to="/dashboard/tagihan"
         class="mt-6 flex font-medium text-gray-500 hover:text-blue-500"
       >
         <div class="flex mr-3">

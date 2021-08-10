@@ -94,7 +94,7 @@
                 md:px-6
                 py-2
                 rounded-md
-                mr-5
+                md:mr-5
                 text-sm
                 md:ml-10
                 block
@@ -271,10 +271,12 @@ export default {
           this.$store.commit('setLoading', false)
         })
         .catch((err) => {
+          console.log(err.response.data.message)
           this.$swal({
             icon: 'error',
-            title: 'Opps ada yang error nih ',
+            text: err.response.data.message,
           })
+          this.$store.commit('setLoading', false)
         })
     },
   },
