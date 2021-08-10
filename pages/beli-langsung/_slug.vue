@@ -474,6 +474,7 @@ import Modal from '~/components/modal.vue'
 import navMobile from '~/components/nav-mobile.vue'
 export default {
   components: { navMobile, Botfooter, Modal },
+  middleware: 'auth',
   data() {
     return {
       // validasi profile lengkap ?
