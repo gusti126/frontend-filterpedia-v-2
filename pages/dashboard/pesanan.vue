@@ -105,7 +105,7 @@
       </div>
 
       <!-- produk blum di bayar -->
-      <div class="" v-show="isBayaran">
+      <!-- <div class="" v-show="isBayaran">
         <div v-for="bayar in this.$store.state.produk" :key="bayar.id">
           <card-pesanan
             :title="bayar.transaction_detail[0].products.product_name"
@@ -117,6 +117,93 @@
             :nameImage="bayar.transaction_detail[0].products.imageurl"
             :status_payment="bayar.status_transaksi"
           />
+        </div> -->
+
+      <div class="" v-show="isBayaran">
+        <div
+          class="border border-gray-300 py-2 px-4 rounded mt-4"
+          v-for="bayar in this.$store.state.produk"
+          :key="bayar.id"
+          v-if="!loading"
+        >
+          <div class="md:flex justify-between mb-5">
+            <div>
+              <div>
+                Nomor Transaksi
+                <span class="font-semibold">{{ bayar.transaction_code }}</span>
+              </div>
+              <div class="text-gray-500 text-sm">
+                dipesan pada tanggal {{ bayar.transaction_date }}
+              </div>
+            </div>
+
+            <div class="md:text-right mt-4 md:mt-0">
+              <div>
+                Status
+                <span
+                  class="font-semibold"
+                  :class="
+                    bayar.status === 6 ? 'text-red-500' : 'text-yellow-500'
+                  "
+                  >{{ bayar.status_transaksi }}</span
+                >
+              </div>
+              <div class="font-medium text-green-700">
+                <span class="text-gray-800">Total Bayar</span> Rp.{{
+                  bayar.sub_total_price | currency
+                }}
+              </div>
+            </div>
+          </div>
+
+          <div v-for="p in bayar.transaction_detail" :key="p.id">
+            <card-pesanan
+              :title="p.products.product_name"
+              :batalkan="true"
+              :harga="p.products.product_price"
+              :pembayaran="false"
+              :id="bayar.id"
+              :noPesanan="bayar.transaction_code"
+              :nameImage="p.products.imageurl"
+              :status_payment="bayar.status_transaksi"
+            />
+          </div>
+
+          <div class="md:my-auto mt-4 flex justify-end">
+            <div
+              class="
+                py-1
+                px-8
+                border
+                text-sm
+                border-red-600
+                text-red-600
+                hover:text-white hover:bg-red-600
+                rounded
+                inline-block
+                cursor-pointer
+                mr-8
+              "
+              @click="confirmCancle(bayar.id, bayar.status_transaksi)"
+            >
+              Batalkan
+            </div>
+            <nuxt-link
+              :to="'/checkout/berhasil/' + bayar.id"
+              class="
+                py-1
+                px-8
+                rounded
+                bg-ungusuez
+                border border-ungusuez
+                text-white
+                hover:border-purple-700 hover:bg-purple-700
+              "
+            >
+              <span v-if="bayar.status == 0">Bayar</span>
+              <span v-if="bayar.status !== 0">Detail</span>
+            </nuxt-link>
+          </div>
         </div>
         <!-- endtesdata state produk -->
       </div>
@@ -253,6 +340,56 @@ export default {
       this.isKemasan = false
       this.isKiriman = false
       this.isSelesai = true
+    },
+    confirmCancle(id, status) {
+      console.log(status)
+      if (status === 'Canceled') {
+        this.$swal.fire({
+          icon: 'info',
+          title: 'Status transaksi dibatalkan',
+          text: 'Status transaksi sudah di batalkan, anda bisa melakukan pemesanan lagi',
+          confirmButtonText: `Ok`,
+        })
+
+        return
+      }
+      this.$swal
+        .fire({
+          title: 'Yakin batalkan pesanan',
+          showCancelButton: true,
+          confirmButtonText: `yakin`,
+        })
+        .then((result) => {
+          console.log(result)
+          console.log(result.dismiss)
+          // console.log(id)
+          if (result.isConfirmed) {
+            console.log(result.isConfirmed)
+            this.batalkan(id)
+          }
+        })
+    },
+
+    async batalkan(id) {
+      this.$store.commit('setLoading', true)
+      let response = await this.$axios
+        .post('/cancel/transactions', {
+          transaction_id: id,
+        })
+        .then((ress) => {
+          this.getData()
+
+          this.$swal({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Profile berhasil di update',
+            showConfirmButton: false,
+            timer: 1700,
+          })
+        })
+
+      this.$store.commit('setLoading', false)
     },
   },
 }

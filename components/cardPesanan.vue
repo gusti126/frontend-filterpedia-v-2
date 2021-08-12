@@ -1,15 +1,5 @@
 <template>
-  <div
-    class="
-      bg-white
-      md:shadow
-      border-b border-gray-300
-      md:border
-      p-3
-      mb-2
-      rounded
-    "
-  >
+  <div class="bg-white mb-5 rounded">
     <div class="flex">
       <div>
         <img :src="nameImage" :alt="nameImage" class="rounded w-36 md:w-24" />
@@ -27,66 +17,6 @@
             {{ namaPengirim }}
           </div>
         </div>
-        <div class="mx-auto" v-else>
-          <div class="font-medium text-gray-700 md:block hidden">
-            No pesanan ( {{ noPesanan }} )
-          </div>
-          <div class="text-sm text-green-500 my-1" v-if="pembayaran">
-            {{ status_payment }}
-          </div>
-          <div class="text-sm text-red-500 my-1" v-else>
-            {{ status_payment }}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="mt-6 flex justify-between md:justify-start">
-      <nuxt-link
-        :to="'/checkout/berhasil/' + id"
-        class="
-          text-sm
-          hover:bg-purple-600
-          bg-ungusuez
-          text-white
-          px-3
-          py-1
-          rounded
-        "
-        v-if="!hiddenCaraBayar"
-        >Cara bayar</nuxt-link
-      >
-      <nuxt-link
-        to="/"
-        class="
-          text-sm
-          hover:bg-ungusuez hover:text-white
-          text-ungusuez
-          py-1
-          ml-3
-          px-2
-          md:ml-3
-          rounded
-          border border-ungusuez
-        "
-        >Chat penjual</nuxt-link
-      >
-      <div
-        class="
-          text-sm
-          hover:text-white hover:bg-red-600
-          text-red-600
-          border border-red-600
-          px-2
-          py-1
-          ml-3
-          md:ml-3
-          rounded
-          cursor-pointer
-        "
-        @click="confirmHapus(id)"
-        v-if="batalkan"
-      >
-        Batalkan
       </div>
     </div>
   </div>
