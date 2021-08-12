@@ -44,10 +44,10 @@
                 focus:outline-none
                 font-medium
                 bg-white
-                text-gray-400
+                text-gray-600
               "
               placeholder="Cari Produk ..."
-              v-model="keyCari"
+              v-model="keyword"
               id="cari-nav"
             />
             <label for="cari-nav" class="my-auto">
@@ -207,6 +207,7 @@ export default {
       scrollPosition: null,
       navHindden: 200,
       keyCari: '',
+      keyword: '',
     }
   },
 

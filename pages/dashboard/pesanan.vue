@@ -51,6 +51,7 @@
             v-show="isBayaran"
           ></div>
         </div>
+        <!-- menu dikemas -->
         <div
           class="
             font-medium
@@ -62,12 +63,13 @@
           :class="{ 'text-blue-500': isKemasan }"
           @click="kemasan"
         >
-          di kemas(4)
+          di kemas({{ produk_dikemas.length }})
           <div
             class="mt-2 border border-blue-500 rounded-full"
             v-show="isKemasan"
           ></div>
         </div>
+        <!-- menu dikirim -->
         <div
           class="
             font-medium
@@ -85,6 +87,7 @@
             v-show="isKiriman"
           ></div>
         </div>
+        <!-- menu selesai -->
         <div
           class="
             font-medium
@@ -105,20 +108,6 @@
       </div>
 
       <!-- produk blum di bayar -->
-      <!-- <div class="" v-show="isBayaran">
-        <div v-for="bayar in this.$store.state.produk" :key="bayar.id">
-          <card-pesanan
-            :title="bayar.transaction_detail[0].products.product_name"
-            :batalkan="true"
-            :harga="bayar.transaction_detail[0].products.product_price"
-            :pembayaran="false"
-            :id="bayar.id"
-            :noPesanan="bayar.transaction_code"
-            :nameImage="bayar.transaction_detail[0].products.imageurl"
-            :status_payment="bayar.status_transaksi"
-          />
-        </div> -->
-
       <div class="" v-show="isBayaran">
         <div
           class="border border-gray-300 py-2 px-4 rounded mt-4"
@@ -212,38 +201,68 @@
       <!-- produk di kemas -->
       <div class="" v-show="isKemasan">
         <!-- data dikemas -->
-        <card-pesanan
-          title="Filter air botolan"
-          :harga="80000"
-          :batalkan="false"
-          :pembayaran="true"
-          noPesanan="200212123121"
-          nameImage="Rectangle 20.jpg"
-        />
-        <card-pesanan
-          title="Filter air botolan"
-          :harga="80000"
-          :batalkan="false"
-          :pembayaran="true"
-          noPesanan="200212123121"
-          nameImage="Rectangle 20-3.jpg"
-        />
-        <card-pesanan
-          title="Filter air botolan"
-          :harga="80000"
-          :batalkan="false"
-          :pembayaran="true"
-          noPesanan="200212123121"
-          nameImage="Rectangle 20-2.jpg"
-        />
-        <card-pesanan
-          title="Filter air botolan"
-          :harga="80000"
-          :batalkan="false"
-          :pembayaran="true"
-          noPesanan="200212123121"
-          nameImage="Rectangle 20-3.jpg"
-        />
+        <div
+          class="border border-gray-300 py-2 px-4 rounded mt-4"
+          v-for="kemas in produk_dikemas"
+          :key="kemas.id"
+          v-if="!loading"
+        >
+          <div class="md:flex justify-between mb-5">
+            <div>
+              <div>
+                Nomor Transaksi
+                <span class="font-semibold">{{ kemas.transaction_code }}</span>
+              </div>
+              <div class="text-gray-500 text-sm">
+                dipesan pada tanggal {{ kemas.transaction_date }}
+              </div>
+            </div>
+
+            <div class="md:text-right mt-4 md:mt-0">
+              <div>
+                Status
+                <span class="font-semibold text-gray-800">{{
+                  kemas.status_transaksi
+                }}</span>
+              </div>
+              <div class="font-medium text-green-700">
+                <span class="text-gray-800">Total Bayar</span> Rp.{{
+                  kemas.sub_total_price | currency
+                }}
+              </div>
+            </div>
+          </div>
+
+          <div v-for="p in kemas.transaction_detail" :key="p.id">
+            <card-pesanan
+              :title="p.products.product_name"
+              :batalkan="true"
+              :harga="p.products.product_price"
+              :pembayaran="false"
+              :id="kemas.id"
+              :noPesanan="kemas.transaction_code"
+              :nameImage="p.products.imageurl"
+              :status_payment="kemas.status_transaksi"
+            />
+          </div>
+
+          <div class="md:my-auto mt-4 flex justify-end">
+            <nuxt-link
+              :to="'/checkout/berhasil/' + kemas.id"
+              class="
+                py-1
+                px-8
+                rounded
+                bg-ungusuez
+                border border-ungusuez
+                text-white
+                hover:border-purple-700 hover:bg-purple-700
+              "
+            >
+              <span>Detail</span>
+            </nuxt-link>
+          </div>
+        </div>
         <!-- enddata dikemas -->
       </div>
       <!-- end produk di kemas -->
@@ -301,19 +320,37 @@ export default {
       isSelesai: false,
       riwayat_transaksi: [],
       transaction_riwayat: [],
+      produk_dikemas: [],
+      produk_dikirim: [],
     }
   },
 
   mounted() {
     this.historyTransaksi()
+    this.produkKemas()
+    this.produkKirim()
   },
   methods: {
     async historyTransaksi() {
       let data = await this.$axios.get('/transactions').then((ress) => {
         this.transaction_riwayat = ress.data.data
-        console.log(this.transaction_riwayat)
         this.$store.commit('setProduk', this.transaction_riwayat)
         this.loading = false
+      })
+    },
+
+    async produkKemas() {
+      let response = await this.$axios
+        .get('/data/transactions/pengemasan')
+        .then((ress) => {
+          this.produk_dikemas = ress.data.data
+        })
+    },
+
+    async produkKirim() {
+      await this.$axios.get('/data/transactions/pengiriman').then((ress) => {
+        this.produk_dikirim = ress.data.data
+        console.log(this.produk_dikirim)
       })
     },
 
