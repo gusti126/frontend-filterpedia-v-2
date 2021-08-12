@@ -377,7 +377,7 @@ export default {
           transaction_id: id,
         })
         .then((ress) => {
-          this.getData()
+          this.historyTransaksi()
 
           this.$swal({
             toast: true,

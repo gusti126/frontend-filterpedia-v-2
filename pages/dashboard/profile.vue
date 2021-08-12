@@ -259,6 +259,7 @@
 </template>
 
 <script>
+import companyVue from './company.vue'
 export default {
   layout: 'dashboard',
   head() {
@@ -320,6 +321,15 @@ export default {
           console.log('alamat in down')
           console.log(this.alamat)
         })
+        .catch((ress) => {
+          console.log(ress)
+          this.$store.commit('setLoading', false)
+          this.$swal({
+            title: 'Profile belum lengkap',
+            text: 'Silahkan lengkapi profile anda terlebih dahulu',
+          })
+          console.log('hello error')
+        })
       this.$store.commit('setLoading', false)
     },
     async getKota() {
@@ -331,10 +341,30 @@ export default {
           console.log('alamat in down')
           // console.log(this.alamat)
         })
-        .catch((ress) => console.log(ress))
+        .catch((ress) => {
+          console.log(ress)
+          this.$store.commit('setLoading', false)
+          console.log('hello error')
+        })
     },
 
     async updateHendle(file) {
+      if (
+        !this.name ||
+        !this.email ||
+        !this.phone ||
+        !this.alamat_user ||
+        !this.posCode ||
+        !this.kotaId_user ||
+        !this.provinsiId_user
+      ) {
+        this.$swal({
+          title: 'Profile belum lengkap',
+          text: 'Lengkapi terlebih dahulu',
+        })
+
+        return
+      }
       this.$store.commit('setLoading', true)
       let formData = new FormData()
       if (this.updateImage) {
