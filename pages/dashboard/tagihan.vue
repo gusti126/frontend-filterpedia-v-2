@@ -31,7 +31,7 @@
         class="border py-2 px-4 rounded mt-4"
         v-for="t in item"
         :key="t.id"
-        v-if="!loading"
+        v-if="t.status !== 6"
       >
         <div class="md:flex justify-between mb-4">
           <div>
@@ -111,6 +111,7 @@
             py-1
             rounded
           "
+          v-if="!loading"
           >Data Kosong</nuxt-link
         >
       </div>
