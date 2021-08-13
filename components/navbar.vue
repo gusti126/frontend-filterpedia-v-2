@@ -132,7 +132,7 @@
               </a>
             </div>
           </div>
-          <!--jika user belum login -->
+          <!--jika user belum login  -->
           <nuxt-link
             to="/login"
             class="
@@ -220,6 +220,25 @@ export default {
     },
     updateProfile(request) {
       console.log('hello ini dari navbar')
+    },
+
+    async cari() {
+      let data = await this.$axios
+        .get('/products/search/' + this.keyword)
+        .then((ress) => {
+          console.log(ress)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+  },
+
+  watch: {
+    keyword() {
+      if (this.keyword.length > 3) {
+        this.cari()
+      }
     },
   },
 }

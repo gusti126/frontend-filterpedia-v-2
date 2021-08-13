@@ -85,20 +85,22 @@
       </div>
       <!-- desktop view -->
       <div class="md:px-20 pt-6 md:block hidden" v-if="keranjang">
-        <div class="grid grid-cols-4 mb-8 text-gray-500">
+        <div class="grid grid-cols-5 mb-8 text-gray-500">
           <div>Image</div>
           <div>Nama</div>
           <div>Harga</div>
+          <div>Amount</div>
           <div>Action</div>
         </div>
         <div
-          class="grid grid-cols-4 mt-8"
+          class="grid grid-cols-5 mt-8"
           v-for="(b, index) in keranjang"
           :key="index"
         >
           <div>
             <img :src="b.products[0].imageurl" alt="" class="rounded w-32" />
           </div>
+
           <div class="text-lg mt-2">
             <nuxt-link to="productdetail" class="hover:text-blue-500">{{
               b.products[0].product_name
@@ -108,6 +110,7 @@
               <span class="line-through text-gray-400 ml-2">Rp.1000000</span>
             </div>
           </div>
+
           <div class="mt-4">
             <div class="text-green-600 font-medium">
               Rp.{{ b.products[0].product_price | currency }}
@@ -154,6 +157,11 @@
               </div>
             </div>
           </div>
+
+          <div class="mt-4">
+            <div>Rp.{{ b.total_price | currency }}</div>
+          </div>
+
           <div
             class="my-auto cursor-pointer flex text-red-600 rounded"
             @click="removeCart(b.id)"
@@ -386,6 +394,7 @@ export default {
       let cart = await this.$axios.$get('/cart').then((ress) => {
         this.$store.commit('setSubTotal', ress.harga_total)
         this.keranjang = ress.data
+        console.log(ress)
         this.load = false
       })
     },
