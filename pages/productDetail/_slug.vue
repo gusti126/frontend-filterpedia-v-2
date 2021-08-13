@@ -548,7 +548,7 @@ export default {
           icon: 'success',
           title: 'Berhasil masukan Keranjang',
           showConfirmButton: false,
-          timer: 1700,
+          timer: 2000,
         })
         this.$store.commit('setLoading', false)
       })

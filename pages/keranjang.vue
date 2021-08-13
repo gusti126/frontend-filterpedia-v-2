@@ -394,7 +394,8 @@ export default {
       let cart = await this.$axios.$get('/cart').then((ress) => {
         this.$store.commit('setSubTotal', ress.harga_total)
         this.keranjang = ress.data
-        console.log(ress)
+        this.$store.commit('setKeranjang', ress.data)
+        // console.log(ress)
         this.load = false
       })
     },
