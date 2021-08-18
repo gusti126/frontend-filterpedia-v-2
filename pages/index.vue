@@ -243,6 +243,7 @@ export default {
         loop: true,
         itemAnimation: true,
       },
+      produkCategori: [],
       tes: 'filterpedia kami menawarkan berbagai macam filter dan kartrid untuk memecahkan sejumlah masalah terkait air.',
       items: [],
     }

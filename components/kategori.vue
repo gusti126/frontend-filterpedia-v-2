@@ -4,56 +4,55 @@
       Kategori
     </div>
     <div class="hidden md:flex justify-between">
-      <div>
-        <div class="bg-gray-400 rounded-full h-20 w-20 mt-5 mx-auto"></div>
-        <div class="text-center mt-2">Kategori satu</div>
-      </div>
-      <div>
-        <div class="bg-gray-400 rounded-full h-20 w-20 mt-5 mx-auto"></div>
-        <div class="text-center mt-2">Kategori dua</div>
-      </div>
-      <div>
-        <div class="bg-gray-400 rounded-full h-20 w-20 mt-5 mx-auto"></div>
-        <div class="text-center mt-2">Kategori tiga</div>
-      </div>
-      <div>
-        <div class="bg-gray-400 rounded-full h-20 w-20 mt-5 mx-auto"></div>
-        <div class="text-center mt-2">Kategori empat</div>
-      </div>
-      <div>
-        <div class="bg-gray-400 rounded-full h-20 w-20 mt-5 mx-auto"></div>
-        <div class="text-center mt-2">Kategori lima</div>
-      </div>
-      <div>
-        <div class="bg-gray-400 rounded-full h-20 w-20 mt-5 mx-auto"></div>
-        <div class="text-center mt-2">Kategori enam</div>
-      </div>
-      <div>
-        <div class="bg-gray-400 rounded-full h-20 w-20 mt-5 mx-auto"></div>
-        <div class="text-center mt-2">Kategori tujuh</div>
+      <div v-for="kategori in produkKategori" :key="kategori.id">
+        <div class="mx-auto">
+          <img
+            :src="kategori.imageurl"
+            alt=""
+            class="rounded-full h-20 w-20 mt-5 object-cover mx-auto"
+          />
+        </div>
+        <div class="text-center mt-2">{{ kategori.category_name }}</div>
       </div>
     </div>
     <div class="md:hidden justify-between flex">
-      <div>
-        <div class="bg-gray-400 rounded-full h-11 w-11 mt-2 mx-auto"></div>
-        <div class="text-center font-normal text-xs">Kategori satu</div>
-      </div>
-      <div>
-        <div class="bg-gray-400 rounded-full h-11 w-11 mt-2 mx-auto"></div>
-        <div class="text-center font-normal text-xs">Kategori dua</div>
-      </div>
-      <div>
-        <div class="bg-gray-400 rounded-full h-11 w-11 mt-2 mx-auto"></div>
-        <div class="text-center font-normal text-xs">Kategori tiga</div>
-      </div>
-      <div>
-        <div class="bg-gray-400 rounded-full h-11 w-11 mt-2 mx-auto"></div>
-        <div class="text-center font-normal text-xs">Kategori empat</div>
-      </div>
-      <div>
-        <div class="bg-gray-400 rounded-full h-11 w-11 mt-2 mx-auto"></div>
-        <div class="text-center font-normal text-xs">lihat semua</div>
+      <div v-for="kategoriM in produkKategori" :key="kategoriM.id">
+        <div class="mt-2 mx-auto">
+          <img
+            :src="kategoriM.imageurl"
+            alt=""
+            class="rounded-full h-11 w-11 mt-5 object-cover mx-auto"
+          />
+        </div>
+        <div class="text-center font-normal text-xs">
+          {{ kategoriM.category_name }}
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      produkKategori: [],
+    }
+  },
+
+  mounted() {
+    this.getData()
+  },
+
+  methods: {
+    async getData() {
+      let kategoriProdukAPi = await this.$axios
+        .$get('/product-category')
+        .then((ress) => {
+          this.produkKategori = ress.data
+          console.log(this.produkKategori)
+        })
+    },
+  },
+}
+</script>

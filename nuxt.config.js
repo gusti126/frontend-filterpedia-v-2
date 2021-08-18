@@ -202,8 +202,8 @@ export default {
   },
 
   googleAnalytics: {
-    id: '202224250',
-    dev: false,
+    id: 'G-13VBER8ZB5',
+    // dev: false,
   },
 
   sitemap: {
