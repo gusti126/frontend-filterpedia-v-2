@@ -5,14 +5,24 @@
     </div>
     <div class="hidden md:flex justify-between">
       <div v-for="kategori in produkKategori" :key="kategori.id">
-        <div class="mx-auto">
-          <img
-            :src="kategori.imageurl"
-            alt=""
-            class="rounded-full h-20 w-20 mt-5 object-cover mx-auto"
-          />
-        </div>
-        <div class="text-center mt-2">{{ kategori.category_name }}</div>
+        <nuxt-link to="">
+          <div class="mx-auto">
+            <img
+              :src="kategori.imageurl"
+              alt=""
+              class="
+                rounded-full
+                h-20
+                w-20
+                mt-5
+                object-cover
+                mx-auto
+                hover:shadow-2xl
+              "
+            />
+          </div>
+          <div class="text-center mt-2">{{ kategori.category_name }}</div>
+        </nuxt-link>
       </div>
     </div>
     <div class="md:hidden justify-between flex">

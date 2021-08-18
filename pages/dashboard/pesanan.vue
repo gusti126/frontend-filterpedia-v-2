@@ -81,7 +81,7 @@
           :class="{ 'text-blue-500': isKiriman }"
           @click="kiriman"
         >
-          di kirim(2)
+          di kirim({{ produk_dikirim.length }})
           <div
             class="mt-2 border border-blue-500 rounded-full"
             v-show="isKiriman"
@@ -269,32 +269,149 @@
 
       <!-- produk di kirim -->
       <div class="" v-show="isKiriman">
-        <!-- data dikemas -->
-        <card-pesanan
-          title="Filter air botolan"
-          :hiddenCaraBayar="true"
-          namaPengirim="Joni Ladusta"
-          :dikirim="true"
-          :harga="80000"
-          :batalkan="false"
-          :pembayaran="true"
-          noPesanan="200212123121"
-          nameImage="Rectangle 20.jpg"
-        />
-        <card-pesanan
-          title="Filter air botolan"
-          :hiddenCaraBayar="true"
-          namaPengirim="Joni Ladusta"
-          :dikirim="true"
-          :harga="80000"
-          :batalkan="false"
-          :pembayaran="true"
-          noPesanan="200212123121"
-          nameImage="Rectangle 20-3.jpg"
-        />
-        <!-- enddata dikemas -->
+        <!-- data dikirim -->
+        <div
+          class="border border-gray-300 py-2 px-4 rounded mt-4"
+          v-for="bayar in produk_dikirim"
+          :key="bayar.id"
+          v-if="!loading"
+        >
+          <div class="md:flex justify-between mb-5">
+            <div>
+              <div>
+                Nomor Transaksi
+                <span class="font-semibold">{{ bayar.transaction_code }}</span>
+              </div>
+              <div class="text-gray-500 text-sm">
+                dipesan pada tanggal {{ bayar.transaction_date }}
+              </div>
+            </div>
+
+            <div class="md:text-right mt-4 md:mt-0">
+              <div>
+                Status
+                <span
+                  class="font-semibold"
+                  :class="
+                    bayar.status === 6 ? 'text-red-500' : 'text-yellow-500'
+                  "
+                  >{{ bayar.status_transaksi }}</span
+                >
+              </div>
+              <div class="font-semibold">
+                <span class="text-gray-800">dikirim oleh</span>
+                {{ bayar.shipping[0].user_data.name }}
+              </div>
+            </div>
+          </div>
+
+          <div v-for="p in bayar.transaction_detail" :key="p.id">
+            <card-pesanan
+              :title="p.products.product_name"
+              :batalkan="true"
+              :harga="p.products.product_price"
+              :pembayaran="false"
+              :id="bayar.id"
+              :noPesanan="bayar.transaction_code"
+              :nameImage="p.products.imageurl"
+              :status_payment="bayar.status_transaksi"
+            />
+          </div>
+
+          <div class="md:my-auto mt-4 flex justify-between">
+            <nuxt-link
+              :to="'/checkout/berhasil/' + bayar.id"
+              class="
+                py-1
+                px-8
+                rounded
+                bg-ungusuez
+                border border-ungusuez
+                text-white
+                hover:border-purple-700 hover:bg-purple-700
+              "
+            >
+              <span>Detail</span>
+            </nuxt-link>
+          </div>
+        </div>
+        <!-- enddata dikirim -->
       </div>
       <!-- end produk di kirim -->
+
+      <!-- produk di selesai -->
+      <div class="" v-show="isSelesai">
+        <!-- data selesai -->
+        <div
+          class="border border-gray-300 py-2 px-4 rounded mt-4"
+          v-for="selesai in produk_selesai"
+          :key="selesai.id"
+          v-if="!loading"
+        >
+          <div class="md:flex justify-between mb-5">
+            <div>
+              <div>
+                Nomor Transaksi
+                <span class="font-semibold">{{
+                  selesai.transaction_code
+                }}</span>
+              </div>
+              <div class="text-gray-500 text-sm">
+                dipesan pada tanggal {{ selesai.transaction_date }}
+              </div>
+            </div>
+
+            <div class="md:text-right mt-4 md:mt-0">
+              <div>
+                Status
+                <span class="font-semibold text-gray-800">{{
+                  selesai.status_transaksi
+                }}</span>
+              </div>
+              <div class="font-medium text-green-700">
+                <span class="text-gray-800">Total Bayar</span> Rp.{{
+                  selesai.sub_total_price | currency
+                }}
+              </div>
+            </div>
+          </div>
+
+          <div v-for="p in selesai.transaction_detail" :key="p.id">
+            <card-pesanan
+              :title="p.products.product_name"
+              :batalkan="true"
+              :harga="p.products.product_price"
+              :pembayaran="false"
+              :id="selesai.id"
+              :noPesanan="selesai.transaction_code"
+              :nameImage="p.products.imageurl"
+              :status_payment="selesai.status_transaksi"
+            />
+          </div>
+
+          <div class="md:my-auto mt-4 flex justify-end">
+            <nuxt-link
+              :to="'/checkout/berhasil/' + selesai.id"
+              class="
+                py-1
+                px-8
+                rounded
+                bg-ungusuez
+                border border-ungusuez
+                text-white
+                hover:border-purple-700 hover:bg-purple-700
+              "
+            >
+              <span>Beri Ulasan</span>
+            </nuxt-link>
+          </div>
+        </div>
+        <div v-if="produk_selesai.length == 0" class="text-center">
+          <div class="font-medium">Data Kosong</div>
+        </div>
+        <!-- enddata selesai -->
+      </div>
+      <!-- end produk selesai -->
     </div>
     <!-- endcontent -->
   </div>
@@ -322,6 +439,7 @@ export default {
       transaction_riwayat: [],
       produk_dikemas: [],
       produk_dikirim: [],
+      produk_selesai: [],
     }
   },
 
@@ -329,6 +447,7 @@ export default {
     this.historyTransaksi()
     this.produkKemas()
     this.produkKirim()
+    this.produkSelesai()
   },
   methods: {
     async historyTransaksi() {
@@ -350,7 +469,13 @@ export default {
     async produkKirim() {
       await this.$axios.get('/data/transactions/pengiriman').then((ress) => {
         this.produk_dikirim = ress.data.data
-        console.log(this.produk_dikirim)
+      })
+    },
+
+    async produkSelesai() {
+      await this.$axios.get('/data/transactions/selesai').then((ress) => {
+        this.produk_selesai = ress.data.data
+        console.log(this.produk_selesai.length)
       })
     },
 
