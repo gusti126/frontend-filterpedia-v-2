@@ -248,12 +248,22 @@ export default {
       items: [],
     }
   },
+
   mounted() {
     this.fetchSomething()
     console.log(this.tes.length)
   },
+  async tagG() {},
   methods: {
     async fetchSomething() {
+      this.$gtag.event('toggleDark', {
+        event_category: 'toggleTheme',
+        event_label: 'dark',
+      })
+      this.$ga.page('/')
+
+      this.$ga.event('category', 'click', 'label', 123)
+
       const data = await this.$axios.$get('/products').then((ress) => {
         this.items = ress.data
         console.log(this.items[0].product_name)

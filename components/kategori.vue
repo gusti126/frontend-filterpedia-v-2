@@ -3,8 +3,22 @@
     <div class="font-semibold text-base md:text-xl mt-4 text-gray-800">
       Kategori
     </div>
+
+    <div v-show="loading">
+      <div class="animate-pulse flex justify-between mt-2">
+        <div v-for="p of 5">
+          <div class="rounded-full bg-blue-400 h-16 w-16 mx-auto"></div>
+          <div class="bg-blue-400 h-4 rounded-full mt-2 w-full"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="hidden md:flex justify-between">
-      <div v-for="kategori in produkKategori" :key="kategori.id">
+      <div
+        v-for="kategori in produkKategori"
+        :key="kategori.id"
+        v-show="!loading"
+      >
         <nuxt-link to="">
           <div class="mx-auto">
             <img
@@ -47,6 +61,7 @@ export default {
   data() {
     return {
       produkKategori: [],
+      loading: true,
     }
   },
 
@@ -60,7 +75,7 @@ export default {
         .$get('/product-category')
         .then((ress) => {
           this.produkKategori = ress.data
-          console.log(this.produkKategori)
+          this.loading = false
         })
     },
   },
