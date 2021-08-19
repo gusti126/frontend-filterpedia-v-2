@@ -33,6 +33,7 @@
       class="bg-white w-full min-h-full pt-3 md:p-6 rounded-xl"
       v-if="!loading"
     >
+      <!-- menu -->
       <div class="flex justify-around mb-6">
         <div
           class="
@@ -45,7 +46,9 @@
           @click="bayaran"
           :class="{ 'text-blue-500': isBayaran }"
         >
-          Semua({{ this.$store.state.produk.length }})
+          menunggu<span v-if="this.$store.state.produk.length > 0"
+            >({{ this.$store.state.produk.length }})</span
+          >
           <div
             class="mt-2 border border-blue-500 rounded-full"
             v-show="isBayaran"
@@ -63,7 +66,10 @@
           :class="{ 'text-blue-500': isKemasan }"
           @click="kemasan"
         >
-          di kemas({{ produk_dikemas.length }})
+          di kemas
+          <span v-if="produk_dikemas.length > 0"
+            >({{ produk_dikemas.length }})</span
+          >
           <div
             class="mt-2 border border-blue-500 rounded-full"
             v-show="isKemasan"
@@ -113,90 +119,97 @@
 
       <!-- produk blum di bayar -->
       <div class="" v-show="isBayaran">
-        <div
-          class="border border-gray-300 py-2 px-4 rounded mt-4"
-          v-for="bayar in this.$store.state.produk"
-          :key="bayar.id"
-          v-if="!loading"
-        >
-          <div class="md:flex justify-between mb-5">
-            <div>
+        <div v-if="this.$store.state.produk.length > 0">
+          <div
+            class="border border-gray-300 py-2 px-4 rounded mt-4"
+            v-for="bayar in this.$store.state.produk"
+            :key="bayar.id"
+            v-if="!loading"
+          >
+            <div class="md:flex justify-between mb-5">
               <div>
-                Nomor Transaksi
-                <span class="font-semibold">{{ bayar.transaction_code }}</span>
+                <div>
+                  Nomor Transaksi
+                  <span class="font-semibold">{{
+                    bayar.transaction_code
+                  }}</span>
+                </div>
+                <div class="text-gray-500 text-sm">
+                  dipesan pada tanggal {{ bayar.transaction_date }}
+                </div>
               </div>
-              <div class="text-gray-500 text-sm">
-                dipesan pada tanggal {{ bayar.transaction_date }}
+
+              <div class="md:text-right mt-4 md:mt-0">
+                <div>
+                  Status
+                  <span
+                    class="font-semibold"
+                    :class="
+                      bayar.status === 6 ? 'text-red-500' : 'text-yellow-500'
+                    "
+                    >{{ bayar.status_transaksi }}</span
+                  >
+                </div>
+                <div class="font-medium text-green-700">
+                  <span class="text-gray-800">Total Bayar</span> Rp.{{
+                    bayar.sub_total_price | currency
+                  }}
+                </div>
               </div>
             </div>
 
-            <div class="md:text-right mt-4 md:mt-0">
-              <div>
-                Status
-                <span
-                  class="font-semibold"
-                  :class="
-                    bayar.status === 6 ? 'text-red-500' : 'text-yellow-500'
-                  "
-                  >{{ bayar.status_transaksi }}</span
-                >
+            <div v-for="p in bayar.transaction_detail" :key="p.id">
+              <card-pesanan
+                :title="p.products.product_name"
+                :batalkan="true"
+                :harga="p.products.product_price"
+                :pembayaran="false"
+                :id="bayar.id"
+                :noPesanan="bayar.transaction_code"
+                :nameImage="p.products.imageurl"
+                :status_payment="bayar.status_transaksi"
+              />
+            </div>
+
+            <div class="md:my-auto mt-4 flex justify-end">
+              <div
+                class="
+                  py-1
+                  px-8
+                  border
+                  text-sm
+                  border-red-600
+                  text-red-600
+                  hover:text-white hover:bg-red-600
+                  rounded
+                  inline-block
+                  cursor-pointer
+                  mr-8
+                "
+                @click="confirmCancle(bayar.id, bayar.status_transaksi)"
+              >
+                Batalkan
               </div>
-              <div class="font-medium text-green-700">
-                <span class="text-gray-800">Total Bayar</span> Rp.{{
-                  bayar.sub_total_price | currency
-                }}
-              </div>
+              <nuxt-link
+                :to="'/checkout/berhasil/' + bayar.id"
+                class="
+                  py-1
+                  px-8
+                  rounded
+                  bg-ungusuez
+                  border border-ungusuez
+                  text-white
+                  hover:border-purple-700 hover:bg-purple-700
+                "
+              >
+                <span v-if="bayar.status == 0">Bayar</span>
+                <span v-if="bayar.status !== 0">Detail</span>
+              </nuxt-link>
             </div>
           </div>
-
-          <div v-for="p in bayar.transaction_detail" :key="p.id">
-            <card-pesanan
-              :title="p.products.product_name"
-              :batalkan="true"
-              :harga="p.products.product_price"
-              :pembayaran="false"
-              :id="bayar.id"
-              :noPesanan="bayar.transaction_code"
-              :nameImage="p.products.imageurl"
-              :status_payment="bayar.status_transaksi"
-            />
-          </div>
-
-          <div class="md:my-auto mt-4 flex justify-end">
-            <div
-              class="
-                py-1
-                px-8
-                border
-                text-sm
-                border-red-600
-                text-red-600
-                hover:text-white hover:bg-red-600
-                rounded
-                inline-block
-                cursor-pointer
-                mr-8
-              "
-              @click="confirmCancle(bayar.id, bayar.status_transaksi)"
-            >
-              Batalkan
-            </div>
-            <nuxt-link
-              :to="'/checkout/berhasil/' + bayar.id"
-              class="
-                py-1
-                px-8
-                rounded
-                bg-ungusuez
-                border border-ungusuez
-                text-white
-                hover:border-purple-700 hover:bg-purple-700
-              "
-            >
-              <span v-if="bayar.status == 0">Bayar</span>
-              <span v-if="bayar.status !== 0">Detail</span>
-            </nuxt-link>
-          </div>
+        </div>
+        <div v-else>
+          <div class="font-medium text-center">Data Kosong</div>
         </div>
         <!-- endtesdata state produk -->
       </div>
@@ -205,67 +218,74 @@
       <!-- produk di kemas -->
       <div class="" v-show="isKemasan">
         <!-- data dikemas -->
-        <div
-          class="border border-gray-300 py-2 px-4 rounded mt-4"
-          v-for="kemas in produk_dikemas"
-          :key="kemas.id"
-          v-if="!loading"
-        >
-          <div class="md:flex justify-between mb-5">
-            <div>
+        <div v-if="produk_dikemas.length > 0">
+          <div
+            class="border border-gray-300 py-2 px-4 rounded mt-4"
+            v-for="kemas in produk_dikemas"
+            :key="kemas.id"
+            v-if="!loading"
+          >
+            <div class="md:flex justify-between mb-5">
               <div>
-                Nomor Transaksi
-                <span class="font-semibold">{{ kemas.transaction_code }}</span>
+                <div>
+                  Nomor Transaksi
+                  <span class="font-semibold">{{
+                    kemas.transaction_code
+                  }}</span>
+                </div>
+                <div class="text-gray-500 text-sm">
+                  dipesan pada tanggal {{ kemas.transaction_date }}
+                </div>
               </div>
-              <div class="text-gray-500 text-sm">
-                dipesan pada tanggal {{ kemas.transaction_date }}
+
+              <div class="md:text-right mt-4 md:mt-0">
+                <div>
+                  Status
+                  <span class="font-semibold text-gray-800">{{
+                    kemas.status_transaksi
+                  }}</span>
+                </div>
+                <div class="font-medium text-green-700">
+                  <span class="text-gray-800">Total Bayar</span> Rp.{{
+                    kemas.sub_total_price | currency
+                  }}
+                </div>
               </div>
             </div>
 
-            <div class="md:text-right mt-4 md:mt-0">
-              <div>
-                Status
-                <span class="font-semibold text-gray-800">{{
-                  kemas.status_transaksi
-                }}</span>
-              </div>
-              <div class="font-medium text-green-700">
-                <span class="text-gray-800">Total Bayar</span> Rp.{{
-                  kemas.sub_total_price | currency
-                }}
-              </div>
+            <div v-for="p in kemas.transaction_detail" :key="p.id">
+              <card-pesanan
+                :title="p.products.product_name"
+                :batalkan="true"
+                :harga="p.products.product_price"
+                :pembayaran="false"
+                :id="kemas.id"
+                :noPesanan="kemas.transaction_code"
+                :nameImage="p.products.imageurl"
+                :status_payment="kemas.status_transaksi"
+              />
+            </div>
+
+            <div class="md:my-auto mt-4 flex justify-end">
+              <nuxt-link
+                :to="'/checkout/berhasil/' + kemas.id"
+                class="
+                  py-1
+                  px-8
+                  rounded
+                  bg-ungusuez
+                  border border-ungusuez
+                  text-white
+                  hover:border-purple-700 hover:bg-purple-700
+                "
+              >
+                <span>Detail</span>
+              </nuxt-link>
             </div>
           </div>
-
-          <div v-for="p in kemas.transaction_detail" :key="p.id">
-            <card-pesanan
-              :title="p.products.product_name"
-              :batalkan="true"
-              :harga="p.products.product_price"
-              :pembayaran="false"
-              :id="kemas.id"
-              :noPesanan="kemas.transaction_code"
-              :nameImage="p.products.imageurl"
-              :status_payment="kemas.status_transaksi"
-            />
-          </div>
-
-          <div class="md:my-auto mt-4 flex justify-end">
-            <nuxt-link
-              :to="'/checkout/berhasil/' + kemas.id"
-              class="
-                py-1
-                px-8
-                rounded
-                bg-ungusuez
-                border border-ungusuez
-                text-white
-                hover:border-purple-700 hover:bg-purple-700
-              "
-            >
-              <span>Detail</span>
-            </nuxt-link>
-          </div>
+        </div>
+        <div v-else>
+          <div class="font-medium text-center">Data Kosong</div>
         </div>
         <!-- enddata dikemas -->
       </div>
@@ -274,70 +294,77 @@
       <!-- produk di kirim -->
       <div class="" v-show="isKiriman">
         <!-- data dikirim -->
-        <div
-          class="border border-gray-300 py-2 px-4 rounded mt-4"
-          v-for="bayar in produk_dikirim"
-          :key="bayar.id"
-          v-if="!loading"
-        >
-          <div class="md:flex justify-between mb-5">
-            <div>
+        <div v-if="produk_dikirim.length > 0">
+          <div
+            class="border border-gray-300 py-2 px-4 rounded mt-4"
+            v-for="bayar in produk_dikirim"
+            :key="bayar.id"
+            v-if="!loading"
+          >
+            <div class="md:flex justify-between mb-5">
               <div>
-                Nomor Transaksi
-                <span class="font-semibold">{{ bayar.transaction_code }}</span>
+                <div>
+                  Nomor Transaksi
+                  <span class="font-semibold">{{
+                    bayar.transaction_code
+                  }}</span>
+                </div>
+                <div class="text-gray-500 text-sm">
+                  dipesan pada tanggal {{ bayar.transaction_date }}
+                </div>
               </div>
-              <div class="text-gray-500 text-sm">
-                dipesan pada tanggal {{ bayar.transaction_date }}
+
+              <div class="md:text-right mt-4 md:mt-0">
+                <div>
+                  Status
+                  <span
+                    class="font-semibold"
+                    :class="
+                      bayar.status === 6 ? 'text-red-500' : 'text-yellow-500'
+                    "
+                    >{{ bayar.status_transaksi }}</span
+                  >
+                </div>
+                <div class="font-semibold">
+                  <span class="text-gray-800">dikirim oleh</span>
+                  {{ bayar.shipping[0].user_data.name }}
+                </div>
               </div>
             </div>
 
-            <div class="md:text-right mt-4 md:mt-0">
-              <div>
-                Status
-                <span
-                  class="font-semibold"
-                  :class="
-                    bayar.status === 6 ? 'text-red-500' : 'text-yellow-500'
-                  "
-                  >{{ bayar.status_transaksi }}</span
-                >
-              </div>
-              <div class="font-semibold">
-                <span class="text-gray-800">dikirim oleh</span>
-                {{ bayar.shipping[0].user_data.name }}
-              </div>
+            <div v-for="p in bayar.transaction_detail" :key="p.id">
+              <card-pesanan
+                :title="p.products.product_name"
+                :batalkan="true"
+                :harga="p.products.product_price"
+                :pembayaran="false"
+                :id="bayar.id"
+                :noPesanan="bayar.transaction_code"
+                :nameImage="p.products.imageurl"
+                :status_payment="bayar.status_transaksi"
+              />
+            </div>
+
+            <div class="md:my-auto mt-4 flex justify-end">
+              <nuxt-link
+                :to="'/checkout/berhasil/' + bayar.id"
+                class="
+                  py-1
+                  px-8
+                  rounded
+                  bg-ungusuez
+                  border border-ungusuez
+                  text-white
+                  hover:border-purple-700 hover:bg-purple-700
+                "
+              >
+                <span>Detail</span>
+              </nuxt-link>
             </div>
           </div>
-
-          <div v-for="p in bayar.transaction_detail" :key="p.id">
-            <card-pesanan
-              :title="p.products.product_name"
-              :batalkan="true"
-              :harga="p.products.product_price"
-              :pembayaran="false"
-              :id="bayar.id"
-              :noPesanan="bayar.transaction_code"
-              :nameImage="p.products.imageurl"
-              :status_payment="bayar.status_transaksi"
-            />
-          </div>
-
-          <div class="md:my-auto mt-4 flex justify-end">
-            <nuxt-link
-              :to="'/checkout/berhasil/' + bayar.id"
-              class="
-                py-1
-                px-8
-                rounded
-                bg-ungusuez
-                border border-ungusuez
-                text-white
-                hover:border-purple-700 hover:bg-purple-700
-              "
-            >
-              <span>Detail</span>
-            </nuxt-link>
-          </div>
+        </div>
+        <div v-else>
+          <div class="font-medium text-center">Data Kosong</div>
         </div>
         <!-- enddata dikirim -->
       </div>
@@ -507,10 +534,10 @@ export default {
       // loading skeleton
       loading: true,
 
-      isBayaran: false,
+      isBayaran: true,
       isKemasan: false,
       isKiriman: false,
-      isSelesai: true,
+      isSelesai: false,
       riwayat_transaksi: [],
       transaction_riwayat: [],
       produk_dikemas: [],
@@ -535,7 +562,6 @@ export default {
       let data = await this.$axios.get('/transactions').then((ress) => {
         this.transaction_riwayat = ress.data.data
         this.$store.commit('setProduk', this.transaction_riwayat)
-        this.loading = false
       })
     },
 
@@ -544,6 +570,7 @@ export default {
         .get('/data/transactions/pengemasan')
         .then((ress) => {
           this.produk_dikemas = ress.data.data
+          this.loading = false
         })
     },
 
@@ -556,7 +583,6 @@ export default {
     async produkSelesai() {
       await this.$axios.get('/data/transactions/selesai').then((ress) => {
         this.produk_selesai = ress.data.data
-        console.log(this.produk_selesai)
       })
     },
 
@@ -569,7 +595,6 @@ export default {
           detail_review: this.ulasan.detail_review,
         })
         .then((ress) => {
-          console.log(ress)
           this.produkSelesai()
           this.ulasan.transaction_code = ''
           this.$store.commit('setLoading', false)
