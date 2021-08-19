@@ -81,7 +81,9 @@
           :class="{ 'text-blue-500': isKiriman }"
           @click="kiriman"
         >
-          di kirim({{ produk_dikirim.length }})
+          di kirim<span v-if="produk_dikirim.length > 0"
+            >({{ produk_dikirim.length }})</span
+          >
           <div
             class="mt-2 border border-blue-500 rounded-full"
             v-show="isKiriman"
@@ -99,7 +101,9 @@
           :class="{ 'text-blue-500': isSelesai }"
           @click="selesai"
         >
-          Selesai
+          Selesai<span v-if="produk_selesai.length > 0"
+            >({{ produk_selesai.length }})</span
+          >
           <div
             class="mt-2 border border-blue-500 rounded-full"
             v-show="isSelesai"
@@ -318,7 +322,7 @@
             />
           </div>
 
-          <div class="md:my-auto mt-4 flex justify-between">
+          <div class="md:my-auto mt-4 flex justify-end">
             <nuxt-link
               :to="'/checkout/berhasil/' + bayar.id"
               class="
@@ -389,23 +393,91 @@
             />
           </div>
 
-          <div class="md:my-auto mt-4 flex justify-end">
-            <nuxt-link
-              :to="'/checkout/berhasil/' + selesai.id"
-              class="
-                py-1
-                px-8
-                rounded
-                bg-ungusuez
-                border border-ungusuez
-                text-white
-                hover:border-purple-700 hover:bg-purple-700
-              "
-            >
-              <span>Beri Ulasan</span>
-            </nuxt-link>
+          <!-- rating -->
+          <div v-if="ulasan.transaction_code === selesai.transaction_code">
+            <div class="text-center">
+              <StarRating
+                v-model="ulasan.stars"
+                :star-size="25"
+                :inline="true"
+                class="text-center mx-auto justify-items-center"
+              >
+              </StarRating>
+            </div>
+            <div class="text-gray-700">Berikan ulasan anda</div>
+            <div>
+              <textarea
+                v-model="ulasan.detail_review"
+                class="border bg-gray-100 rounded w-full p-2 my-2"
+                placeholder="ketik pesan ..."
+              ></textarea>
+            </div>
           </div>
+          <!-- endrating -->
+
+          <div v-if="selesai.product_review === null">
+            <div
+              class="md:my-auto mt-4 flex justify-end"
+              v-if="ulasan.transaction_code !== selesai.transaction_code"
+            >
+              <div
+                class="
+                  py-1
+                  px-8
+                  rounded
+                  bg-ungusuez
+                  border border-ungusuez
+                  text-white
+                  hover:border-purple-700 hover:bg-purple-700
+                  cursor-pointer
+                "
+                @click="showFromUlasan(selesai.transaction_code)"
+              >
+                <span>Beri Ulasan</span>
+              </div>
+            </div>
+            <div class="md:my-auto mt-4 flex" v-else>
+              <div
+                class="
+                  py-1
+                  px-8
+                  rounded
+                  bg-ungusuez
+                  border border-ungusuez
+                  text-white
+                  hover:border-purple-700 hover:bg-purple-700
+                  cursor-pointer
+                "
+                @click="hendleSendReview(selesai.id)"
+              >
+                <span>Kirim Ulasan</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- data reviews  -->
+          <div class="" v-if="selesai.product_review !== null">
+            <div class="text-gray-800 text-sm mt-2 font-medium">
+              Ulasan saya
+            </div>
+            <div class="text-left">
+              <StarRating
+                :rating="selesai.product_review.stars"
+                :star-size="13"
+                :inline="true"
+                class="text-center mx-auto justify-items-center"
+                :read-only="true"
+                :show-rating="false"
+              >
+              </StarRating>
+            </div>
+            <div class="text-xs text-gray-500 mt-2">
+              {{ selesai.product_review.detail_review }}
+            </div>
+          </div>
+          <!-- enddata reviews  -->
         </div>
+
         <div v-if="produk_selesai.length == 0" class="text-center">
           <div class="font-medium">Data Kosong</div>
         </div>
@@ -418,7 +490,11 @@
 </template>
 
 <script>
+import StarRating from 'vue-star-rating'
 export default {
+  components: {
+    StarRating,
+  },
   layout: 'dashboard',
   middleware: 'auth',
   head() {
@@ -431,15 +507,20 @@ export default {
       // loading skeleton
       loading: true,
 
-      isBayaran: true,
+      isBayaran: false,
       isKemasan: false,
       isKiriman: false,
-      isSelesai: false,
+      isSelesai: true,
       riwayat_transaksi: [],
       transaction_riwayat: [],
       produk_dikemas: [],
       produk_dikirim: [],
       produk_selesai: [],
+      ulasan: {
+        transaction_code: '', //untuk menjadikan primary saat memberi ulasan
+        stars: 1,
+        detail_review: '',
+      },
     }
   },
 
@@ -475,8 +556,36 @@ export default {
     async produkSelesai() {
       await this.$axios.get('/data/transactions/selesai').then((ress) => {
         this.produk_selesai = ress.data.data
-        console.log(this.produk_selesai.length)
+        console.log(this.produk_selesai)
       })
+    },
+
+    async hendleSendReview(id) {
+      this.$store.commit('setLoading', true)
+      let data = await this.$axios
+        .post('/review/transaction', {
+          transaction_id: id,
+          stars: this.ulasan.stars,
+          detail_review: this.ulasan.detail_review,
+        })
+        .then((ress) => {
+          console.log(ress)
+          this.produkSelesai()
+          this.ulasan.transaction_code = ''
+          this.$store.commit('setLoading', false)
+          this.$swal({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Berhasil kirim ulasan.',
+            showConfirmButton: false,
+            timer: 2000,
+          })
+        })
+    },
+
+    showFromUlasan(code) {
+      this.ulasan.transaction_code = code
     },
 
     bayaran() {
