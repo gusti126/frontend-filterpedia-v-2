@@ -577,6 +577,7 @@ export default {
     async produkKirim() {
       await this.$axios.get('/data/transactions/pengiriman').then((ress) => {
         this.produk_dikirim = ress.data.data
+        console.log(this.produk_dikirim)
       })
     },
 

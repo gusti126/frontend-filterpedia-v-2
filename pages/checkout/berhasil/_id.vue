@@ -82,6 +82,7 @@
               v-if="imgUrl.length > 4"
             />
           </div>
+
           <!-- jika status pembayaran unpaid -->
           <div class="md:flex justify-center" v-if="item.status === 0">
             <nuxt-link
@@ -153,7 +154,8 @@
               />
             </div>
           </div>
-          <!-- jika status pembayaran  -->
+
+          <!-- jika status proses verifikasi  -->
           <div class="md:flex justify-center" v-if="item.status === 2">
             <div>
               <img
@@ -170,6 +172,58 @@
                 Kamu sudah mengkonfirmasi bukti pembayaran selanjutnya akan
                 admin proses. <br />
                 ini tidak memakan waktu lama <br />
+                <div class="text-gray-600 mb-3">Punya pertanyaan ?</div>
+                <nuxt-link
+                  to="#"
+                  class="px-2 py-1 rounded bg-blue-700 text-white"
+                >
+                  Hubungi Admin
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+
+          <!-- jika pesanan di kemas -->
+          <div class="md:flex justify-center" v-if="item.status === 3">
+            <div class="my-auto">
+              <img
+                src="~/assets/kemasan.png"
+                alt=""
+                class="w-44 md:mr-6 mx-auto"
+              />
+            </div>
+            <div class="my-auto">
+              <div class="font-semibold text-xl mt-2 text-center md:text-left">
+                Status {{ item.status_transaksi }}
+              </div>
+              <div class="md:block hidden">
+                Pesanan sedang kami kemas untuk di kirim
+                <div class="text-gray-600 mb-3">Punya pertanyaan ?</div>
+                <nuxt-link
+                  to="#"
+                  class="px-2 py-1 rounded bg-blue-700 text-white"
+                >
+                  Hubungi Admin
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+
+          <!-- jika status pesanan sedang di kirim -->
+          <div class="md:flex justify-center" v-if="item.status === 4">
+            <div class="my-auto">
+              <img
+                src="~/assets/shipping.png"
+                alt=""
+                class="w-44 md:mr-6 mx-auto"
+              />
+            </div>
+            <div class="my-auto">
+              <div class="font-semibold text-xl text-center md:text-left">
+                Status {{ item.status_transaksi }}
+              </div>
+              <div class="md:block hidden">
+                Pesanan anda sedang di perjalanan dan akan segara sampai
                 <div class="text-gray-600 mb-3">Punya pertanyaan ?</div>
                 <nuxt-link
                   to="#"
