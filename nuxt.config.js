@@ -164,7 +164,8 @@ export default {
     baseUrl: 'https://filterpedia.co.id/#/',
     name: 'Filterpedia Indonesia',
     title: 'Filterpedia Water Treatment Indonesia',
-    description: 'Filterpedia Water Treatment Indonesia Deskripsi',
+    description:
+      'Filterpedia Water Treatment Indonesia Deskripsi in nuxt.config',
     canonical: 'auto',
     isForcedTrailingSlash: false,
     url: 'https://filterpedia.co.id/#/',

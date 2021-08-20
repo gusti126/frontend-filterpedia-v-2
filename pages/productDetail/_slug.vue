@@ -412,10 +412,11 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 export default {
   head: function () {
     return this.$seo({
+      url: 'https://filterpedia.co.id/#/' + this.$route.params.slug,
       title: 'Beli > ' + this.nama,
       description: this.product_description,
       openGraph: {
-        title: 'openGraph title',
+        title: 'Beli > ' + this.nama,
         image: this.imgThumbnail,
         description: this.product_description,
       },
@@ -443,8 +444,8 @@ export default {
         image: this.imgThumbnail,
         image: {
           url: this.imgThumbnail,
-          width: '850',
-          height: '850',
+          width: 850,
+          height: 850,
           type: 'image/png',
         },
       },

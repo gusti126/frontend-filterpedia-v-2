@@ -136,18 +136,26 @@ export default {
   },
   head: function () {
     return this.$seo({
-      title: 'Filterpedia Water Treatment Indonesia',
+      url:
+        'https://filterpedia.co.id/#/product-category/' +
+        this.$route.params.slug,
+      title: this.produkName,
       description:
-        'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original',
+        'Filterpedia Water Treatment Indonesia Jual ' + this.produkName,
       openGraph: {
-        title: 'Filterpedia Water Treatment Indonesia',
+        title: 'Filterpedia Water Treatment Indonesia ' + this.produkName,
         description:
-          'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original index',
+          'Filterpedia Water Treatment Indonesia Jual ' + this.produkName,
+        image: this.imageurl,
+        type: 'product',
       },
       twitter: {
-        title: 'Filterpedia Indonesia',
+        title: 'Filterpedia Water Treatment Indonesia Jual ' + this.produkName,
         description:
-          'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original',
+          'Filterpedia Water Treatment Indonesia Jual ' +
+          this.produkName +
+          ' mudah dan aman kualitas top',
+        image: this.imageurl,
         card: 'produk',
       },
     })
@@ -162,7 +170,7 @@ export default {
         itemAnimation: true,
       },
       produkName: '',
-      produkCategori: [],
+      imageurl: '',
       tes: 'filterpedia kami menawarkan berbagai macam filter dan kartrid untuk memecahkan sejumlah masalah terkait air.',
       items: [],
     }
@@ -179,6 +187,7 @@ export default {
           this.items = ress.data.products
           console.log(ress.data)
           this.produkName = ress.data.category_name
+          this.imageurl = ress.data.imageurl
           this.load = false
         })
     },
