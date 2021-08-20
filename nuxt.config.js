@@ -28,6 +28,12 @@ export default {
         content:
           'Filterpedia Water Treatment Filter Mudah dan Aman by Cipta Aneka Air',
       },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        name: 'og:image',
+        content: 'https://admin.filterpedia.co.id/logo.png',
+      },
       // {
       //   hid: 'og:url',
       //   name: 'og:url',
@@ -86,7 +92,6 @@ export default {
     'vue-social-sharing/nuxt',
     '@nuxtjs/sitemap',
     '@nuxtjs/google-analytics',
-    'nuxt-seo',
     '@nuxtjs/google-gtag',
 
     // Or if you have custom options...
@@ -158,53 +163,8 @@ export default {
     ],
   ],
 
-  // dependency seo
-  seo: {
-    // Module options
-    baseUrl: 'https://filterpedia.co.id/#/',
-    name: 'Filterpedia Indonesia',
-    title: 'Filterpedia Water Treatment Indonesia',
-    description:
-      'Filterpedia Water Treatment Indonesia Deskripsi in nuxt.config',
-    canonical: 'auto',
-    isForcedTrailingSlash: false,
-    url: 'https://filterpedia.co.id/#/',
-    openGraph: {
-      title: 'Filterpedia Water Treatment Indonesia',
-      description:
-        'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original opengraph',
-      type: 'article',
-      image: {
-        width: '850',
-        height: '850',
-        url: 'https://filterpedia.co.id/_nuxt/img/filterpedia.6981af1.png',
-      },
-      og: {
-        name: 'Filterpedia o:g name',
-        title: 'Filterpedia Water Treatment Indonesia From Seo',
-        description:
-          'description Filterpedia Water Treatment Indonesia From Seo nuxt config',
-        type: 'article',
-        url: 'https://filterpedia.co.id/#/nuxtconfig',
-        image: 'https://filterpedia.co.id/_nuxt/img/filterpedia.6981af1.png',
-        image: {
-          url: 'https://filterpedia.co.id/_nuxt/img/filterpedia.6981af1.png',
-          width: '850',
-          height: '850',
-          type: 'image/png',
-        },
-      },
-    },
-    twitter: {
-      title: 'Filterpedia Indonesia',
-      description:
-        'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original',
-      card: 'produk',
-    },
-  },
-
   googleAnalytics: {
-    id: 'G-13VBER8ZB5',
+    id: 'UA-205495987-1',
     // dev: false,
   },
 

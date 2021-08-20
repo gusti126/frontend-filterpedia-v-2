@@ -324,22 +324,6 @@ import navbar from '~/components/navbar.vue'
 import { mapMutations } from 'vuex'
 export default {
   components: { navbar, NavMobile },
-  // @click="$store.commit('increment')"
-  head: function ({ $seo }) {
-    $seo({
-      name: 'Filterpedia Indonesia Mendunia',
-      title: 'Keranjang',
-      description: 'keranjang Page',
-      image: this.$store.state.auth.user.profile_photo_url,
-
-      openGraph: {
-        title: 'Keranjang belanja ' + this.$store.state.auth.user.name,
-        image: this.$store.state.auth.user.profile_photo_url,
-        images: this.$store.state.auth.user.profile_photo_url,
-        description: 'Belanja mudah dan aman',
-      },
-    })
-  },
 
   data() {
     return {
@@ -448,6 +432,24 @@ export default {
         user_id: this.$store.state.auth.user.id,
       })
     },
+  },
+  head() {
+    return {
+      meta: [
+        {
+          hid: 'image',
+          name: 'image',
+          property: 'image',
+          content: 'https://admin.filterpedia.co.id/logo.png',
+        },
+        {
+          hid: 'og:image',
+          name: 'og:image',
+          property: 'og:image',
+          content: 'https://admin.filterpedia.co.id/logo.png',
+        },
+      ],
+    }
   },
 }
 </script>

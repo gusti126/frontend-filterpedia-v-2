@@ -410,46 +410,86 @@ import botfooter from '~/components/botfooter.vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 export default {
-  head: function () {
-    return this.$seo({
-      url: 'https://filterpedia.co.id/#/' + this.$route.params.slug,
-      title: 'Beli > ' + this.nama,
-      description: this.product_description,
-      openGraph: {
-        title: 'Beli > ' + this.nama,
-        image: this.imgThumbnail,
-        description: this.product_description,
-      },
-      twitter: {
-        title: 'Beli > ' + this.nama + '> Filterpedia Indonesia',
-        description: this.product_description,
-        card: 'produk',
-        description: this.product_description,
-      },
-      image: {
-        width: '850',
-        height: '850',
-        url: this.imgThumbnail,
-        type: 'image/png',
-      },
-      og: {
-        name: 'Filterpedia o:g name',
-        title: 'Filterpedia Water Treatment Indonesia From Seo',
-        description:
-          'description Filterpedia Water Treatment Indonesia From Seo nuxt config',
-        type: 'article',
-        url:
-          'https://filterpedia.co.id/#/productDetail/' +
-          this.$route.params.slug,
-        image: this.imgThumbnail,
-        image: {
-          url: this.imgThumbnail,
-          width: 850,
-          height: 850,
-          type: 'image/png',
+  head() {
+    return {
+      title: 'Beli > + ' + this.nama + ' | Filterpedia',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          property: 'description',
+          content:
+            'Beli ' +
+            this.nama +
+            ' Filterpedia Water Treatment Filter Mudah dan Aman ',
         },
-      },
-    })
+        {
+          hid: 'url',
+          name: 'url',
+          property: 'url',
+          content: 'https://filterpedia.co.id/#/' + this.$route.params.slug,
+        },
+        {
+          hid: 'keyword',
+          name: 'keyword',
+          property: 'keyword',
+          content: this.product_description,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          name: 'og:description',
+          content: this.product_description,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          name: 'og:title',
+          content: 'Beli > +' + this.nama,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          name: 'og:image',
+          content: this.imgThumbnail,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          name: 'og:type',
+          content: 'product',
+        },
+        {
+          hid: 'og:url',
+          name: 'og:url',
+          content: 'https://filterpedia.co.id/#/' + this.$route.params.slug,
+        },
+        {
+          hid: 'twitter:card',
+          property: 'twitter:card',
+          name: 'twitter:card',
+          content: 'product',
+        },
+        {
+          hid: 'twitter:title',
+          property: 'twitter:title',
+          name: 'twitter:title',
+          content: this.nama,
+        },
+        {
+          hid: 'twitter:description',
+          property: 'twitter:description',
+          name: 'twitter:description',
+          content: this.product_description,
+        },
+        {
+          hid: 'twitter:image',
+          property: 'twitter:image',
+          name: 'twitter:image',
+          content: this.imgThumbnail,
+        },
+      ],
+    }
   },
 
   components: { botfooter, ClassicEditor },

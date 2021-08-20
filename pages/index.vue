@@ -216,23 +216,45 @@ export default {
     slideritem,
     BannerHeader,
   },
-  head: function () {
-    return this.$seo({
-      title: 'Filterpedia Water Treatment Indonesia',
-      description:
-        'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original',
-      openGraph: {
-        title: 'Filterpedia Water Treatment Indonesia',
-        description:
-          'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original index',
-      },
-      twitter: {
-        title: 'Filterpedia Indonesia',
-        description:
-          'Filterpedia Water Treatment Indonesia Aman dan Mudah Kualitas Original',
-        card: 'produk',
-      },
-    })
+  head() {
+    return {
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Filterpedia Water Treatment Filter Mudah dan Aman ',
+        },
+        {
+          hid: 'keyword',
+          name: 'keyword',
+          content: 'Filterpedia Water Treatment Filter Mudah dan Aman ',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          name: 'og:description',
+          content: 'Filterpedia Water Treatment Filter Mudah dan Aman ',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          name: 'og:title',
+          content: 'Filterpedia Water Treatment Filter Mudah dan Aman ',
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          name: 'og:type',
+          content: 'product',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          name: 'og:image',
+          content: 'https://admin.filterpedia.co.id/logo.png',
+        },
+      ],
+    }
   },
   data() {
     return {

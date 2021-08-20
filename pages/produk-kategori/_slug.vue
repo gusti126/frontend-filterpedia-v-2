@@ -134,31 +134,86 @@ export default {
     slideritem,
     BannerHeader,
   },
-  head: function () {
-    return this.$seo({
-      url:
-        'https://filterpedia.co.id/#/product-category/' +
-        this.$route.params.slug,
-      title: this.produkName,
-      description:
-        'Filterpedia Water Treatment Indonesia Jual ' + this.produkName,
-      openGraph: {
-        title: 'Filterpedia Water Treatment Indonesia ' + this.produkName,
-        description:
-          'Filterpedia Water Treatment Indonesia Jual ' + this.produkName,
-        image: this.imageurl,
-        type: 'product',
-      },
-      twitter: {
-        title: 'Filterpedia Water Treatment Indonesia Jual ' + this.produkName,
-        description:
-          'Filterpedia Water Treatment Indonesia Jual ' +
-          this.produkName +
-          ' mudah dan aman kualitas top',
-        image: this.imageurl,
-        card: 'produk',
-      },
-    })
+  head() {
+    return {
+      title: 'Beli > + ' + this.produkName + ' | Filterpedia',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          property: 'description',
+          content:
+            'Beli ' +
+            this.produkName +
+            ' Filterpedia Water Treatment Filter Mudah dan Aman ',
+        },
+        {
+          hid: 'url',
+          name: 'url',
+          property: 'url',
+          content: 'https://filterpedia.co.id/#/' + this.$route.params.slug,
+        },
+        {
+          hid: 'keyword',
+          name: 'keyword',
+          property: 'keyword',
+          content: this.seo.keywords,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          name: 'og:description',
+          content: this.seo.description_seo,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          name: 'og:title',
+          content: 'Beli > +' + this.produkName,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          name: 'og:image',
+          content: this.imageurl,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          name: 'og:type',
+          content: 'product',
+        },
+        {
+          hid: 'og:url',
+          name: 'og:url',
+          content: 'https://filterpedia.co.id/#/' + this.$route.params.slug,
+        },
+        {
+          hid: 'twitter:card',
+          property: 'twitter:card',
+          name: 'twitter:card',
+          content: 'product',
+        },
+        {
+          hid: 'twitter:title',
+          property: 'twitter:title',
+          name: 'twitter:title',
+          content: this.produkName,
+        },
+        {
+          hid: 'twitter:description',
+          property: 'twitter:description',
+          name: 'twitter:description',
+          content: this.seo.description_seo,
+        },
+        {
+          hid: 'twitter:image',
+          property: 'twitter:image',
+          name: 'twitter:image',
+          content: this.imageurl,
+        },
+      ],
+    }
   },
   data() {
     return {
@@ -169,6 +224,10 @@ export default {
         loop: true,
         itemAnimation: true,
       },
+      seo: {
+        keywords: '',
+        description_seo: '',
+      },
       produkName: '',
       imageurl: '',
       tes: 'filterpedia kami menawarkan berbagai macam filter dan kartrid untuk memecahkan sejumlah masalah terkait air.',
@@ -177,7 +236,7 @@ export default {
   },
   mounted() {
     this.fetchSomething()
-    console.log(this.tes.length)
+    // console.log(this.tes.length)
   },
   methods: {
     async fetchSomething() {
@@ -185,9 +244,11 @@ export default {
         .$get('/product-category/' + this.$route.params.slug)
         .then((ress) => {
           this.items = ress.data.products
-          console.log(ress.data)
+          // console.log(ress.data)
           this.produkName = ress.data.category_name
           this.imageurl = ress.data.imageurl
+          this.seo.keywords = ress.data.keywords
+          this.seo.description_seo = ress.data.description_seo
           this.load = false
         })
     },
