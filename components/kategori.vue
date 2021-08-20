@@ -19,7 +19,7 @@
         :key="kategori.id"
         v-show="!loading"
       >
-        <nuxt-link to="">
+        <nuxt-link :to="'/produk-kategori/' + kategori.slug">
           <div class="mx-auto">
             <img
               :src="kategori.imageurl"
@@ -41,16 +41,18 @@
     </div>
     <div class="md:hidden justify-between flex">
       <div v-for="kategoriM in produkKategori" :key="kategoriM.id">
-        <div class="mt-2 mx-auto">
-          <img
-            :src="kategoriM.imageurl"
-            alt=""
-            class="rounded-full h-11 w-11 mt-5 object-cover mx-auto"
-          />
-        </div>
-        <div class="text-center font-normal text-xs">
-          {{ kategoriM.category_name }}
-        </div>
+        <nuxt-link :to="'/produk-kategori/' + kategoriM.slug">
+          <div class="mt-2 mx-auto">
+            <img
+              :src="kategoriM.imageurl"
+              alt=""
+              class="rounded-full h-11 w-11 mt-5 object-cover mx-auto"
+            />
+          </div>
+          <div class="text-center font-normal text-xs">
+            {{ kategoriM.category_name }}
+          </div>
+        </nuxt-link>
       </div>
     </div>
   </div>

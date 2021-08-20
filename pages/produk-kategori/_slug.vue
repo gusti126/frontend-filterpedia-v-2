@@ -8,8 +8,6 @@
     </div>
     <!--end banner header -->
     <div class="md:px-20 px-2 mt-10">
-      <kategori />
-
       <!-- Product populer -->
       <div
         class="
@@ -22,7 +20,7 @@
           md:mb-5
         "
       >
-        Product Populer
+        Produk {{ produkName }}
       </div>
       <div
         class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-3 md:gap-6"
@@ -90,6 +88,7 @@
       </div>
       <!-- endProduct populer -->
     </div>
+
     <!-- banner info -->
     <div class="md:px-20 px-2 mt-6">
       <img
@@ -118,87 +117,6 @@
       </div>
     </div>
     <!-- endbanner info -->
-
-    <!-- brand logo -->
-    <div class="md:px-20 px-2 my-10 hidden md:block">
-      <brand-logo />
-    </div>
-    <!-- endbrand logo -->
-
-    <!-- produk spesial diskon -->
-    <div class="md:px-20 px-2 mt-6 md:mt-10">
-      <div
-        class="font-semibold text-base md:text-xl text-gray-800 mb-4 md:mb-5"
-      >
-        Spesial Diskon
-      </div>
-
-      <div
-        class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-3 md:gap-6"
-      >
-        <div class="md:col-span-3 col-span-1" v-for="range in 4" v-show="load">
-          <div
-            class="
-              border border-blue-300
-              shadow
-              rounded-md
-              p-4
-              max-w-sm
-              w-full
-              mx-auto
-            "
-          >
-            <div class="animate-pulse">
-              <div class="rounded bg-blue-400 h-32 py-8">
-                <div class="font-bold text-center text-blue-600 text-xl">
-                  Sedang Loading Sebentar
-                </div>
-              </div>
-              <div class="rounded bg-blue-400 h-4 mt-2"></div>
-              <div class="rounded bg-blue-400 h-4 mt-2"></div>
-              <!-- <div class="bg-red-700"></div> -->
-            </div>
-          </div>
-        </div>
-        <div
-          class="md:col-span-3 col-span-1"
-          v-for="item in items"
-          :key="item.id"
-          v-show="!load"
-        >
-          <nuxt-link :to="'/productDetail/' + item.slug">
-            <!-- dekstop view -->
-            <card-produk
-              class="md:hidden block"
-              :nameImage="item.imageurl"
-              v-bind:diskon="80000"
-              v-bind:price="item.product_price"
-              :load="load"
-              :title="
-                item.product_name.length > 18
-                  ? item.product_name.substring(0, 16) + ' ...'
-                  : item.product_name
-              "
-            />
-
-            <!-- mobile view -->
-            <card-produk
-              class="hidden md:block"
-              :nameImage="item.imageurl"
-              v-bind:diskon="80000"
-              v-bind:price="item.product_price"
-              :load="load"
-              :title="
-                item.product_name.length > 23
-                  ? item.product_name.substring(0, 26) + ' ...'
-                  : item.product_name
-              "
-            />
-          </nuxt-link>
-        </div>
-      </div>
-    </div>
-    <!-- endproduk spesial diskon -->
 
     <div>
       <botfooter nameImage="logo.png" />
@@ -243,6 +161,7 @@ export default {
         loop: true,
         itemAnimation: true,
       },
+      produkName: '',
       produkCategori: [],
       tes: 'filterpedia kami menawarkan berbagai macam filter dan kartrid untuk memecahkan sejumlah masalah terkait air.',
       items: [],
@@ -254,11 +173,14 @@ export default {
   },
   methods: {
     async fetchSomething() {
-      const data = await this.$axios.$get('/products').then((ress) => {
-        this.items = ress.data
-        console.log(this.items[0].product_name)
-        this.load = false
-      })
+      const data = await this.$axios
+        .$get('/product-category/' + this.$route.params.slug)
+        .then((ress) => {
+          this.items = ress.data.products
+          console.log(ress.data)
+          this.produkName = ress.data.category_name
+          this.load = false
+        })
     },
   },
 }
