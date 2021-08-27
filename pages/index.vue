@@ -95,7 +95,7 @@
       <img
         src="~/assets/banner/bannerinfo.svg"
         alt=""
-        class="rounded md:rounded-xl md:block hidden"
+        class="rounded md:rounded-xl md:block hidden w-full"
       />
       <!-- Make a div wrapped slider,set height and width -->
       <div class="md:hidden">
