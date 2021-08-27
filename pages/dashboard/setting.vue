@@ -3,7 +3,7 @@
     <!-- content -->
     <div class="bg-white w-full min-h-full p-6 rounded-xl">
       <div class="grid grid-cols-12 grid-flow-row gap-4 mt-6">
-        <div class="col-span-12 md:col-span-4 md:col-start-3">
+        <!-- <div class="col-span-12 md:col-span-4 md:col-start-3">
           <div>
             <label for="Email">Ganti Email</label>
           </div>
@@ -22,26 +22,8 @@
             "
             :value="this.$store.state.auth.user.email"
           />
-        </div>
-        <div class="col-span-12 md:col-span-4">
-          <div>
-            <label for="Phone">Nama PT</label>
-          </div>
-          <input
-            type="text"
-            class="
-              border border-gray-300
-              rounded-2xl
-              focus:outline-none
-              px-4
-              py-1
-              w-full
-              md:text-sm
-              focus:border-blue-500 focus:text-blue-500
-            "
-            value="PT Garuda Cyber"
-          />
-        </div>
+        </div> -->
+
         <div class="col-span-12 md:col-span-4 md:col-start-3">
           <div>
             <label for="Email">Ganti Password</label>
@@ -110,7 +92,7 @@ export default {
   middleware: 'auth',
   head() {
     return {
-      title: 'Pengaturan Akun Lisa Blackpink',
+      title: 'Pengaturan Akun ',
     }
   },
 }

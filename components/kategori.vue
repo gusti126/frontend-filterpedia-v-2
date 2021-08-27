@@ -13,13 +13,14 @@
       </div>
     </div>
 
-    <div class="hidden md:flex justify-between">
+    <div class="hidden md:flex justify-start">
       <div
         v-for="kategori in produkKategori"
         :key="kategori.id"
         v-show="!loading"
+        class="mr-16"
       >
-        <nuxt-link :to="'/produk-kategori/' + kategori.slug">
+        <nuxt-link :to="'/produk-kategori/' + kategori.slug" class="ml-6">
           <div class="mx-auto">
             <img
               :src="kategori.imageurl"
