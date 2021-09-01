@@ -268,6 +268,7 @@ export default {
       produkCategori: [],
       tes: 'filterpedia kami menawarkan berbagai macam filter dan kartrid untuk memecahkan sejumlah masalah terkait air.',
       items: [],
+      bannerMain: [],
     }
   },
 
@@ -275,7 +276,7 @@ export default {
     this.fetchSomething()
     console.log(this.tes.length)
   },
-  async tagG() {},
+
   methods: {
     async fetchSomething() {
       this.$gtag.event('toggleDark', {

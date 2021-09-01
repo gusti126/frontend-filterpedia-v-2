@@ -5,8 +5,8 @@
     <slider ref="slider" :options="options">
       <!-- slideritem wrapped package with the components you need -->
 
-      <slideritem>
-        <img src="~/assets/banner/Frame 1.jpg" alt="" class="md:rounded" />
+      <slideritem v-for="banner in bannerMain" :key="banner.id">
+        <img :src="banner.imageurl" alt="" class="md:rounded" />
       </slideritem>
       <!-- <slideritem>
         <img src="~/assets/banner/Frame 4.jpg" alt="" class="md:rounded" />
@@ -41,7 +41,25 @@ export default {
         loop: true,
         itemAnimation: true,
       },
+
+      bannerMain: [],
     }
+  },
+
+  mounted() {
+    this.getBannerHome()
+  },
+
+  methods: {
+    async getBannerHome() {
+      let bannerHeader = await this.$axios
+        .get('/banner-positions/main-banner')
+        .then((ress) => {
+          this.bannerMain = ress.data.data.banners
+          console.log('dari component banner header')
+          console.log(this.bannerMain)
+        })
+    },
   },
 }
 </script>
