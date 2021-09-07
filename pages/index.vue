@@ -93,9 +93,11 @@
     <!-- banner info -->
     <div class="md:px-20 px-2 mt-6">
       <img
-        src="~/assets/banner/bannerinfo.svg"
+        :src="banner.imageurl"
         alt=""
         class="rounded md:rounded-xl md:block hidden w-full"
+        v-for="banner in bannerPromotion"
+        :key="banner.id"
       />
       <!-- Make a div wrapped slider,set height and width -->
       <div class="md:hidden">
@@ -269,12 +271,13 @@ export default {
       tes: 'filterpedia kami menawarkan berbagai macam filter dan kartrid untuk memecahkan sejumlah masalah terkait air.',
       items: [],
       bannerMain: [],
+      bannerPromotion: [],
     }
   },
 
   mounted() {
     this.fetchSomething()
-    console.log(this.tes.length)
+    this.getbanner()
   },
 
   methods: {
@@ -292,6 +295,15 @@ export default {
         console.log(this.items[0].product_name)
         this.load = false
       })
+    },
+    async getbanner() {
+      let promosi = await this.$axios
+        .get('banner-positions/promotion-banner')
+        .then((ress) => {
+          console.log(ress)
+          this.bannerPromotion = ress.data.data.banners
+          console.log(this.bannerPromotion)
+        })
     },
   },
 }
