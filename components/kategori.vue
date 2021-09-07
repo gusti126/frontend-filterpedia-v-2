@@ -27,8 +27,8 @@
               alt=""
               class="
                 rounded-full
-                h-20
-                w-20
+                h-32
+                w-32
                 mt-5
                 object-cover
                 mx-auto

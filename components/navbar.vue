@@ -320,7 +320,7 @@ export default {
     async cari() {
       this.loadingSearch = true
       let data = await this.$axios
-        .get('/products/search/' + this.keyword)
+        .get('/search/products?keyword=' + this.keyword)
         .then((ress) => {
           this.produkCari = ress.data.data
           console.log(this.produkCari)
