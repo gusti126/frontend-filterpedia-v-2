@@ -412,7 +412,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 export default {
   head() {
     return {
-      title: 'Beli > + ' + this.nama + ' | Filterpedia',
+      title: 'Beli - ' + this.nama + ' | Filterpedia',
       meta: [
         {
           hid: 'description',

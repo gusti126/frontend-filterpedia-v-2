@@ -99,19 +99,14 @@
         v-for="banner in bannerPromotion"
         :key="banner.id"
       />
+      <!-- banner mobile -->
       <!-- Make a div wrapped slider,set height and width -->
       <div class="md:hidden">
         <!-- Using the slider component -->
         <slider ref="slider" :options="options">
           <!-- slideritem wrapped package with the components you need -->
-          <slideritem>
-            <img src="~/assets/banner/Frame 4.jpg" alt="" class="" />
-          </slideritem>
-          <slideritem>
-            <img src="~/assets/banner/Frame 8.jpg" alt="" class="" />
-          </slideritem>
-          <slideritem>
-            <img src="~/assets/banner/Frame 1.jpg" alt="" class="" />
+          <slideritem v-for="banner in bannerPromotion" :key="banner.id">
+            <img :src="banner.imageurl" alt="" class="" />
           </slideritem>
 
           <!-- Customizable loading -->
@@ -304,6 +299,7 @@ export default {
           this.bannerPromotion = ress.data.data.banners
           console.log(this.bannerPromotion)
         })
+      let benner
     },
   },
 }
