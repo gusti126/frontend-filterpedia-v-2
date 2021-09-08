@@ -282,7 +282,8 @@
               Rp.{{ price | currency }}
             </div>
             <div class="text-gray-700 text-md">Harga sudah termasuk PPN</div>
-            <div class="flex my-4">
+
+            <!-- <div class="flex my-4">
               <div
                 class="
                   mr-3
@@ -299,7 +300,7 @@
                 Diskon 70%
               </div>
               <div class="">Rp.800.000</div>
-            </div>
+            </div> -->
 
             <div class="my-7 flex justify-between">
               <nuxt-link
