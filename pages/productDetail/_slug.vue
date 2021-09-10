@@ -144,8 +144,8 @@
                 <div class="text-gray-700 text-lg font-semibold">
                   {{ nama }}
                 </div>
-                <div class="text-base text-green-600 font-semibold">
-                  Rp.{{ 7000000 | currency }}
+                <div class="text-base text-green-600 font-semibold mt-2">
+                  Rp.{{ price | currency }}
                 </div>
               </div>
             </div>
@@ -165,7 +165,7 @@
                   v-show="isInfoProduk"
                 ></div>
               </div>
-              <div
+              <!-- <div
                 class="md:text-xl font-medium text-gray-800 hover:text-blue-400"
               >
                 <div @click="ulasan">Ulasan</div>
@@ -173,7 +173,7 @@
                   class="rounded-full bg-gray-800 border md:h-1 mt-1"
                   v-show="!isInfoProduk"
                 ></div>
-              </div>
+              </div> -->
             </div>
 
             <!-- ulasan -->
@@ -396,9 +396,85 @@
         </div>
       </div>
 
-      <!-- Product serupa -->
+      <!-- produk serupa -->
+      <div class="md:px-20 px-2 mt-6 md:mt-10">
+        <div
+          class="font-semibold text-base md:text-xl text-gray-800 mb-4 md:mb-5"
+        >
+          Produk serupa
+        </div>
 
-      <!-- endProduct serupa -->
+        <div
+          class="grid md:grid-cols-12 grid-cols-2 grid-flow-row gap-3 md:gap-6"
+        >
+          <div
+            class="md:col-span-3 col-span-1"
+            v-for="range in 4"
+            v-show="load"
+          >
+            <div
+              class="
+                border border-blue-300
+                shadow
+                rounded-md
+                p-4
+                max-w-sm
+                w-full
+                mx-auto
+              "
+            >
+              <div class="animate-pulse">
+                <div class="rounded bg-blue-400 h-32 py-8">
+                  <div class="font-bold text-center text-blue-600 text-xl">
+                    Sedang Loading Sebentar
+                  </div>
+                </div>
+                <div class="rounded bg-blue-400 h-4 mt-2"></div>
+                <div class="rounded bg-blue-400 h-4 mt-2"></div>
+                <!-- <div class="bg-red-700"></div> -->
+              </div>
+            </div>
+          </div>
+          <div
+            class="md:col-span-3 col-span-1"
+            v-for="item in produkSerupa"
+            :key="item.id"
+            v-show="!load"
+          >
+            <nuxt-link :to="'/productDetail/' + item.slug">
+              <!-- dekstop view -->
+              <card-produk
+                class="md:hidden block"
+                :nameImage="item.imageurl"
+                v-bind:diskon="item.discount"
+                v-bind:persenDiskon="item.discount"
+                v-bind:price="item.product_price"
+                :load="load"
+                :title="
+                  item.product_name.length > 18
+                    ? item.product_name.substring(0, 16) + ' ...'
+                    : item.product_name
+                "
+              />
+
+              <!-- mobile view -->
+              <card-produk
+                class="hidden md:block"
+                :nameImage="item.imageurl"
+                v-bind:diskon="80000"
+                v-bind:price="item.product_price"
+                :load="load"
+                :title="
+                  item.product_name.length > 23
+                    ? item.product_name.substring(0, 26) + ' ...'
+                    : item.product_name
+                "
+              />
+            </nuxt-link>
+          </div>
+        </div>
+      </div>
+      <!-- endproduk serupa -->
     </div>
     <div>
       <botfooter nameImage="logo.png" />
@@ -516,6 +592,7 @@ export default {
       subdeks: '',
       readmore: true,
       imgThumbnail: null,
+      produkSerupa: [],
     }
   },
   async asyncData({ $axios, params }) {
@@ -533,6 +610,8 @@ export default {
       let item = await this.$axios
         .$get('/products/' + this.$route.params.slug)
         .then((ress) => {
+          console.log(ress.product_serupa)
+          this.produkSerupa = ress.product_serupa
           this.product_id = ress.data.id
           this.product_description = ress.data.product_description
           this.nama = ress.data.product_name
@@ -545,8 +624,6 @@ export default {
             imageurl: ress.data.imageurl,
           })
           if (ress.image.length) {
-            // this.photos = ress.image
-            // this.photos.push(ress.image)
             for (let i = 0; i < ress.image.length; i++) {
               this.photos.push({
                 id: ress.image[i].id,

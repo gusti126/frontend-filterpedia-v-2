@@ -8,23 +8,25 @@
       {{ title }}
     </div>
 
-    <div class="flex my-2">
-      <div class="text-blue-900 text-xs md:text-sm font-medium my-auto">
-        70%
-      </div>
-      <div
-        class="
-          font-normal
-          text-xs
-          md:text-sm
-          italic
-          line-through
-          text-gray-500
-          mx-1
-          md:mx-3
-        "
-      >
-        Rp.{{ diskon }}
+    <div v-if="diskon > 1">
+      <div class="flex my-2">
+        <div class="text-blue-900 text-xs md:text-sm font-medium my-auto">
+          {{ persenDiskon }}%
+        </div>
+        <div
+          class="
+            font-normal
+            text-xs
+            md:text-sm
+            italic
+            line-through
+            text-gray-500
+            mx-1
+            md:mx-3
+          "
+        >
+          Rp.{{ diskon }}
+        </div>
       </div>
     </div>
 
@@ -61,6 +63,7 @@ export default {
     price: Number,
     nameImage: String,
     diskon: Number,
+    persenDiskon: Number,
     noPesanan: String,
   },
   data() {

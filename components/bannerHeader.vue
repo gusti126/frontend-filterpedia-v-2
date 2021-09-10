@@ -46,8 +46,6 @@ export default {
         .get('/banner-positions/main-banner')
         .then((ress) => {
           this.bannerMain = ress.data.data.banners
-          console.log('dari component banner header')
-          console.log(this.bannerMain)
         })
     },
   },

@@ -159,7 +159,7 @@
         </div>
         <div
           class="md:col-span-3 col-span-1"
-          v-for="item in items"
+          v-for="item in itemsPromo"
           :key="item.id"
           v-show="!load"
         >
@@ -168,7 +168,8 @@
             <card-produk
               class="md:hidden block"
               :nameImage="item.imageurl"
-              v-bind:diskon="80000"
+              v-bind:diskon="item.discount"
+              v-bind:persenDiskon="item.discount"
               v-bind:price="item.product_price"
               :load="load"
               :title="
@@ -265,6 +266,7 @@ export default {
       produkCategori: [],
       tes: 'filterpedia kami menawarkan berbagai macam filter dan kartrid untuk memecahkan sejumlah masalah terkait air.',
       items: [],
+      itemsPromo: [],
       bannerMain: [],
       bannerPromotion: [],
     }
@@ -273,6 +275,7 @@ export default {
   mounted() {
     this.fetchSomething()
     this.getbanner()
+    this.getProdukPoromo()
   },
 
   methods: {
@@ -287,7 +290,6 @@ export default {
 
       const data = await this.$axios.$get('/products').then((ress) => {
         this.items = ress.data
-        console.log(this.items[0].product_name)
         this.load = false
       })
     },
@@ -295,11 +297,13 @@ export default {
       let promosi = await this.$axios
         .get('banner-positions/promotion-banner')
         .then((ress) => {
-          console.log(ress)
           this.bannerPromotion = ress.data.data.banners
-          console.log(this.bannerPromotion)
         })
-      let benner
+    },
+    async getProdukPoromo() {
+      let data = await this.$axios.get('/discount-products').then((ress) => {
+        this.itemsPromo = ress.data.data
+      })
     },
   },
 }
