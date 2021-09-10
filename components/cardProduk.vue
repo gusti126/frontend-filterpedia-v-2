@@ -70,7 +70,7 @@ export default {
     return {}
   },
   mounted() {
-    console.log(this.load)
+    console.log(this.diskon)
   },
 
   methods: {},

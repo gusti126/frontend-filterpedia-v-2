@@ -283,7 +283,7 @@
             </div>
             <div class="text-gray-700 text-md">Harga sudah termasuk PPN</div>
 
-            <!-- <div class="flex my-4">
+            <div class="flex my-4" v-if="diskonItem !== null">
               <div
                 class="
                   mr-3
@@ -297,10 +297,10 @@
                   font-bold
                 "
               >
-                Diskon 70%
+                <span> {{ diskonItem.discount }}% </span>
               </div>
-              <div class="">Rp.800.000</div>
-            </div> -->
+              <div class="line-through">990.000</div>
+            </div>
 
             <div class="my-7 flex justify-between">
               <nuxt-link
@@ -397,7 +397,7 @@
       </div>
 
       <!-- produk serupa -->
-      <div class="md:px-20 px-2 mt-6 md:mt-10">
+      <div class="mt-6 md:mt-10">
         <div
           class="font-semibold text-base md:text-xl text-gray-800 mb-4 md:mb-5"
         >
@@ -446,8 +446,6 @@
               <card-produk
                 class="md:hidden block"
                 :nameImage="item.imageurl"
-                v-bind:diskon="item.discount"
-                v-bind:persenDiskon="item.discount"
                 v-bind:price="item.product_price"
                 :load="load"
                 :title="
@@ -461,7 +459,6 @@
               <card-produk
                 class="hidden md:block"
                 :nameImage="item.imageurl"
-                v-bind:diskon="80000"
                 v-bind:price="item.product_price"
                 :load="load"
                 :title="
@@ -593,6 +590,7 @@ export default {
       readmore: true,
       imgThumbnail: null,
       produkSerupa: [],
+      diskonItem: [],
     }
   },
   async asyncData({ $axios, params }) {
@@ -610,11 +608,11 @@ export default {
       let item = await this.$axios
         .$get('/products/' + this.$route.params.slug)
         .then((ress) => {
-          console.log(ress.product_serupa)
           this.produkSerupa = ress.product_serupa
           this.product_id = ress.data.id
           this.product_description = ress.data.product_description
           this.nama = ress.data.product_name
+          this.diskonItem = ress.data.discount
           this.price = ress.data.product_price
           this.subdeks = this.product_description.substring(0, 290)
           this.imgThumbnail = ress.data.imageurl

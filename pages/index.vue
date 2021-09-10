@@ -62,7 +62,9 @@
             <card-produk
               class="md:hidden block"
               :nameImage="item.imageurl"
-              v-bind:diskon="80000"
+              v-bind:diskon="
+                item.discount === null ? 0 : item.discount.discount
+              "
               v-bind:price="item.product_price"
               :load="load"
               :title="
@@ -76,7 +78,12 @@
             <card-produk
               class="hidden md:block"
               :nameImage="item.imageurl"
-              v-bind:diskon="80000"
+              v-bind:persenDiskon="
+                item.discount === null ? 0 : item.discount.discount
+              "
+              v-bind:diskon="
+                item.discount === null ? 0 : item.harga_setelah_discount
+              "
               v-bind:price="item.product_price"
               :load="load"
               :title="
@@ -168,9 +175,9 @@
             <card-produk
               class="md:hidden block"
               :nameImage="item.imageurl"
-              v-bind:diskon="item.discount"
-              v-bind:persenDiskon="item.discount"
-              v-bind:price="item.product_price"
+              v-bind:diskon="item.product_price"
+              v-bind:persenDiskon="item.discount.discount"
+              v-bind:price="item.harga_setelah_discount"
               :load="load"
               :title="
                 item.product_name.length > 18
@@ -183,8 +190,9 @@
             <card-produk
               class="hidden md:block"
               :nameImage="item.imageurl"
-              v-bind:diskon="80000"
-              v-bind:price="item.product_price"
+              v-bind:diskon="item.product_price"
+              v-bind:persenDiskon="item.discount.discount"
+              v-bind:price="item.harga_setelah_discount"
               :load="load"
               :title="
                 item.product_name.length > 23
