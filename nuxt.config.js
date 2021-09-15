@@ -187,6 +187,12 @@ export default {
     // withCredentials: true,
   },
   auth: {
+    redirect: {
+      login: '/',
+      logout: '/logout',
+      home: '/',
+      callback: '/callback',
+    },
     strategies: {
       local: {
         endpoints: {
@@ -210,6 +216,63 @@ export default {
         // globalToken: true,
         // autoFetchUser: true,
       },
+      google: {
+        scheme: 'oauth2',
+        endpoints: {
+          authorization: 'https://admin.filterpedia.co.id/api/login/google',
+          token: 'token',
+          userInfo: '/profile',
+          logout: false,
+        },
+        token: {
+          property: 'access_token',
+          type: 'Bearer',
+          maxAge: 1800,
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30,
+        },
+        responseType: 'token',
+        grantType: 'authorization_code',
+        accessType: undefined,
+        redirectUri:
+          'https://admin.filterpedia.co.id/api/login/google/callback',
+        redirect_uri:
+          'https://admin.filterpedia.co.id/api/login/google/callback',
+        logoutRedirectUri: undefined,
+        clientId:
+          '618723887014-bfbaf70p5i3gtgft130n6pccsv1dnq14.apps.googleusercontent.com',
+        scope: ['openid', 'profile', 'email'],
+        state: 'UNIQUE_AND_NON_GUESSABLE',
+        codeChallengeMethod: '',
+        responseMode: '',
+        acrValues: '',
+        client_id:
+          '786215079173-5fuabahsve31vlcsbn36c8lq6tkjl8cd.apps.googleusercontent.com',
+        // autoLogout: false
+      },
+      // google: {
+      //   endpoints: {
+      //     authorization: 'https://admin.filterpedia.co.id/api/login/google',
+      //     token: undefined,
+      //     userInfo: 'https://www.googleapis.com/oauth2/v3/userinfo',
+      //     logout: 'https://example.com/logout',
+      //   },
+      //   clientId:
+      //     '618723887014-bfbaf70p5i3gtgft130n6pccsv1dnq14.apps.googleusercontent.com',
+      //   scope: ['openid', 'profile', 'email'],
+      //   client_id:
+      //     '618723887014-bfbaf70p5i3gtgft130n6pccsv1dnq14.apps.googleusercontent.com',
+      //   response_type: 'code',
+      //   access_token_endpoint: 'localhost:4040',
+      // },
+    },
+    redirect: {
+      login: '/',
+      logout: '/',
+      callback: '/',
+      home: '/',
     },
   },
 

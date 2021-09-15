@@ -299,7 +299,7 @@
               >
                 <span> {{ diskonItem.discount }}% </span>
               </div>
-              <div class="line-through">990.000</div>
+              <div class="line-through">{{ hargaAwal | currency }}</div>
             </div>
 
             <div class="my-7 flex justify-between">
@@ -591,6 +591,7 @@ export default {
       imgThumbnail: null,
       produkSerupa: [],
       diskonItem: [],
+      hargaAwal: 0,
     }
   },
   async asyncData({ $axios, params }) {
@@ -616,6 +617,10 @@ export default {
           this.price = ress.data.product_price
           this.subdeks = this.product_description.substring(0, 290)
           this.imgThumbnail = ress.data.imageurl
+          if (this.diskonItem !== null) {
+            this.price = ress.data.harga_setelah_discount
+            this.hargaAwal = ress.data.product_price
+          }
           // // image thumbnail
           this.photos.push({
             id: 220900 + this.product_id,

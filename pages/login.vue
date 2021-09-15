@@ -140,10 +140,10 @@
           >
           <div class="text-center my-4">atau login dengan</div>
           <div class="flex justify-between">
-            <nuxt-link to="" class="flex">
+            <div class="flex cursor-pointer" @click="loginWithGoogle">
               <img src="~assets/icon/icons_google.svg" class="mr-2 w-8" />
               <div class="my-auto">Google</div>
-            </nuxt-link>
+            </div>
             <nuxt-link to="" class="flex">
               <img src="~assets/icon/logos_facebook.svg" class="mr-2 w-8" />
               <div class="my-auto">Facebook</div>
@@ -223,6 +223,15 @@ export default {
       } else {
         this.showPassword = true
       }
+    },
+    async loginWithGoogle() {
+      // let data = await this.$auth.loginWith('google', {
+      //   params: { prompt: 'select_account' },
+      // })
+      await this.$auth.loginWith('google').then((ress) => {
+        console.log(ress)
+        console.log('from google methods')
+      })
     },
   },
 }
