@@ -233,7 +233,7 @@ export default {
           property: 'refresh_token',
           maxAge: 60 * 60 * 24 * 30,
         },
-        responseType: 'token',
+        responseType: 'code',
         grantType: 'authorization_code',
         accessType: undefined,
         redirectUri:
