@@ -231,7 +231,6 @@ export default {
             email: this.email,
           })
           .then((ress) => {
-            console.log(ress)
             this.sendKodeEmail = true
             this.$swal({
               icon: 'success',
