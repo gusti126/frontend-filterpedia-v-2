@@ -138,16 +138,18 @@
             "
             >Register</nuxt-link
           >
-          <div class="text-center my-4">atau login dengan</div>
-          <div class="flex justify-between">
-            <div class="flex cursor-pointer" @click="loginWithGoogle">
-              <img src="~assets/icon/icons_google.svg" class="mr-2 w-8" />
-              <div class="my-auto">Google</div>
+          <div class="hidden">
+            <div class="text-center my-4">atau login dengan</div>
+            <div class="flex justify-between">
+              <div class="flex cursor-pointer" @click="loginWithGoogle">
+                <img src="~assets/icon/icons_google.svg" class="mr-2 w-8" />
+                <div class="my-auto">Google</div>
+              </div>
+              <nuxt-link to="" class="flex">
+                <img src="~assets/icon/logos_facebook.svg" class="mr-2 w-8" />
+                <div class="my-auto">Facebook</div>
+              </nuxt-link>
             </div>
-            <nuxt-link to="" class="flex">
-              <img src="~assets/icon/logos_facebook.svg" class="mr-2 w-8" />
-              <div class="my-auto">Facebook</div>
-            </nuxt-link>
           </div>
         </div>
       </div>

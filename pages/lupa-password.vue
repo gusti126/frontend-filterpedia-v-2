@@ -260,9 +260,8 @@ export default {
           text: 'password tidak sama ',
         })
       } else {
+        this.$store.commit('setLoading', true)
         let response = await this.$axios
-        this.$store
-          .commit('setLoading', true)
           .post('/reset-password', {
             token: this.kode,
             email: this.email,
